@@ -289,7 +289,11 @@ $$
     \begin{aligned}R_z(45°)R_y(90°)R_x(45°)&=R_z(90°)R_y(90°)R_x(90°)\\&=\begin{bmatrix}0&0&1\\0&1&0\\-1&0&0\end{bmatrix}\end{aligned}
     $$
 
-2.  Gimbal Lock：如果有一个角度为 $\pi/2$，那么剩下 2 个自由度会变成 1 个（变成 $\mathbb{SO}(2)$ 了）。
+2.  Gimbal Lock：如果三次旋转中第二次旋转 $\beta$ 的角度为 $\pi/2$，那么剩下 2 个自由度会变成 1 个
+
+    $$
+    \begin{aligned}E(\alpha,\frac\pi2,\beta)&=R_z(\beta)R_y(\frac\pi2)R_x(\alpha)\\&=\begin{bmatrix}0&\cos(\beta)\cdot\sin(\alpha)-\cos(\alpha)\cdot\sin(\beta)&\sin(\alpha)\cdot\sin(\beta)+\cos(\alpha)\cdot\cos(\beta)\\0&\sin(\alpha)\cdot\sin(\beta)+\cos(\alpha)\cdot\cos(\beta)&\cos(\alpha)\cdot\sin(\beta)-\cos(\beta)\cdot\sin(\alpha)\\-1&0&0\end{bmatrix}\\&=\begin{bmatrix}0&\sin(\alpha-\beta)&\cos(\alpha-\beta)\\0&\cos(\alpha-\beta)&-\sin(\alpha-\beta)\\-1&0&0\end{bmatrix}\\&=R_y(\frac\pi2)R_x(\alpha-\beta)\end{aligned}
+    $$
 
 ### 欧拉定理
 
