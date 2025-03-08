@@ -236,6 +236,120 @@ $$
 T_{0\to3}^{0}=T_{0\to1}^{0}T_{1\to2}^{1}T_{2\to3}^{2}=\begin{bmatrix}\cos\theta_{1}&-\sin\theta_{1}&0&-\sin\theta_{1}(l_{2}+l_{3})\\\sin\theta_{1}&\cos\theta_{1}&0&\cos\theta_{1}(l_{2}+l_{3})\\0&0&1&l_{1}-l_{4}+\theta_{2}\\0&0&0&1\end{bmatrix}=\begin{bmatrix}R_{s\to e}^{s}&\mathbf{t}_{s\to e}^{s}\\0&1\end{bmatrix}
 $$
 
+### 旋转矩阵
+
+看了以上三个例子，接下来我们给出更一般的情况。
+
+对于一个单位轴向量（axis）$\mathbf{u} = [x, y, z]^\top$，其对应的叉乘矩阵（cross product matrix）$K$ 定义为：
+
+$$
+K = \begin{bmatrix}
+0 & -z & y \\
+z & 0 & -x \\
+-y & x & 0
+\end{bmatrix}
+$$
+
+其具有性质：当 $K$ 与任意向量 $\mathbf{v}$ 相乘时，运算结果等同于 $\mathbf{u}$ 和 $\mathbf{v}$ 的叉乘：
+
+$$
+K\mathbf{v} = \begin{bmatrix}
+0 & -z & y \\
+z & 0 & -x \\
+-y & x & 0
+\end{bmatrix}
+\begin{bmatrix}
+v_1 \\ v_2 \\ v_3
+\end{bmatrix} =
+\begin{bmatrix}
+-z v_2 + y v_3 \\
+z v_1 - x v_3 \\
+-x v_2 + y v_1
+\end{bmatrix} = \mathbf{u} \times \mathbf{v}
+$$
+
+那么，绕单位轴 $\mathbf{u}$ 旋转 $\theta$ 的旋转矩阵 $R_\theta$ 可以表示为：
+
+$$
+R_\theta = \cos\theta \cdot I + (1-\cos\theta)(\mathbf{u}\mathbf{u}^\top) + \sin\theta \cdot K
+$$
+
+这就是 **Rodrigues 旋转公式（矩阵形式）**。
+
+为了证明它，我们先证明向量形式：
+
+**Rodrigues 旋转公式（向量形式）**：在 3D 空间中，任意一个向量 $\mathbf{v}$ 沿着单位向量 $\mathbf{u}$ 旋转 $\theta$ 角度之后的向量 $\mathbf{v}'$ 为：
+
+$$
+\mathbf{v}' = \cos(\theta)\mathbf{v} + (1 - \cos(\theta))(\mathbf{u} \cdot \mathbf{v})\mathbf{u} + \sin(\theta)(\mathbf{u} \times \mathbf{v})
+$$
+
+其详细证明参见 [Krasjet / Quaternion](https://krasjet.github.io/quaternion/quaternion.pdf) 第 2 节 · 三维空间中的旋转（第 11 页）。
+
+从向量形式稍加变形，我们就能得到矩阵形式：
+
+$$
+\begin{aligned}
+\mathbf{v}^{\prime}&=\cos(\theta)\mathbf{v}+(1-\cos(\theta))(\mathbf{u}\cdot\mathbf{v})\mathbf{u}+\sin(\theta)(\mathbf{u}\times\mathbf{v}) \\
+&=\cos(\theta)\mathbf{v}+(1-\cos(\theta))(\mathbf{u}^\top\mathbf{v})\mathbf{u}+\sin(\theta)(\mathbf{u}\times\mathbf{v}) \\
+&=\cos(\theta)\mathbf{v}+(1-\cos(\theta))\mathbf{u}(\mathbf{u}^\top\mathbf{v})+\sin(\theta)(\mathbf{u}\times\mathbf{v}) \\
+&=\begin{bmatrix}\cos(\theta)I+(1-\cos(\theta))(\mathbf{u}\mathbf{u}^\top)+\sin(\theta)K\end{bmatrix}\mathbf{v} \\
+&=R_\theta\mathbf{v}
+\end{aligned}
+$$
+
+旋转矩阵 $R_\theta$ 也可以写成：
+
+$$
+R_\theta = e^{\theta K}
+$$
+
+我们可以证明后者和前者是等价的：
+$$
+e^{\theta K} = I + \theta K + \frac{(\theta K)^2}{2!} + \frac{(\theta K)^3}{3!} + \cdots
+$$
+
+而我们又有：
+
+$$
+K^2 = \begin{bmatrix}
+-z^2 - y^2 & xy & xz \\
+xy & -x^2 - z^2 & yz \\
+xz & yz & -x^2 - y^2
+\end{bmatrix}
+$$
+
+利用 $\mathbf{u}$ 是单位向量的性质（$x^2 + y^2 + z^2 = 1$），可简化为：
+
+$$
+K^2 = \mathbf{u}\mathbf{u}^\top - I
+$$
+
+所以：
+
+$$
+K^3 = K \cdot K^2 = K (\mathbf{u}\mathbf{u}^\top - I) = K \mathbf{u}\mathbf{u}^\top - K = -K
+$$
+
+这里利用了叉乘性质 $K\mathbf{u} = \mathbf{u} \times \mathbf{u} = \mathbf{0}$。
+
+所以：
+
+$$
+K^3 = -K, \quad K^4 = -K^2, \quad K^5 = K, \quad \dots
+$$
+
+带回展开形式，合并同类项：
+$$
+\begin{aligned}
+e^{\theta K} &= I + \left(\theta - \frac{\theta^3}{3!} + \frac{\theta^5}{5!} - \cdots\right)K + \left(\frac{\theta^2}{2!} - \frac{\theta^4}{4!} + \cdots\right)K^2 \\
+&= I + \sin\theta K + (1 - \cos\theta)K^2 \\
+&= I + \sin\theta K + (1 - \cos\theta)(\mathbf{u}\mathbf{u}^\top - I) \\
+&= \cos\theta I + (1 - \cos\theta)\mathbf{u}\mathbf{u}^\top + \sin\theta K \\
+&= R_\theta
+\end{aligned}
+$$
+
 ### SE (3) 群与空间变换
 
 **SE (3)** 是 Special Euclidean group in 3 dimensions 的缩写，代表三维特殊欧几里得群。**它描述了三维空间中所有的刚体变换（rigid transformations）**，包括旋转和平移，但不包括缩放、切变等变形。

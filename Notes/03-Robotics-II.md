@@ -116,10 +116,58 @@ $$
 
 ### 四元数运算
 
-**向量旋转**：使用四元数 $q$ 旋转向量 $\bold{x}$：
+**向量旋转**：任意向量 $\mathbf{v}$ 沿着以单位向量定义的旋转轴 $\mathbf{u}$ 旋转 $\theta$ 度得到 $\mathbf{v}'$，那么：
 
--   将 $\bold{x}$ 扩展为四元数形式：$x = (0, \bold{x})$；
--   旋转后：$x' = q x q^{-1}$。
+令向量 $\mathbf{v}$ 的四元数形式 $v = [0, \mathbf{v}]$，旋转四元数 $q = \left[\cos\left(\frac{\theta}{2}\right), \sin\left(\frac{\theta}{2}\right)\mathbf{u}\right]$
+
+则旋转后的向量 $\mathbf{v}'$ 可表示为：
+
+$$
+\mathbf{v}' = qv q^* = qv q^{-1}
+$$
+
+如果是给定四元数 $q$ 旋转向量 $\mathbf{v}$ ，那么设 $q = [w, \mathbf{r}]$ 是单位四元数（即 $w^2 + \|\mathbf{r}\|^2 = 1$），向量 $\mathbf{v}$ 的四元数形式为 $v = [0, \mathbf{v}]$。
+
+则：
+
+$$
+\begin{aligned}
+qvq^* &= [w, \mathbf{r}][0, \mathbf{v}][w, -\mathbf{r}] \\
+&= [ - \mathbf{r} \cdot \mathbf{v}, w\mathbf{v} + \mathbf{r} \times \mathbf{v} ][w, -\mathbf{r}] \\
+&= [0, (1-2\|\mathbf{r}\|^2)\mathbf{v} + 2(\mathbf{r} \cdot \mathbf{v})\mathbf{r} + 2w(\mathbf{r} \times \mathbf{v})]
+\end{aligned}
+$$
+
+最后一个等式的展开计算如下
+
+实部：
+
+$$
+\begin{aligned}
+&= (- \mathbf{r} \cdot \mathbf{v})w - (w\mathbf{v} + \mathbf{r} \times \mathbf{v}) \cdot (-\mathbf{r}) \\
+&= -w (\mathbf{r} \cdot \mathbf{v}) + w (\mathbf{v} \cdot \mathbf{r}) + (\mathbf{r} \times \mathbf{v}) \cdot \mathbf{r} \\
+&= 0 \quad
+\end{aligned}
+$$
+
+虚部：
+
+$$
+\begin{aligned}
+&= (- \mathbf{r} \cdot \mathbf{v})(-\mathbf{r}) + w (w\mathbf{v} + \mathbf{r} \times \mathbf{v}) + (w\mathbf{v} + \mathbf{r} \times \mathbf{v}) \times (-\mathbf{r}) \\
+&= (\mathbf{r} \cdot \mathbf{v})\mathbf{r} + w^2 \mathbf{v} + w (\mathbf{r} \times \mathbf{v}) - w (\mathbf{v} \times \mathbf{r}) - (\mathbf{r} \times \mathbf{v}) \times \mathbf{r} \\
+&= (\mathbf{r} \cdot \mathbf{v})\mathbf{r} + w^2 \mathbf{v} + 2w (\mathbf{r} \times \mathbf{v}) - \big[ (\mathbf{r} \cdot \mathbf{r})\mathbf{v} - (\mathbf{v} \cdot \mathbf{r})\mathbf{r} \big] \\
+&= (1 - 2\|\mathbf{r}\|^2)\mathbf{v} + 2(\mathbf{r} \cdot \mathbf{v})\mathbf{r} + 2w (\mathbf{r} \times \mathbf{v})
+\end{aligned}
+$$
+
+其中利用了叉乘展开式：
+
+$$
+a \times b \times c = (a \cdot c)b - (a \cdot b)c
+$$
+
+以及单位四元数约束条件 $w^2 + \|\mathbf{r}\|^2 = 1$，将 $w^2 = 1 - \|\mathbf{r}\|^2$ 代入后合并同类项。
 
 **旋转组合**：两个旋转 $q_1$ 和 $q_2$ 的组合等价于四元数的乘法：
 
@@ -261,7 +309,7 @@ $$
 
 ![configuration_space_pathfinding](./03-Robotics-II.assets/configuration_space_pathfinding.png)
 
-给定:
+给定：
 
 -   自由空间 $C_{\text{free}}$。
 -   起始状态 $q_{\text{start}} \in C_{\text{free}}$。
