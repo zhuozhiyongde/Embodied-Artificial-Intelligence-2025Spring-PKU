@@ -2,21 +2,21 @@
 
 ## 汽车工厂机器人
 
-核心：预设计并计算轨迹，随后只是重放轨迹，实际上是不断 “重放”
+核心：预设计并计算轨迹，随后只是重放轨迹，实际上是不断“重放”
 
 问题：
 
 -   部署耗时
 -   无法灵活处理多任务
 
-如果想要足够通用，则需要像人，才能实现 “通用机器人”（Task generalists），能够形成 **perception-action loop（感知 - 动作循环）**。
+如果想要足够通用，则需要像人，才能实现“通用机器人”（Task generalists），能够形成 **perception-action loop（感知 - 动作循环）**。
 
 实际上是形成了一个神经网络：
 
 输入：本体状态、控制信息、环境信息
 输出：下一步的关节控制
 
-## VLA（Vision Language Action Model）
+## VLA (Vision Language Action Model)
 
 神经网络：
 
