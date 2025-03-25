@@ -45,14 +45,14 @@ $$
 
 $$
 \begin{aligned}
-q_1 q_2 &= (w_1 w_2 - \bold{v}_1^T \bold{v}_2, \, w_1 \bold{v}_2 + w_2 \bold{v}_1 + \bold{v}_1 \times \bold{v}_2) \\
+q_1 q_2 &= (w_1 w_2 - \bold{v}_1^{\top} \bold{v}_2, \, w_1 \bold{v}_2 + w_2 \bold{v}_1 + \bold{v}_1 \times \bold{v}_2) \\
 &= (w_1 w_2 - \bold{v}_1 \cdot \bold{v}_2, \, w_1 \bold{v}_2 + w_2 \bold{v}_1 + \bold{v}_1 \times \bold{v}_2)
 \end{aligned}
 $$
 
 这被称为 Graßmann 积。
 
-注意：四元数的乘法**不可交换**，即 $q_1 q_2 \neq q_2 q_1$。
+注意：四元数的乘法 **不可交换**，即 $q_1 q_2 \neq q_2 q_1$。
 
 **共轭**：
 
@@ -63,7 +63,7 @@ $$
 **模长**：
 
 $$
-\|q\|^2 = w^2 + \bold{v}^T \bold{v} = qq^* = q^*q
+\|q\|^2 = w^2 + \bold{v}^{\top} \bold{v} = qq^* = q^*q
 $$
 
 **逆**：
@@ -88,7 +88,7 @@ $$
 q = \left[\cos\frac{\theta}{2}, \sin\frac{\theta}{2} \hat{\omega}\right]
 $$
 
-注意，旋转到四元数存在 “双重覆盖” 关系，我们可以很容易地发现：
+注意，旋转到四元数存在“双重覆盖”关系，我们可以很容易地发现：
 
 $$
 \begin{aligned}
@@ -184,7 +184,7 @@ $$
 
 ### 四元数的距离
 
-这部分证明参见 [Krasjet / Quaternion](https://krasjet.github.io/quaternion/quaternion.pdf) 第 4 节 · 四元数插值（第 37 页）。
+这部分证明参见 [Krasjet / Quaternion](https://krasjet.github.io/quaternion/quaternion.pdf) 第 4 节・四元数插值（第 37 页）。
 
 在单位三维球面 $S^3$ 上，或两个四元数 $(q_1, q_2)$ 之间的角度：
 
@@ -204,7 +204,7 @@ $$
 \text{dist}(p, q) = 2 \min \{\langle p, q \rangle, \langle p, -q \rangle\}
 $$
 
-这里需要在两个值之间取最小值的原因也可以参见 [Krasjet / Quaternion](https://krasjet.github.io/quaternion/quaternion.pdf) 第 5.4 节 · 双倍覆盖带来的问题（第 46 页）。
+这里需要在两个值之间取最小值的原因也可以参见 [Krasjet / Quaternion](https://krasjet.github.io/quaternion/quaternion.pdf) 第 5.4 节・双倍覆盖带来的问题（第 46 页）。
 
 可以证明，两个旋转 $(R_1, R_2)$ 的距离与其对应四元数 $q(R_1)$ 和 $q(R_2)$ 在球面上的距离成线性关系（前者是后者的两倍）。
 
@@ -212,7 +212,7 @@ $$
 
 ### 四元数插值
 
-这部分证明参见 [Krasjet / Quaternion](https://krasjet.github.io/quaternion/quaternion.pdf) 第 5 节 · 四元数插值（第 41 页）。
+这部分证明参见 [Krasjet / Quaternion](https://krasjet.github.io/quaternion/quaternion.pdf) 第 5 节・四元数插值（第 41 页）。
 
 #### 线性插值（Linear Interpolation, Lerp）
 
@@ -248,7 +248,7 @@ $$
 
 ![slerp](./03-Robotics-II.assets/slerp.png)
 
-证明的一个方法在 [Krasjet / Quaternion](https://krasjet.github.io/quaternion/quaternion.pdf) 第 5.3 节 · 球面线性插值（第 43 页）。
+证明的一个方法在 [Krasjet / Quaternion](https://krasjet.github.io/quaternion/quaternion.pdf) 第 5.3 节・球面线性插值（第 43 页）。
 
 不过老师的 Slide 上有另一种更简单的利用三角函数性质的证明方法：
 
@@ -289,7 +289,7 @@ $$
 
 ### 有趣的事实
 
-对于神经网络来讲，最好的旋转表示方法是 9 个数的旋转矩阵。因为其他的表示方法均可能出现对于输入的微小扰动，即一个小的旋转，出现一个跳变，而只有最初最冗余的 $\mathbb{R}^{3\times3}$ 旋转矩阵保证其必然是连续的（**即连续性**），而这对于神经网络是很好的性质。
+对于神经网络来讲，最好的旋转表示方法是 9 个数的旋转矩阵。因为其他的表示方法均可能出现对于输入的微小扰动，即一个小的旋转，出现一个跳变，而只有最初最冗余的 $\mathbb{R}^{3\times3}$ 旋转矩阵保证其必然是连续的（ **即连续性** ），而这对于神经网络是很好的性质。
 
 ## 运动规划
 

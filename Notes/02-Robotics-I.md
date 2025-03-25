@@ -13,7 +13,7 @@
 ### 点的表示与坐标系
 
 -   任意点 $p$ 的位置由一个参考系 $\mathcal{F}_s$ 记录。
--   点的坐标记为普通字母 （如 $p$），向量用粗体字母表示 （如 $\mathbf{v}$）。
+-   点的坐标记为普通字母（如 $p$），向量用粗体字母表示（如 $\mathbf{v}$）。
 
 记录公式包含参考系的上标，例如：
 
@@ -33,8 +33,8 @@ $$
 
 ![coordinate_frame_transformation_diagram](./02-Robotics-I.assets/coordinate_frame_transformation_diagram.png)
 
--   转动矩阵（rotation）：$R_{s \to b}$，用于对齐坐标轴 $\{x_i, y_i, z_i\}$，代表 “朝向”
--   平动向量（translation）：$\mathbf{t}_{s \to b}$，用于对齐原点 $o_s$ 和 $o_b$，代表 “位置”
+-   转动矩阵（rotation）：$R_{s \to b}$，用于对齐坐标轴 $\{x_i, y_i, z_i\}$，代表“朝向”
+-   平动向量（translation）：$\mathbf{t}_{s \to b}$，用于对齐原点 $o_s$ 和 $o_b$，代表“位置”
 
 $(R_{s \to b}^s, \mathbf{t}_{s \to b}^s)$ 合在一起，就描述了一个刚体的位姿，其拥有 6 个自由度，转动和平动各自拥有 3 个自由度。
 
@@ -186,7 +186,7 @@ $$
 
 -   **定义**：第 0 号连杆。
 -   **特点**：
-    -   被视为 “固定” 参考。
+    -   被视为“固定”参考。
     -   空间坐标系 $\mathcal{F}_s$ 附着于此。
 
 #### 末端执行器连杆 (End-effector link)
@@ -284,7 +284,7 @@ $$
 \mathbf{v}' = \cos(\theta)\mathbf{v} + (1 - \cos(\theta))(\mathbf{u} \cdot \mathbf{v})\mathbf{u} + \sin(\theta)(\mathbf{u} \times \mathbf{v})
 $$
 
-其详细证明参见 [Krasjet / Quaternion](https://krasjet.github.io/quaternion/quaternion.pdf) 第 2 节 · 三维空间中的旋转（第 11 页）。
+其详细证明参见 [Krasjet / Quaternion](https://krasjet.github.io/quaternion/quaternion.pdf) 第 2 节・三维空间中的旋转（第 11 页）。
 
 从向量形式稍加变形，我们就能得到矩阵形式：
 
@@ -305,6 +305,7 @@ R_\theta = e^{\theta K}
 $$
 
 我们可以证明后者和前者是等价的：
+
 $$
 e^{\theta K} = I + \theta K + \frac{(\theta K)^2}{2!} + \frac{(\theta K)^3}{3!} + \cdots
 $$
@@ -340,6 +341,7 @@ K^3 = -K, \quad K^4 = -K^2, \quad K^5 = K, \quad \dots
 $$
 
 带回展开形式，合并同类项：
+
 $$
 \begin{aligned}
 e^{\theta K} &= I + \left(\theta - \frac{\theta^3}{3!} + \frac{\theta^5}{5!} - \cdots\right)K + \left(\frac{\theta^2}{2!} - \frac{\theta^4}{4!} + \cdots\right)K^2 \\
@@ -379,9 +381,19 @@ $$
 
 **欧拉角（Euler Angles）**：描述三维旋转的一种方法，通过三个连续的旋转来表示任意旋转。
 
+![eular-angle](./02-Robotics-I.assets/eular-angle.png)
+
 -   绕 X 轴旋转 $\phi$（roll）
+
+    ![roll](./02-Robotics-I.assets/roll.gif)
+
 -   绕 Y 轴旋转 $\theta$（pitch）
+
+    ![pitch](./02-Robotics-I.assets/pitch.gif)
+
 -   绕 Z 轴旋转 $\psi$（yaw）
+
+    ![yaw](./02-Robotics-I.assets/yaw.gif)
 
 应用：相较于旋转矩阵 $R$，所需数值表示从 9 个降低到了 3 个。
 

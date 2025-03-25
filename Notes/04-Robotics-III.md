@@ -89,7 +89,7 @@ insight：问题做不出来不一定是自己的问题，也有可能是更底�
 $$
 \begin{array}{l}
 \textbf{function} \ \text{概率路线图}(n, k, q_{start}, q_{goal}) \ \textbf{returns} \ \text{一条从起点到目标的路径} \\
-\quad \text{// 输入: } n: \text{路线图中采样节点的数量}, k: \text{为每个配置检查的最近邻居数量}, q_{start}, q_{goal} \\
+\quad \text{// 输入：} n: \text{路线图中采样节点的数量}, k: \text{为每个配置检查的最近邻居数量}, q_{start}, q_{goal} \\
 \quad V \leftarrow \{q_{start}, q_{goal}\} \\
 \quad E \leftarrow \varnothing \\
 \quad \textbf{while} \ |V| < n \ \textbf{do} \\
@@ -106,7 +106,7 @@ $$
 \quad \quad \quad \textbf{end} \\
 \quad \quad \textbf{end} \\
 \quad \textbf{end} \\
-\quad \textbf{return} \ \text{使用Dijkstra算法寻找从} \ q_{start} \ \text{到} \ q_{goal} \ \text{的路径} \\
+\quad \textbf{return} \ \text{使用 Dijkstra 算法寻找从} \ q_{start} \ \text{到} \ q_{goal} \ \text{的路径} \\
 \end{array}
 $$
 
@@ -150,7 +150,7 @@ $$
 
 ![bridge_sampling](./04-Robotics-III.assets/bridge_sampling.png)
 
-这种采样方式更适合在狭窄通道处构建 “桥梁”，但是问题是非窄桥的地方采样会更少了。
+这种采样方式更适合在狭窄通道处构建“桥梁”，但是问题是非窄桥的地方采样会更少了。
 
 #### 总结
 
@@ -178,8 +178,8 @@ $$
 
 $$
 \begin{array}{l}
-\textbf{function} \ \text{RRT扩展算法}(n, \epsilon, \beta, q_{start}, q_{goal}) \ \textbf{returns} \ \text{一条从起点到目标的路径} \\
-\quad \text{// 输入: } n: \text{树中采样节点的数量}, \epsilon: \text{步长}, \beta: \text{采样目标点的概率}, q_{start}, q_{goal} \\
+\textbf{function} \ \text{RRT 扩展算法}(n, \epsilon, \beta, q_{start}, q_{goal}) \ \textbf{returns} \ \text{一条从起点到目标的路径} \\
+\quad \text{// 输入：} n: \text{树中采样节点的数量}, \epsilon: \text{步长}, \beta: \text{采样目标点的概率}, q_{start}, q_{goal} \\
 \quad V \leftarrow \{q_{start}\} \\
 \quad E \leftarrow \varnothing \\
 \quad \textbf{for} \ i = 1 \rightarrow n \ \textbf{do} \\
@@ -188,14 +188,14 @@ $$
 \quad \quad \textbf{else} \\
 \quad \quad \quad q_{target} \leftarrow \text{从} \ C_{free} \ \text{中均匀随机采样} \\
 \quad \quad \textbf{end} \\
-\quad \quad q_{near} \leftarrow \text{V中离} \ q_{target} \ \text{最近的邻居} \\
+\quad \quad q_{near} \leftarrow \text{V 中离} \ q_{target} \ \text{最近的邻居} \\
 \quad \quad q_{new} \leftarrow q_{near} + \frac{\epsilon}{|q_{near}-q_{target}|}(q_{target} - q_{near}) \\
 \quad \quad \textbf{if} \ q_{new} \notin V \ \text{and} \ q_{new} \in C_{free} \ \text{and} \ (q_{near}, q_{new}) \in C_{free} \ \textbf{then} \\
 \quad \quad \quad V \leftarrow V \cup \{q_{new}\} \\
 \quad \quad \quad E \leftarrow E \cup \{(q_{near}, q_{new})\} \\
 \quad \quad \textbf{end} \\
 \quad \textbf{end} \\
-\quad \textbf{return} \ \text{使用Dijkstra算法寻找从} \ q_{start} \ \text{到} \ q_{goal} \ \text{的路径} \\
+\quad \textbf{return} \ \text{使用 Dijkstra 算法寻找从} \ q_{start} \ \text{到} \ q_{goal} \ \text{的路径} \\
 \end{array}
 $$
 
