@@ -36,9 +36,9 @@ $$
     - 对每个 $\hat{p}_i$ 寻找 $\hat{q}_j$ 使得 $j = \arg\min_k \| \hat{p}_i - \hat{q}_k \|$
     - 这一步采用的是贪婪匹配的思想
 3. **位姿求解** （Pose Estimation）
-    - 计算协方差矩阵 $H = \sum \hat{p}_i \hat{q}_j^T$
-    - 对 $H$ 进行 SVD 分解：$H = U \Sigma V^T$
-    - 最优旋转矩阵 $R = V U^T$
+    - 计算协方差矩阵 $H = \sum \hat{p}_i \hat{q}_j^{\top}$
+    - 对 $H$ 进行 SVD 分解：$H = U \Sigma V^{\top}$
+    - 最优旋转矩阵 $R = V U^{\top}$
     - 平移向量 $t = \bar{Q} - R \bar{P}$
     - 这里的详细推导可以参见前一章笔记的正交 Procrustes 问题
 4. **迭代优化** （Iteration）
@@ -121,9 +121,9 @@ $$
 1. 输入 RGBD 图像，提取 RGB 信息，使用 Mask R-CNN（如果没学过，可以参见我在 AI 基础写的 [这篇笔记](https://arthals.ink/blog/application-of-cnn#mask-r-cnn)）获得 ROI（感兴趣区域，Region of Interest），分割物体
 2. 对于分割出的物体，对其每个像素预测其对应的 NOCS 空间坐标 $(x,y,z)$，得到 NOCS Map
 3. 利用 Depth 图像和相机内参，将 NOCS Map 中的点反投影（Back Projection）到三维空间中，得到点云数据
-4. 通过 NOCS Map 和 Depth 图像得到的点云数据，进行 Pose Fitting，利用 Umeyama 算法，计算得出物体的 7DoF 位姿（缩放 + 旋转 + 平移）
+4. 通过 NOCS Map 和 Depth 图像得到的点云数据，进行 Pose Fitting，利用 Umeyama 算法，计算得出物体的 7DoF 位姿（缩放 + 旋转 + 平移），缩放系数的计算就是简单的用 NOCS Map 的各轴向长度与物体实际点云各轴向作了一个除法。而反过来计算 Bounding Box 的时候，则利用了 NOCS 建模时令物体中心处在原点从而具有的对称性，以预测出的 NOCS Map 各轴向最大绝对值乘 2 再乘缩放系数作为了 Bounding Box 的各轴向尺寸
 
-Umeyama 算法和前文类似，再次不再赘述，值得一提的是对于缩放系数 $s$ 的计算过程，这里好像用到了 NOCS 具有对称性的性质，直接取了各方向的最大值去计算了一个缩放系数（具体没太听懂，有大佬会的话可以指正一下）。
+Umeyama 算法和前文类似，再次不再赘述。
 
 了解了过程之后，一个很自然的问题就是：为什么不能直接用神经网络去根据 RGB 图像和 RGBD 反投影得到的深度图预测 6DoF 位姿？
 
@@ -170,11 +170,11 @@ $$
 \text{pose} \to \text{grasp} \to \text{motion planning} \to \text{control}
 $$
 
-1. 一代技术：工业机器人，完全的轨迹重放
-2. 二代技术：轨迹预测，也即 Pose Tracking
+1. 一代技术：工业机器人，完全的轨迹重放，无环境感知能力
+2. 二代技术：位姿预测，但需要物体预先定义，轨迹通过位姿进行预测规划得到
 3. 三代技术：抓取预测
-4. 四代技术：动作规划预测，端到端
-5. 五代技术：完全的闭环控制，大语言模型？
+4. 四代技术：动作规划预测，神经网络端到端直接输出动作轨迹 Action / Trajectory，可以进行闭环纠错
+5. 五代技术：完全的闭环控制，大语言模型指导进行语义推理
 
 开环控制如果 pose estimation 足够快，也能搞成闭环。
 

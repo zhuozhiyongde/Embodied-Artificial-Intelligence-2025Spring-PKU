@@ -1,0 +1,55 @@
+\documentclass[tikz, border=10pt]{standalone}
+\usepackage{tikz}
+\usepackage{tikz-3dplot} % For 3D plotting
+
+\begin{document}
+
+% Set the viewing angle
+% tdplot_main_coords{theta}{phi}
+% theta: rotation around z-axis
+% phi: elevation angle from xy-plane
+\tdplotsetmaincoords{70}{110} % Adjust angles for a good view
+
+\begin{tikzpicture}[scale=2, tdplot_main_coords]
+
+    % Define cone parameters
+    \def\h{3} % Height of the pyramid base plane from apex
+    \def\r{1} % Radius of the pyramid base circle
+
+    % Draw the coordinate axes (optional, for context)
+
+    % Apex of the pyramid (contact point)
+    \coordinate (O) at (0,0,0);
+    \fill (O) circle (0.5pt); % Mark the apex
+
+    % Label for the general force at the apex
+    \node[below left, xshift=-2pt, yshift=-2pt] at (O) {$ [ f_x \quad f_y \quad f_z ]^\top $}; % Using pmatrix for vector T notation is hard in TikZ node
+
+    % Draw the 6 edges (force vectors) of the pyramid
+    \foreach \angle [count=\i] in {0, 60, 120, 180, 240, 300} {
+        % Calculate endpoint coordinates for the edge
+        \pgfmathsetmacro{\ex}{{\r*cos(\angle)}}
+        \pgfmathsetmacro{\ey}{{\r*sin(\angle)}}
+        \coordinate (P\i) at (\ex, \ey, \h);
+
+        % Draw the edge as a vector
+        \draw[thick, -latex] (O) -- (P\i);
+
+        % Add label to the first edge (angle=0)
+        \ifnum\i=1
+            \node[right, xshift=30pt, yshift=90pt, midway, font=\tiny] at (P\i) {$ [ \tau_x \quad \tau_y \quad \tau_z ]^\top $}; % Label one specific wrench
+        \fi
+    }
+    \tdplotdrawarc{(0,0,\h)}{\r}{0}{360}{solid, blue, thick}{}
+
+    % Optionally draw the base of the pyramid (dashed)
+    \draw[dashed, thin, gray] (P1) -- (P2) -- (P3) -- (P4) -- (P5) -- (P6) -- cycle;
+
+    % Optionally draw the outline of the original cone (thin, gray)
+    % \tdplotdrawarc{(0,0,\h)}{\r}{0}{360}{thin, gray}{}
+    % \draw[thin, gray] (O) -- (\r, 0, \h);
+    % \draw[thin, gray] (O) -- (-\r*0.5, \r*0.866, \h); % Example tangent lines might need adjustment based on view
+
+\end{tikzpicture}
+
+\end{document}
