@@ -80,7 +80,7 @@ $$
 
 **纯四元数**：若四元数的实部为 $0$，即 $q = (0, \bold{v})$，则称其为纯四元数。纯四元数可以表示三维空间中的向量。
 
-**旋转表示**：任何一个旋转，都可以表示为绕某个单位向量 $\hat{\omega}$ 旋转 $\theta$ 角度。
+**旋转表示**：任何一个旋转，都可以表示为绕某个单位向量 $\hat{\omega}$ 旋转 $\theta$ 角度（证明见后）。
 
 那么，对应的四元数可以表示为：
 
@@ -88,7 +88,7 @@ $$
 q = \left[\cos\frac{\theta}{2}, \sin\frac{\theta}{2} \hat{\omega}\right]
 $$
 
-注意，旋转到四元数存在“双重覆盖”关系，我们可以很容易地发现：
+注意，旋转到四元数存在 “双重覆盖” 关系，我们可以很容易地发现：
 
 $$
 \begin{aligned}
@@ -112,11 +112,11 @@ $$
 \end{cases}
 $$
 
-其中，$\omega$ 是单位四元数的实部，四元数的一种常见表示就是 $(w,x,y,z)$。
+其中，$w$ 是单位四元数的实部，四元数的一种常见表示就是 $(w,x,y,z)$。
 
-### 四元数运算
+### 四元数与旋转
 
-**向量旋转**：任意向量 $\mathbf{v}$ 沿着以单位向量定义的旋转轴 $\mathbf{u}$ 旋转 $\theta$ 度得到 $\mathbf{v}'$，那么：
+**向量旋转**：任意向量 $\mathbf{v}$ 沿着以 **单位向量** 定义的旋转轴 $\mathbf{u}$ 旋转 $\theta$ 度得到 $\mathbf{v}'$，那么：
 
 令向量 $\mathbf{v}$ 的四元数形式 $v = [0, \mathbf{v}]$，旋转四元数 $q = \left[\cos\left(\frac{\theta}{2}\right), \sin\left(\frac{\theta}{2}\right)\mathbf{u}\right]$
 
@@ -169,6 +169,44 @@ $$
 
 以及单位四元数约束条件 $w^2 + \|\mathbf{r}\|^2 = 1$，将 $w^2 = 1 - \|\mathbf{r}\|^2$ 代入后合并同类项。
 
+接下来证明这个结果与罗德里格旋转公式等价即可。
+
+$$
+qvq^* = [0, (1-2\|\mathbf{r}\|^2)\mathbf{v} + 2(\mathbf{r} \cdot \mathbf{v})\mathbf{r} + 2w(\mathbf{r} \times \mathbf{v})]
+$$
+
+我们有：
+
+-   $w = \cos(\frac{\theta}{2})$
+-   $\mathbf{r} = \sin(\frac{\theta}{2})\mathbf{u}$，且 $\mathbf{u}$ 是单位向量，$\|\mathbf{u}\| = 1$。
+
+所以：
+
+$$
+\begin{aligned}
+1 - 2\|\mathbf{r}\|^2 &= 1 - 2\sin^2\left(\frac{\theta}{2}\right) = \cos(\theta) \\
+\\
+2(\mathbf{r} \cdot \mathbf{v})\mathbf{r} &= 2 \left(\sin\left(\frac{\theta}{2}\right)(\mathbf{u} \cdot \mathbf{v})\right) \left(\sin\left(\frac{\theta}{2}\right)\mathbf{u}\right) \\
+&= 2 \sin^2\left(\frac{\theta}{2}\right) (\mathbf{u} \cdot \mathbf{v}) \mathbf{u} \\
+&= (1 - \cos(\theta)) (\mathbf{u} \cdot \mathbf{v}) \mathbf{u} \\
+\\
+2w(\mathbf{r} \times \mathbf{v}) &= 2 \cos\left(\frac{\theta}{2}\right) \left(\sin\left(\frac{\theta}{2}\right)(\mathbf{u} \times \mathbf{v})\right) \\
+&= \left(2 \sin\left(\frac{\theta}{2}\right) \cos\left(\frac{\theta}{2}\right)\right) (\mathbf{u} \times \mathbf{v}) \\
+&= \sin(\theta) (\mathbf{u} \times \mathbf{v})
+\end{aligned}
+$$
+
+将以上结果代回到 $\mathbf{v}'$ 的表达式中：
+
+$$
+\begin{aligned}
+\mathbf{v}' &= (1-2\|\mathbf{r}\|^2)\mathbf{v} + 2(\mathbf{r} \cdot \mathbf{v})\mathbf{r} + 2w(\mathbf{r} \times \mathbf{v}) \\
+&= (\cos(\theta))\mathbf{v} + (1 - \cos(\theta)) (\mathbf{u} \cdot \mathbf{v}) \mathbf{u} + (\sin(\theta)) (\mathbf{u} \times \mathbf{v})
+\end{aligned}
+$$
+
+正是罗德里格旋转公式的结果。
+
 **旋转组合**：两个旋转 $q_1$ 和 $q_2$ 的组合等价于四元数的乘法：
 
 $$
@@ -182,13 +220,127 @@ $$
 -   四元数的旋转表示具有 $3$ 个自由度（四个参数加一个单位模长约束）。
 -   几何上，单位四元数可以看作 $4$ 维球面 $S^3$ 的壳。
 
+### 四元数与旋转矩阵
+
+#### 从四元数到旋转矩阵
+
+因为我们有 $\mathbf{v}' = q \mathbf{v} q^{-1}$ （这里假设 $\mathbf{v}$ 是向量， $q$ 是单位四元数， $\mathbf{v}'$ 是旋转后的向量，并且我们将向量 $\mathbf{v}$ 视为纯四元数 $[0, \mathbf{v}]$ 进行运算），我们可以计算出对应的旋转矩阵为：
+
+令单位四元数 $q = w + x\mathbf{i} + y\mathbf{j} + z\mathbf{k} = [w, (x, y, z)]$，则旋转矩阵 $R(q)$ 为：
+
+$$
+R(q) = \begin{bmatrix} 1 - 2y^2 - 2z^2 & 2xy - 2zw & 2xz + 2yw \\ 2xy + 2zw & 1 - 2x^2 - 2z^2 & 2yz - 2xw \\ 2xz - 2yw & 2yz + 2xw & 1 - 2x^2 - 2y^2 \end{bmatrix}
+$$
+
+> 证明：使用三个基向量挨个求就行。
+>
+> 令 $\mathbf{r} = (x, y, z)$。
+>
+> 令 $\mathbf{v} = \mathbf{e}_1 = (1, 0, 0)$。
+>
+> -   $\|\mathbf{r}\|^2 = x^2 + y^2 + z^2$
+> -   $\mathbf{r} \cdot \mathbf{e}_1 = x$
+> -   $\mathbf{r} \times \mathbf{e}_1 = (x, y, z) \times (1, 0, 0) = (0, z, -y)$
+>
+> $$
+> \begin{aligned}
+> \mathbf{v}'_1 &= (1-2(x^2+y^2+z^2))\mathbf{e}_1 + 2x\mathbf{r} + 2w(\mathbf{r} \times \mathbf{e}_1) \\
+> &= (1-2x^2-2y^2-2z^2)(1, 0, 0) + 2x(x, y, z) + 2w(0, z, -y) \\
+> &= (1-2x^2-2y^2-2z^2 + 2x^2, 2xy + 2wz, 2xz - 2wy) \\
+> &= (1 - 2y^2 - 2z^2, 2xy + 2zw, 2xz - 2yw)
+> \end{aligned}
+> $$
+>
+> 这就是矩阵 $R$ 的第一列。
+>
+> 令 $\mathbf{v} = \mathbf{e}_2 = (0, 1, 0)$。
+>
+> -   $\mathbf{r} \cdot \mathbf{e}_2 = y$
+> -   $\mathbf{r} \times \mathbf{e}_2 = (x, y, z) \times (0, 1, 0) = (-z, 0, x)$
+>
+> $$
+> \begin{aligned}
+> \mathbf{v}'_2 &= (1-2(x^2+y^2+z^2))\mathbf{e}_2 + 2y\mathbf{r} + 2w(\mathbf{r} \times \mathbf{e}_2) \\
+> &= (1-2x^2-2y^2-2z^2)(0, 1, 0) + 2y(x, y, z) + 2w(-z, 0, x) \\
+> &= (2xy - 2wz, 1-2x^2-2y^2-2z^2 + 2y^2, 2yz + 2wx) \\
+> &= (2xy - 2zw, 1 - 2x^2 - 2z^2, 2yz + 2xw)
+> \end{aligned}
+> $$
+>
+> 这就是矩阵 $R$ 的第二列。
+>
+> 令 $\mathbf{v} = \mathbf{e}_3 = (0, 0, 1)$。
+>
+> -   $\mathbf{r} \cdot \mathbf{e}_3 = z$
+> -   $\mathbf{r} \times \mathbf{e}_3 = (x, y, z) \times (0, 0, 1) = (y, -x, 0)$
+>
+> $$
+> \begin{aligned}
+> \mathbf{v}'_3 &= (1-2(x^2+y^2+z^2))\mathbf{e}_3 + 2z\mathbf{r} + 2w(\mathbf{r} \times \mathbf{e}_3) \\
+> &= (1-2x^2-2y^2-2z^2)(0, 0, 1) + 2z(x, y, z) + 2w(y, -x, 0) \\
+> &= (2xz + 2wy, 2yz - 2wx, 1-2x^2-2y^2-2z^2 + 2z^2) \\
+> &= (2xz + 2yw, 2yz - 2xw, 1 - 2x^2 - 2y^2)
+> \end{aligned}
+> $$
+>
+> 这就是矩阵 $R$ 的第三列。
+>
+> 将 $\mathbf{v}'_1, \mathbf{v}'_2, \mathbf{v}'_3$ 作为列向量组合起来，就得到了图片中给出的旋转矩阵 $R(q)$：
+>
+> $$
+> R(q) = \begin{bmatrix} 1 - 2y^2 - 2z^2 & 2xy - 2zw & 2xz + 2yw \\ 2xy + 2zw & 1 - 2x^2 - 2z^2 & 2yz - 2xw \\ 2xz - 2yw & 2yz + 2xw & 1 - 2x^2 - 2y^2 \end{bmatrix}
+> $$
+>
+> 证毕。
+
+#### 从旋转矩阵到四元数
+
+根据上一步结果，旋转矩阵 $R$ 的迹（trace）满足：
+
+$$
+\text{tr}(R) = 3 - 4(x^2 + y^2 + z^2) = 4w^2 - 1
+$$
+
+我们可以计算四元数的分量为：
+
+$$
+\begin{aligned}
+w &= \frac{\sqrt{\text{tr}(R)+1}}{2} \\
+x &= \frac{R_{32}-R_{23}}{4w} \\
+y &= \frac{R_{13}-R_{31}}{4w} \\
+z &= \frac{R_{21}-R_{12}}{4w}
+\end{aligned}
+$$
+
+其中 $R_{ij}$ 表示矩阵 $R$ 的第 $i$ 行第 $j$ 列的元素。这些公式在 $w \neq 0$ 时有效。
+
 ### 四元数的距离
 
-这部分证明参见 [Krasjet / Quaternion](https://krasjet.github.io/quaternion/quaternion.pdf) 第 4 节・四元数插值（第 37 页）。
+这部分证明亦可参见 [Krasjet / Quaternion](https://krasjet.github.io/quaternion/quaternion.pdf) 第 4 节・四元数插值（第 37 页）。
 
 在单位三维球面 $S^3$ 上，或两个四元数 $(q_1, q_2)$ 之间的角度：
 
 $$
+\langle p, q \rangle = \arccos(p \cdot q)
+$$
+
+证明：设 $p = (p_w, \mathbf{p}_v)$ 和 $q = (q_w, \mathbf{q}_v)$，那么显然，从 $p$ 旋转到 $q$ 的相对旋转可以由四元数乘法 $\Delta q = q p^*$ 表示。
+
+$$
+\begin{aligned}
+\Delta q &= q p^* \\
+&= (q_w, \mathbf{q}_v)(p_w, -\mathbf{p}_v) \\
+&= (q_w p_w - \mathbf{q}_v \cdot (-\mathbf{p}_v), q_w(-\mathbf{p}_v) + p_w \mathbf{q}_v + \mathbf{q}_v \times (-\mathbf{p}_v)) \\
+&= (q_w p_w + \mathbf{q}_v \cdot \mathbf{p}_v, \dots)
+\end{aligned}
+$$
+
+所以，$\Delta q$ 的实部 $\text{Re}(\Delta q) = q_w p_w + \mathbf{q}_v \cdot \mathbf{p}_v$。
+
+这正好是 $p$ 和 $q$ 作为 4D 向量的点积 $p \cdot q$。
+
+$$
+\text{Re}(\Delta q) = p \cdot q = \cos \langle p, q \rangle\\
 \langle p, q \rangle = \arccos(p \cdot q)
 $$
 
@@ -206,13 +358,13 @@ $$
 
 这里需要在两个值之间取最小值的原因也可以参见 [Krasjet / Quaternion](https://krasjet.github.io/quaternion/quaternion.pdf) 第 5.4 节・双倍覆盖带来的问题（第 46 页）。
 
-可以证明，两个旋转 $(R_1, R_2)$ 的距离与其对应四元数 $q(R_1)$ 和 $q(R_2)$ 在球面上的距离成线性关系（前者是后者的两倍）。
+回顾之前四元数与旋转的关系，不难得知两个旋转 $(R_1, R_2)$ 的距离与其对应四元数 $q(R_1)$ 和 $q(R_2)$ 在球面上的距离成线性关系（前者是后者的两倍）。
 
 ![unit_circle_and_rotation_diagram](./03-Robotics-II.assets/unit_circle_and_rotation_diagram.png)
 
 ### 四元数插值
 
-这部分证明参见 [Krasjet / Quaternion](https://krasjet.github.io/quaternion/quaternion.pdf) 第 5 节・四元数插值（第 41 页）。
+这部分证明可以参见 [Krasjet / Quaternion](https://krasjet.github.io/quaternion/quaternion.pdf) 第 5 节・四元数插值（第 41 页）。
 
 #### 线性插值（Linear Interpolation, Lerp）
 
@@ -228,9 +380,9 @@ $$
 q(t) = \frac{(1-t)q_1 + tq_2}{\|(1-t)q_1 + tq_2\|}
 $$
 
-![nlerp](./03-Robotics-II.assets/nlerp.png)
-
 省流：就是除个模长，让他恢复为单位四元数。
+
+![nlerp](./03-Robotics-II.assets/nlerp.png)
 
 #### 球面线性插值（Spherical Linear Interpolation, Slerp）
 
@@ -250,7 +402,7 @@ $$
 
 证明的一个方法在 [Krasjet / Quaternion](https://krasjet.github.io/quaternion/quaternion.pdf) 第 5.3 节・球面线性插值（第 43 页）。
 
-不过老师的 Slide 上有另一种更简单的利用三角函数性质的证明方法：
+不过老师的 Slide 上有另一种更简单直观的利用三角函数性质的证明方法：
 
 ![vector_geometry_angle_diagram](./03-Robotics-II.assets/vector_geometry_angle_diagram.png)
 
@@ -290,6 +442,20 @@ $$
 ### 有趣的事实
 
 对于神经网络来讲，最好的旋转表示方法是 9 个数的旋转矩阵。因为其他的表示方法均可能出现对于输入的微小扰动，即一个小的旋转，出现一个跳变，而只有最初最冗余的 $\mathbb{R}^{3\times3}$ 旋转矩阵保证其必然是连续的（ **即连续性** ），而这对于神经网络是很好的性质。
+
+### 各旋转表示方式对比
+
+| Representation  | Inverse?    | Composing?  | Any local movement in SO(3) can be achieved by local movement in the domain? |
+| --------------- | ----------- | ----------- | ---------------------------------------------------------------------------- |
+| Rotation Matrix | ✔️          | ✔️          | N/A                                                                          |
+| Euler Angle     | Complicated | Complicated | No                                                                           |
+| Angle-axis      | ✔️          | Complicated | ?                                                                            |
+| Quaternion      | ✔️          | ✔️          | ✔️                                                                           |
+
+-   旋转矩阵：可逆、可组合（矩阵连乘）、但在 $\mathbb{SO}(3)$ 上移动不直接（9 D - 6 约束 = 3DoF）
+-   欧拉角：逆向复杂、组合复杂、因为 Gimbal lock 的存在，与 $\mathbb{SO}(3)$ 不能平滑映射
+-   轴角：可逆、组合复杂、大部分情况下可以与 $\mathbb{SO}(3)$ 平滑映射，但是在边界情况（如旋转 $0$ 度时）不行
+-   四元数：完美
 
 ## 运动规划
 

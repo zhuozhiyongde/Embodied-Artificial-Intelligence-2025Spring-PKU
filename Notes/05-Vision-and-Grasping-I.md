@@ -13,6 +13,8 @@
 
 ### 抓取的自由度
 
+**抓取姿势（Grasp Pose）**：手的位置、方向和关节状态
+
 -   **4-DoF 抓取**：仅需平移和绕重力轴旋转，适用于结构化环境、固定位置（如流水线物料分拣）
 
     $$
@@ -40,9 +42,9 @@
 2. 输入与输出之间没有信息回路
 3. 系统不会根据执行结果来自动修正控制信号
 
-**开环抓取**：基于视觉位姿估计，预测抓取位姿，执行抓取，视觉只会用到一次，如果失败（如掉落、没抓起来），不会尝试修正
+**开环抓取**：基于视觉位姿估计，预测抓取位姿，执行抓取，视觉只会用到一次，如果失败（如掉落、没抓起来），不会尝试修正，“蒙着眼睛做事情”。
 
-**闭环抓取**：基于视觉位姿估计，预测抓取位姿，执行抓取，如果抓取失败，则调整抓取位姿，重新抓取
+**闭环抓取**：基于视觉位姿估计，预测抓取位姿，执行抓取，如果抓取失败，则调整抓取位姿，重新抓取。
 
 ### 开环抓取系统
 
@@ -71,7 +73,7 @@
 
     那么其可以唯一对应一个位姿
 
-2. 点云（Point Cloud）图像，只需满足物体无对称性，那么就可以唯一对应一个位姿。
+2. 点云（Point Cloud）图像，只需满足物体 **无对称性**，那么就可以唯一对应一个位姿。
 
 ##### Iterative Closest Point (ICP) 算法
 
@@ -81,18 +83,18 @@
 
 2. 迭代直至收敛：
 
-    - 数据关联：确立变换后最近邻点对，建立模板点云 $M$ 与场景点云 $S$ 对应关系
+    1. 数据关联：确立变换后最近邻点对，建立模板点云 $M$ 与场景点云 $S$ 对应关系
 
         $$
         C = \{ (m_i, s_j) | s_j = \arg \min_{s \in S} \| T_k m_i - s \| \}
         $$
 
-    - 变换求解：最小化对应点距离
+    2. 变换求解：最小化对应点距离
         $$
         T_{k+1} = \arg \min_T \sum_{(m,s) \in C} \| Tm - s \|^2
         $$
 
-问题：比较怕物体被挡住造成点云缺失。
+问题：比较怕物体被挡住造成 **点云缺失**。
 
 #### 对未知物体的抓取
 
@@ -104,7 +106,7 @@
 
 回归：估计连续变量。
 
-旋转回归：一种特殊的回归任务，对于输入信号，经由神经网络估计连续的旋转变量。
+**旋转回归**：一种特殊的回归任务，对于输入信号，经由神经网络估计连续的旋转变量。
 
 ![Typora 2025-03-18 16.13.52](./05-Vision-and-Grasping-I.assets/rotation_regression_neural_network.png)
 
@@ -121,14 +123,14 @@ $\mathbb{SO}(2) / \mathbb{SO}(3)$ 具有很好的连续性，没有跳变点的�
 
 与普通回归不同，旋转表示在非线性空间、非欧空间中，**所以对于之前所讲过的所有旋转的表达方式，简单地使用 MSE 来作为监督信号都会不够理想。**
 
-这是因为，CNN 理应具有连续性，对于输入的微小变动，其输出不应当造成很大的改变。
+这是因为，CNN 理应具有连续性，**对于输入的微小变动，其输出不应当造成很大的改变。**
 
 而如果对于某一旋转表达方式，存在这种 Ground Truth 监督信号的跳变，神经网络为了拟合这种跳变点，就会导致其权重矩阵 $W$ 出现一些很大的参数，造成数值不稳定性的同时，为之消耗大量的注意力，大部分的训练过程都去拟合这种跳变而不是其他占比更多、更泛用的部分，这是非常不好的。并且这一过程是 Loss 无关的，是由于选择了不好的表达方式造成的本质性问题。
 
 所以，理想的表达方式，应当满足：
 
 1. **双射**，表达方式到 $\mathbb{SO}(3)$ 群是一一映射的，否则特定旋转时可能出现多种等价表示，这使得神经网络难以学习
-2. **连续**， $\mathbb{SO}(3)$ 群中任何一点附近的连续变化，其对应的表达方式应当也是连续变化，也即不存在性质不好的 “奇点”
+2. **连续**， $\mathbb{SO}(3)$ 群中任何一点附近的连续变化，其对应的表达方式应当也是连续变化，也即不存在性质不好的 **奇点（Singularities）**
 
 ### 欧拉角
 
@@ -146,7 +148,7 @@ $$
 
 绕旋转轴转 $0$ 和 $2\pi$ 是一样的，但是在实际的 $\mathbb{SO}(2)$ 中是连续的。
 
-一个解决方法是引入冗余维度，把低维空间中的的不连续改成高维空间中的连续，如 $\theta \to (x,y)$，后者是连续的，且能反向求解出前者。
+一个解决方法是 **引入冗余维度**，把低维空间中的的不连续改成高维空间中的连续，如 $\theta \to (x,y)$，后者是连续的，且能反向求解出前者。
 
 ### 轴角
 
@@ -274,7 +276,7 @@ $$
 \end{bmatrix}V^{\top}
 $$
 
-其中 $U$ 和 $V$ 是通过 SVD 分解得到的正交矩阵，$\det(UV)$ 项确保结果矩阵的行列式为 +1，满足旋转矩阵的性质。
+其中 $U$ 和 $V$ 是对神经网络预测除的矩阵进行 SVD 分解得到的正交矩阵，$\det(UV)$ 项确保结果矩阵的行列式为 +1，满足旋转矩阵的性质。
 
 > **SVD 的基本过程**
 >
@@ -298,7 +300,7 @@ $$
 
 ### 增量旋转预测
 
-对于预测增量旋转（delta rotation），即 $\mathbb{SO}(3)$ 在单位矩阵 $I$ 附近的小范围旋转，前面几种表示方式实际上都可以，因为此时在这个邻域没有了我们考虑了半天的奇点问题。
+对于预测增量旋转（delta rotation），即 $\mathbb{SO}(3)$ 在单位矩阵 $I$ 附近的小范围旋转，前面几种表示方式实际上都可以，因为此时在这个邻域没有了我们考虑了半天的奇点（Singularities）问题。
 
 而且，此时由于四元数等表示方式需要预测参数更少，学习起来甚至可能更快。
 
@@ -309,7 +311,7 @@ $$
 1. 对物体表面的每个像素，预测其在物体建模模型上的 3D 坐标
 2. 基于这些对应关系拟合旋转矩阵
 
-这种方法建立了模型坐标系 $(x_i^M, y_i^M, z_i^M)$ 和相机坐标系 $(x_i^C, y_i^C, z_i^C)$ 两个坐标系之间的对应关系。
+这种方法建立了模型坐标系（model） $(x_i^M, y_i^M, z_i^M)$ 和相机坐标系（camera） $(x_i^C, y_i^C, z_i^C)$ 两个坐标系之间的对应关系。
 
 我们的目标是找到将模型坐标系转换到相机坐标系的最优变换矩阵（要求物体大小不变）。
 
@@ -322,11 +324,13 @@ $$
 
 ### 正交 Procrustes 问题
 
-不考虑位移 $t$ 的纯旋转拟合可以形式化为正交 Procrustes 问题，这是一个矩阵逼近问题。
+给定两组对应的 3D 点集，不考虑位移 $t$ 的纯旋转拟合（求解它们之间的最优旋转矩阵）可以形式化为正交 Procrustes 问题，这是一个矩阵逼近问题。
 
-给定矩阵 $\mathbf{M} \in \mathbb{R}^{n \times p}$ 和 $\mathbf{N} \in \mathbb{R}^{n \times p}$，我们需要求解：
+定义：给定矩阵 $\mathbf{M} \in \mathbb{R}^{n \times p}$ 和 $\mathbf{N} \in \mathbb{R}^{n \times p}$，我们需要求解：
+
 $$
-\hat{\mathbf{A}} = \arg\min_{\mathbf{A} \in \mathbb{R}^{p \times p}} \|\mathbf{M} - \mathbf{NA}\|_F^2 \quad \text{subject to} \quad \mathbf{A}^{\top}\mathbf{A} = \mathbf{I}
+\hat{\mathbf{A}} = \arg\min_{\mathbf{A} \in \mathbb{R}^{p \times p}} \|\mathbf{M}^{\top} - \mathbf{AN}^{\top}\|_F^2 = \arg\min_{\mathbf{A} \in \mathbb{R}^{p \times p}} \|\mathbf{M} - \mathbf{NA}^{\top}\|_F^2 \\
+\text{subject to} \quad \mathbf{A}^{\top}\mathbf{A} = \mathbf{I}
 $$
 
 其中，$\|\cdot\|_F$ 表示 Frobenius 范数，定义为：
@@ -337,13 +341,12 @@ $$
 
 这里：
 
--   $\mathbf{M}$ 可以表示相机坐标系中的点集
+-   $\mathbf{M}$ 可以表示目标坐标系中的点集（例如相机坐标系）
 
--   $\mathbf{N}$ 表示模型坐标系中的对应点集
-
+-   $\mathbf{N}$ 表示源坐标系中的对应点集（例如模型坐标系）
 -   求解的 $\mathbf{A}$ 即为从 $\mathbf{N}$ 到 $\mathbf{M}$ 的最优旋转矩阵
 
-    约束条件 $\mathbf{A}^{\top}\mathbf{A} = \mathbf{I}$ 确保 $\mathbf{A}$ 是正交矩阵，保证了纯旋转变换（不包含缩放或剪切）。
+-   约束条件 $\mathbf{A}^{\top}\mathbf{A} = \mathbf{I}$ 确保 $\mathbf{A}$ 是正交矩阵，保证了纯旋转变换（不包含缩放或剪切）。
 
 正交 Procrustes 问题有一个优雅的解析解，可以通过奇异值分解（SVD）获得。如果我们对矩阵 $\mathbf{M}^{\top}\mathbf{N}$ 进行 SVD 分解：
 
@@ -354,7 +357,7 @@ $$
 那么最优旋转矩阵为：
 
 $$
-\hat{\mathbf{A}} = \mathbf{VU}^{\top}
+\hat{\mathbf{A}} = \mathbf{UV}^{\top}
 $$
 
 #### 数学证明
@@ -373,7 +376,9 @@ $$
 \begin{aligned}
 \|\mathbf{M} - \mathbf{NA}^{\top}\|_F^2
 &= \text{tr}((\mathbf{M} - \mathbf{NA}^{\top})^{\top}(\mathbf{M} - \mathbf{NA}^{\top}))\\
-&= \text{tr}(\mathbf{M}^{\top}\mathbf{M}) - 2\text{tr}(\mathbf{M}^{\top}\mathbf{NA}^{\top}) + \text{tr}(\mathbf{AN}^{\top}\mathbf{NA}^{\top}) \\
+&= \text{tr}(\mathbf{M}^{\top}\mathbf{M} - \mathbf{M}^{\top}\mathbf{NA}^{\top} - \mathbf{AN}^{\top}\mathbf{M} + \mathbf{AN}^{\top}\mathbf{NA}^{\top}) \\
+&= \text{tr}(\mathbf{M}^{\top}\mathbf{M}) - \text{tr}(\mathbf{M}^{\top}\mathbf{NA}^{\top}) - \text{tr}(\mathbf{AN}^{\top}\mathbf{M}) + \text{tr}(\mathbf{AN}^{\top}\mathbf{NA}^{\top}) \\
+&= \text{tr}(\mathbf{M}^{\top}\mathbf{M}) - \text{tr}(\mathbf{M}^{\top}\mathbf{NA}^{\top}) - \text{tr}((\mathbf{M}^{\top}\mathbf{NA}^{\top})^{\top}) + \text{tr}(\mathbf{N}^{\top}\mathbf{N}\mathbf{A}^{\top}\mathbf{A}) \\
 &= \text{tr}(\mathbf{M}^{\top}\mathbf{M}) - 2\text{tr}(\mathbf{M}^{\top}\mathbf{NA}^{\top}) + \text{tr}(\mathbf{N}^{\top}\mathbf{N})
 \end{aligned}
 $$
@@ -386,7 +391,7 @@ $$
 \begin{aligned}
 \text{tr}(\mathbf{M}^{\top}\mathbf{NA}^{\top}) &= \text{tr}(\mathbf{UDV}^{\top}\mathbf{A}^{\top}) \\
 &= \text{tr}(\mathbf{UD}(\mathbf{AV})^{\top}) \\
-&= \text{tr}((\mathbf{AV})^{\top}\mathbf{UD}) \\
+&= \text{tr}((\mathbf{AV})^{\top}\mathbf{UD})  \quad (\text{循环性质，左乘正交矩阵逆，右乘正交矩阵}) \\
 &= \sum_{i=1}^{d}[(\mathbf{AV})^{\top}\mathbf{U}]_{ii}d_i
 \end{aligned}
 $$
@@ -405,11 +410,37 @@ $$
 \end{aligned}
 $$
 
+#### 后处理
+
+正交 Procrustes 问题的基本约束 $\mathbf{A}^{\top}\mathbf{A} = \mathbf{I}$ 保证了 $\mathbf{A}$ 是一个正交矩阵。但正交矩阵即可以是旋转（$\det \mathbf{A} = +1$），也可以是 **反射** （改变手性，$\det \mathbf{A} = -1$）
+
+所以，如果计算出的 $\det(\mathbf{UV}^{\top}) = -1$，表明 $\mathbf{UV}^{\top}$ 是一个反射。为了得到最接近的纯旋转，我们通过修改 SVD 中间对角矩阵 $\mathbf{D}$ 的最后一个元素符号来 “翻转” 这个反射。具体做法就是将解修正为：
+
+$$
+\hat{\mathbf{A}} = \mathbf{U}\begin{pmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & \det(\mathbf{UV}^{\top}) \end{pmatrix}\mathbf{V}^{\top}
+$$
+
+直观上，这代表选择翻转关联性最弱的方向，是因为这样做对整体对齐效果（即 Frobenius 范数或等价的迹最大化目标）的影响是最小的。
+
 #### 位移求解
 
-位移向量 $t$ 相对于旋转矩阵就非常好解了，直接求两个点集的几何中心的差值即可。
+可以想到，一旦旋转矩阵确定，那么位移向量 $t$ 就非常好解了（计算变换前后差值即可）。
 
-同理，将一个变换矩阵转换为刚才说的正交 Procrustes 问题，也只需要对两个原始点集 $\mathbf{M}$ 和 $\mathbf{N}$ 分别减去各自的几何中心即可。
+将一个变换矩阵转换为刚才说的正交 Procrustes 问题，也只需要对两个原始点集 $\mathbf{M}$ 和 $\mathbf{N}$ 分别减去各自的几何中心即可。
+
+步骤：
+
+1.  中心化
+
+    -   计算两个点集的质心：$\overline{\mathbf{M}}$（M 的均值）, $\overline{\mathbf{N}}$（N 的均值）。
+    -   得到中心化后的点集：$\tilde{\mathbf{M}} = \mathbf{M} - \overline{\mathbf{M}}$, $\tilde{\mathbf{N}} = \mathbf{N} - \overline{\mathbf{N}}$。
+
+2.  求解旋转 $\hat{\mathbf{R}}$：对中心化后的点集 $\tilde{\mathbf{M}}$ 和 $\tilde{\mathbf{N}}$ 应用 **带约束的正交 Procrustes 算法** （要求 $\det(\mathbf{R})=+1$），求解最优旋转 $\hat{\mathbf{R}}$，使得 $\tilde{\mathbf{M}}^{\top} \approx \hat{\mathbf{R}}\tilde{\mathbf{N}}^{\top}$。
+
+3.  求解平移 $\hat{\mathbf{T}}$：利用已求得的 $\hat{\mathbf{R}}$ 和原始点集的质心计算最优平移：
+    $$
+    \hat{\mathbf{T}} = \overline{\mathbf{M}^{\top} - \hat{\mathbf{R}} \mathbf{N}^{\top}}
+    $$
 
 #### 问题
 
@@ -417,7 +448,7 @@ $$
 
 对于 Outlier 较为敏感，使用 RANSAC 算法即可。
 
-**一下内容直接摘录自 CV 导论笔记，看过的可以直接跳。**
+**以下内容直接摘录自 CV 导论笔记，看过的可以直接跳。**
 
 ##### 最小二乘法（Least Square Method）
 
@@ -460,7 +491,7 @@ $$
 
 ### Catagory level
 
-对同一类别物体的位姿变换预测，这类物品通常具有共有结构，如茶杯具有相近的几何形状，可以用于定位。
+对同一类别物体的位姿变换预测，这类物品通常具有共有结构，如茶杯具有相近的几何形状，可以用于定位（下节课详细讲）。
 
 在同类别物体中进行泛化，但也因此受限，没见过的类别不行。
 

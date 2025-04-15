@@ -1,2 +1,4 @@
 Slides/
 Homeworks/
+*.aux
+*.synctex.gz
