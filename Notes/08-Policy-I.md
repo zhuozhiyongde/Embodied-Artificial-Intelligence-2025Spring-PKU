@@ -448,6 +448,59 @@ $$
 
 ## 强化学习
 
-懒得写了，当年学过强化学习课程已经被狠狠摧残过一遍了。
+> 懒得详细写了，当年学过强化学习课程已经被狠狠摧残过一遍了。
+>
+> 推荐参照 [动手学强化学习](https://hrl.boyuai.com/) 自学。
 
-推荐参照 [动手学强化学习](https://hrl.boyuai.com/) 自学。
+### 马尔可夫决策过程（Markov Decision Process，MDP）
+
+$$
+\mathcal{M} = \{S, \mathcal{A}, \mathcal{T}, r\}
+$$
+
+其中：
+
+-   $\mathcal{A}$：动作空间 (Action Space)，智能体可以采取的动作。
+-   $\mathcal{T}$：状态转移算子 (Transition Operator)，现在依赖于状态和动作，$p(s_{t+1}|s_t, a_t)$。
+-   $r$：奖励函数 (Reward Function)，$r：S \times \mathcal{A} \to \mathbb{R}$，表示在状态 $s_t$ 执行动作 $a_t$ 后获得的即时奖励 $r(s_t, a_t)$。
+
+### 部分可观测马尔可夫决策过程（POMDP）
+
+部分可观测马尔可夫决策过程（Partially Observable Markov Decision Process, POMDP）是 MDP 的扩展，其中智能体只能观测到部分状态。
+
+$$
+\mathcal{M} = \{S, \mathcal{A}, \mathcal{O}, \mathcal{T}, \mathcal{E}, r\}
+$$
+
+其中：
+
+-   $\mathcal{O}$：观测空间 (Observation Space)，智能体可以观测到的状态
+-   $\mathcal{E}$：观测概率 (Observation Probability)，$p(o_t|s_t, a_t)$，描述在真实状态 $s_t$ 下，观测到 $o_t$ 的概率 $p(o_t|s_t)$
+-   $\mathcal{T}$：状态转移算子 (Transition Operator)，$p(s_{t+1}|s_t, a_t)$
+
+此时，智能体 **无法直接知道** 当前的真实状态 $s_t$，只能得到一个与 $s_t$ 相关的观测 $o_t$。
+
+### 强化学习的目标
+
+**强化学习**：学习一个策略（policy） $\pi_\theta(a|s)$ （由参数 $\theta$ 决定），使得在一个轨迹（trajectory） $\tau =(s_1, a_1, s_2, a_2, ...)$ 上的累积奖励期望最大化。
+
+$$
+\begin{aligned}
+\theta^* &= \arg\max_\theta \mathbb{E}_{\tau \sim p_\theta(\tau)} \left[ \sum_t r(s_t, a_t) \right] \\
+&= \arg\max_\theta \mathbb{E}_{(s_t, a_t) \sim p_\theta(s_t, a_t)} \left[ r(s_t, a_t) \right]
+\end{aligned}
+$$
+
+其中，$p_\theta(\tau) = p(s_1) \prod_{t=1}^T \pi_\theta(a_t|s_t) p(s_{t+1}|s_t, a_t)$ 是轨迹 $\tau$ 出现的概率。
+
+注意这个式子暗含了马尔可夫性，因为状态转移概率 $p(s_{t+1}|s_t, a_t)$ 只依赖于 $s_t$ 和 $a_t$）。
+
+**有限时间界（Finite Horizon）**：最大化固定步数 $T$ （有限时间）内的总奖励期望。
+
+$$
+\theta^* = \arg\max_\theta \sum_{t=1}^T \mathbb{E}_{(s_t, a_t) \sim p_\theta(s_t, a_t)} [r(s_t, a_t)]
+$$
+
+其中 $p_\theta(s_t, a_t)$ 是在 $t$ 时刻访问状态 - 动作对 $(s_t, a_t)$ 的概率（边际分布）。
+
+**RL 优化的是期望奖励**：即使奖励函数本身不平滑，期望奖励 $\mathbb{E}_{\pi_\theta}[r(x)]$ 通常是关于策略参数 $\theta$ 平滑的，这使得基于梯度的优化方法成为可能。
