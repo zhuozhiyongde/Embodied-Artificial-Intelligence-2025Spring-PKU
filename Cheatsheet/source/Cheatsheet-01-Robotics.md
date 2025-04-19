@@ -26,7 +26,9 @@ R_{z}(\gamma):=\begin{bmatrix}\cos\gamma&-\sin\gamma&0\\\sin\gamma&\cos\gamma&0\
 
 **旋转表示**：绕某个单位向量 $\hat{\omega}$ 旋转 $\theta$ 角度，对应的四元数：$q = \left[\cos\frac{\theta}{2}, \sin\frac{\theta}{2} \hat{\omega}\right]$
 
-注意，旋转到四元数存在 **“双重覆盖”** 关系。从四元数恢复轴角表示：$\theta = 2 \arccos(w), \quad \hat{\omega} =\begin{cases}\frac{\bold{v}}{\sin(\theta/2)}, & \theta \neq 0 \\0, & \theta = 0\end{cases}$。
+注意，旋转到四元数存在 **“双重覆盖”**：$q$ 和 $-q$ 代表同一个旋转。
+
+**从四元数恢复轴角表示**：$\theta = 2 \arccos(w), \quad \hat{\omega} =\begin{cases}\frac{\bold{v}}{\sin(\theta/2)}, & \theta \neq 0 \\0, & \theta = 0\end{cases}$。
 
 **向量旋转**：任意向量 $\mathbf{v}$ 沿着以**单位向量**定义的旋转轴 $\mathbf{u}$ 旋转 $\theta$ 度得到 $\mathbf{v}'$，那么：令向量 $\mathbf{v}$ 的四元数形式 $v = [0, \mathbf{v}]$，旋转四元数 $q = \left[\cos\left(\frac{\theta}{2}\right), \sin\left(\frac{\theta}{2}\right)\mathbf{u}\right]$，则旋转后的向量 $\mathbf{v}'$ 可表示为：$\mathbf{v}' = qv q^* = qv q^{-1}$。
 
