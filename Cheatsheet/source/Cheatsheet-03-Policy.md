@@ -1,30 +1,3 @@
-# Grasp
-
-**DexGraspNet**：合成数据（Synthetic Data） + 深度学习
-
-1. 场景理解：预测每个点 **抓取可能性（Graspness）**，是否是 **物体（Objectness）**
-2. 局部特征：不用全局特征（关联性弱、泛化性差），选择 Graspness 高的地方附近的点云，提取局部特征（ **几何信息** ）
-3. 条件抓取生成模块：条件生成处理 $(T, R)$ 多峰分布，然后采样后直接预测手指形态 $\theta$
-
-仅处理包覆式抓取（Power Grasp），没处理指尖抓取（Precision Grasp）；主要使用力封闭抓取；透明（Transparent）或高反光（Highly Specular/Shiny）物体有折射（Refraction）/ 镜面反射（Specular Reflection），导致点云质量差。
-
-**ASGrasp**：深度修复，合成数据 + 监督学习。域随机化、多模态立体视觉、立体匹配（Stereo Matching） 。
-
-**Affordance**：指一个物体所能支持或提供的交互方式或操作可能性，哪个区域、何种方式进行交互。
-
-**Where2Act**：大量随机尝试 + 标注。学习从视觉输入预测交互点 $a_p$、交互方向 $R_{z|p}$ 和成功置信度 $s_{R|p}$。**VAT-Mart**：预测一整条操作轨迹。
-
-利用视觉输入进行预测：
-
--   **物体位姿（Object Pose）**：需要模型、抓取标注。
--   **抓取位姿（Grasp Pose）**：直接预测抓取点和姿态，无模型或预定义抓取。
--   **可供性（Affordance）**
-
-**启发式（Heuristic）规则**：预抓取 Pre-grasp，到附近安全位置再闭合，避免碰撞
-
-1.  **操作复杂度有限**：难以处理复杂任务，受启发式规则设计限制。
-2.  **开环执行（Open-loop）**：规划一次，执行到底，闭眼做事。高频重规划可近似闭环。
-
 # Policy
 
 **策略学习**：学习 $\pi(a_t|s_t)$ 或 $\pi(a_t|o_t)$，实现 **闭环控制**。
@@ -58,7 +31,7 @@
 -   **Model-Free**：不需要知道环境的模型
 -   **Model-Based**：利用神经网络学习环境的模型
 
-**REINFORCE**：按照整条轨迹的总回报 $R(\tau^{(i)})$  加权，**On-Policy**。BC 是平权。
+**REINFORCE**：按照整条轨迹的总回报 $R(\tau^{(i)})$ 加权，**On-Policy**。BC 是平权。
 
 **On-Policy**：数据来自当前策略。效果好，**样本效率低**，每次都得重新采样。**Off-Policy**：数据可来自不同策略。**样本效率高**，可能不稳定。
 
@@ -66,7 +39,7 @@
 
 **Baseline**：降方差，减去 $a_t$ 无关状态基线 $b(s_t)$，$\hat{Q}(s_t, a_t) - b(s_t)$。梯度无偏。
 
-**Advantage $A^{\pi_\theta}(s_t, a_t) = Q^{\pi_\theta}(s_t, a_t) - V^{\pi_\theta}(s_t)$**：动作相对平均的优势，可替换$R(\tau^{(i)})$  做权值，$\hat{A}(s_t, a_t) = r(s_t, a_t) + \gamma \hat{V}(s_{t+1}) - \hat{V}(s_t)$
+**Advantage $A^{\pi_\theta}(s_t, a_t) = Q^{\pi_\theta}(s_t, a_t) - V^{\pi_\theta}(s_t)$**：动作相对平均的优势，可替换$R(\tau^{(i)})$ 做权值，$\hat{A}(s_t, a_t) = r(s_t, a_t) + \gamma \hat{V}(s_{t+1}) - \hat{V}(s_t)$
 
 **Bootstrap**：使用基于当前函数估计的值 $\hat{V}_{\phi}^{\pi}(s_{i,t+1})$ 来更新 **同一个函数** 在另一个点 $s_{i,t}$ 的估计 $\hat{V}_{\phi}^{\pi}(s_{i,t})$
 

@@ -417,7 +417,7 @@ $$
 所以，如果计算出的 $\det(\mathbf{UV}^{\top}) = -1$，表明 $\mathbf{UV}^{\top}$ 是一个反射。为了得到最接近的纯旋转，我们通过修改 SVD 中间对角矩阵 $\mathbf{D}$ 的最后一个元素符号来 “翻转” 这个反射。具体做法就是将解修正为：
 
 $$
-\hat{\mathbf{A}} = \mathbf{U}\begin{pmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & \det(\mathbf{UV}^{\top}) \end{pmatrix}\mathbf{V}^{\top}
+\hat{\mathbf{A}} = \mathbf{U}\begin{bmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & \det(\mathbf{UV}^{\top}) \end{bmatrix}\mathbf{V}^{\top}
 $$
 
 直观上，这代表选择翻转关联性最弱的方向，是因为这样做对整体对齐效果（即 Frobenius 范数或等价的迹最大化目标）的影响是最小的。
