@@ -470,7 +470,6 @@ V^{\pi_\theta}(s_t) = \mathbb{E}_{\tau \sim p_\theta(\tau)} \left[ \sum_{t'=t}^{
 $$
 
 **动作价值函数 $Q^{\pi_\theta}(s_t, a_t)$**：表示在状态 $s_t$ 采取动作 $a_t$ 后，再遵循策略 $\pi_\theta$ 所能获得的期望（折扣）Reward-to-Go 回报，它依赖于状态 $s_t$、动作 $a_t$ 和策略 $\pi_\theta$。
-
 $$
 Q^{\pi_\theta}(s_t, a_t) = \mathbb{E}_{\tau \sim p_\theta(\tau)} \left[ \sum_{t'=t}^{T} \gamma^{t'-t} r_{t'} \middle| s_t, a_t \right] = r(s_t, a_t) + \gamma \mathbb{E}_{s_{t+1} \sim P(\cdot|s_t, a_t)} [V^{\pi_\theta}(s_{t+1})]
 $$
