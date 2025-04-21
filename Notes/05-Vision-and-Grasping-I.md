@@ -311,9 +311,9 @@ $$
 1. 对物体表面的每个像素，预测其在物体建模模型上的 3D 坐标
 2. 基于这些对应关系拟合旋转矩阵
 
-这种方法建立了模型坐标系（model） $(x_i^M, y_i^M, z_i^M)$ 和相机坐标系（camera） $(x_i^C, y_i^C, z_i^C)$ 两个坐标系之间的对应关系。
+这种方法建立了相机坐标系（camera） $(x_i^C, y_i^C, z_i^C)$ 到模型坐标系（model） $(x_i^M, y_i^M, z_i^M)$ 的对应关系。
 
-我们的目标是找到将模型坐标系转换到相机坐标系的最优变换矩阵（要求物体大小不变）。
+我们的目标是找到将相机坐标系转换到模型坐标系的最优变换矩阵（要求物体大小不变）。
 
 ![model_to_camera_coordinates](./05-Vision-and-Grasping-I.assets/model_to_camera_coordinates.png)
 

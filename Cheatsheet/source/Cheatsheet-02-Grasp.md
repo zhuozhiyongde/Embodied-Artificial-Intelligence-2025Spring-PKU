@@ -1,8 +1,6 @@
 # Vision-and-Grasping
 
-**抓握式操作** （Prehensile Manipulation）：通过完全约束物体自由度实现精确控制
-
-**非抓握式操作** （Non-prehensile Manipulation）：利用推、滑等接触力学原理调整物体状态，适用于薄片状物体或预处理场景，**不是所有动作都需要抓取**
+**抓握式操作** （Prehensile Manipulation）：通过完全约束物体自由度实现精确控制。**非抓握式操作**：利用推、滑等接触力学原理调整物体状态，适用于薄片状物体或预处理场景，**不是所有动作都需要抓取**
 
 **抓取姿势（Grasp Pose）**：手的位置、方向和关节状态 & **抓取的自由度**
 
@@ -20,33 +18,27 @@
 
 **旋转回归**：用神经网络估计连续的旋转变量，理想表达方式：表示空间到 $\mathbb{SO}(3)$ 群一一映射、且满足连续性，即不存在 **奇点（Singularities）**
 
-**欧拉角**：$R = R_x(\alpha)R_y(\beta)R_z(\gamma)$，存在非双射（考虑引入冗余维度解决 $\theta \to (x,y)$）、Gimbal lock 问题
-
-**轴角**：$(\text{axis}, \text{angle}) = (\mathbf{e}, \theta)$，当 $\theta=0$ （单位旋转）或 $\theta=\pi$ （旋转轴可以反向）时存在多义性。
-
-**四元数**：$q = w + xi + yj + zk$，存在双重覆盖问题，约束空间为上半球则引入不连续性（临近球大圆的不连续性和球大圆上的不连续性）。$q = \left[\cos\frac{\theta}{2}, \sin\frac{\theta}{2} \hat{\omega}\right]$
+**欧拉角**、**轴角**：存在多义性。**四元数**：双重覆盖问题，约束空间为上半球则引入不连续性（临近球大圆的不连续性和球大圆上的不连续性）。$q = \left[\cos\frac{\theta}{2}, \sin\frac{\theta}{2} \hat{\omega}\right]$，本质是 $\mathbb{R}^4$ 与 $\mathbb{SO}(3)$ 无法构成拓扑同构, 至少 $\mathbb{R}^5$ 才行
 
 **6D 表示**：拟合旋转矩阵然后施密特正交化（Schmidt orthogonalization），但拟合的 9 个数不等价
 
-**9D 表示**：SVD 正交化，CNN 友好，连续、一一映射、等价。$\hat{R} = U\begin{bmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & \det(UV) \end{bmatrix}V^{\top}$（保证 $\det(\hat{R}) = 1$，符合旋转矩阵手性不变性）
+**9D 表示**：SVD 正交化，CNN 友好，连续、一一映射、等价。$\hat{R} = U\begin{bmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & \det(UV) \end{bmatrix}V^{\top}$（保证 $\det(\hat{R}) = 1$，符合手性不变性）
 
 **增量旋转预测 Delta Rotation**：小范围旋转，以上几种方式都适用，此时四元数等表示方法需要预测参数较少，学起来更快
 
-**Rotation Fitting**：通过神经网络预测拟合物体表面点的对应关系（模型坐标系  $(x_i^M, y_i^M, z_i^M)$ 到相机坐标系 $(x_i^C, y_i^C, z_i^C)$ 的最优变换矩阵）。步骤：对物体表面的每个像素，预测其在物体建模模型上的 3D 坐标；基于这些对应关系拟合旋转矩阵（要求物体见过）
+**Rotation Fitting**：通过神经网络预测拟合物体表面点的对应关系（相机坐标系 $(x_i^C, y_i^C, z_i^C)$ 到模型坐标系  $(x_i^M, y_i^M, z_i^M)$ 的最优变换矩阵）。步骤：对物体表面的每个像素，预测其在物体建模模型上的 3D 坐标；基于这些对应关系拟合旋转矩阵（要求物体见过）
 
 **Orthogonal Procrustes**：给定两组点 $\mathbf{M}, \mathbf{N} \in \mathbb{R}^{n \times 3}$，求最优旋转矩阵 $\mathbf{A}$ 使得 $\hat{\mathbf{A}} = \arg\min_{\mathbf{A}} \|\mathbf{M} - \mathbf{N}\mathbf{A}^\top\|_F^2, \quad \text{s.t.}~\mathbf{A}^\top\mathbf{A} = \mathbf{I}$，其中 $\|X\|_F = \sqrt{\text{trace}(X^{\top}X)} = \sqrt{\sum_{i,j} x_{ij}^2}$
 
-解析解：对 $\mathbf{M}^\top\mathbf{N}$ 做 SVD 分解，$\mathbf{M}^\top\mathbf{N} = \mathbf{UDV}^\top$，最优旋转为 $\hat{\mathbf{A}} = \mathbf{U}\begin{bmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & \det(\mathbf{UV}^{\top}) \end{bmatrix}\mathbf{V}^{\top}$（修正手性）
-
-平移向量 $t$ 可通过点集质心计算：$\hat{\mathbf{t}} = \overline{\mathbf{M}} - \hat{\mathbf{A}}\,\overline{\mathbf{N}}$
+解析解：对 $\mathbf{M}^\top\mathbf{N}$ 做 SVD 分解，$\mathbf{M}^\top\mathbf{N} = \mathbf{UDV}^\top$，最优旋转为 $\hat{\mathbf{A}} = \mathbf{U}\begin{bmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & \det(\mathbf{UV}^{\top}) \end{bmatrix}\mathbf{V}^{\top}$，$\hat{\mathbf{t}} = \overline{\mathbf{M}^{\top} - \hat{\mathbf{A}} \mathbf{N}^{\top}}$
 
 问题：对离群点敏感，常用 RANSAC 进行鲁棒拟合。
 
-**RANSAC**：通过随机抽样找到内点 (inliers) 最多的模型假设，1. 以最小点集采样拟合所需模型（线=2，面=3）；2. 计算模型参数；3. 计算内点数量（距离小于阈值 $\epsilon$ 的）；4. 迭代重复，找内点最多的模型。
+**RANSAC**：通过随机抽样找到内点 (inliers) 最多的模型假设，1. 以最小点集采样拟合所需模型（线=2，面=3，旋转=3）；2. 计算模型参数；3. 计算内点数量（距离小于阈值 $\epsilon$ 的）；4. 迭代重复，找内点最多的模型。
 
-**Instance Level PE**：每个物体有独立模型，典型方法如 PoseCNN，结合 ICP 可提升精度
+**Instance Level Pose Estimation**：每个物体有独立模型，如 PoseCNN，结合 ICP 可提升精度
 
-**Category Level PE**：同类物体归一化到 $1\times1\times1$ box，可预测旋转，预测平移需已知物体大小
+**Category Level Pose Estimation**：同类物体归一化到 $1\times1\times1$ box，可预测旋转，预测平移需已知物体大小
 
 **迭代最近点算法（ICP）**：作为后处理提高物体的位姿估计精度，提高抓取成功率；平移误差比旋转误差更敏感；怕物体被挡住造成 **点云缺失**。**目标**：优化初始位姿估计，对齐源点云 $P = \{p_i\}$ 和目标点云 $Q = \{q_j\}$ ；寻找最优旋转 $\hat{R} \in\mathbb{SO}(3)$ 和平移 $\hat{T}\in\mathbb{R}^{3\times 1}$
 
@@ -71,7 +63,7 @@
 2. 将问题分解为 2D $\to$ 3D 映射 + 3D $\to$ 3D 几何优化，更直观
 3. **NOCS 方法充分利用了形状 / 几何先验**，提升了对未见物体的泛化能力。
 
-**合成数据**：训练 NOCS 网络需要大量标注数据，但真实数据标注成本高、泛化性差，所以需要合成数据进行训练。然而存在 **Sim2Real Gap**，导致模型在真实世界性能下降
+**Synthetic data 合成数据**：训练 NOCS 网络需要大量标注数据，但真实数据标注成本高、泛化性差，所以需要合成数据进行训练。然而存在 **Sim2Real Gap**，导致模型在真实世界性能下降
 
 **Mixed Reality Data** ：将合成前景物体叠加到真实背景上，易于获取大量带 NOCS 标签的数据。问题：合成前景与背景 **分界太过明显**，从而导致分割的 Mask R-CNN 学习到的经验难以应用到真实世界
 
@@ -83,7 +75,7 @@
 
 **Force Closure**：依赖摩擦力，通过接触力抵抗任意 Wrench（力 + 力矩），也即可以让物体产生的任何加速度 $a$ 和角加速度 $\alpha$
 
-**关系**：$\text{Form Closure} \subseteq \text{Force Closure} \subseteq \text{Successful Grasp}$，反例：1. 双指夹纸；2. 托起。
+$\text{Form Closure} \subseteq \text{Force Closure} \subseteq \text{Successful Grasp}$，反例：1. 双指夹纸 2. 托起
 
 **摩擦锥（Friction Cone）**：定义了在静摩擦系数 $\mu$ 下，接触点不滑动的力的方向范围（与法线夹角最大值 $\alpha = \arctan \mu$）
 
@@ -129,14 +121,14 @@ GraspNet 的核心在于 **学习局部几何特征（Local Geometric Features�
 **DexGraspNet**：合成数据（Synthetic Data） + 深度学习
 
 1. 场景理解：预测每个点 **抓取可能性（Graspness）**，是否是 **物体（Objectness）**
-2. 局部特征：不用全局特征（关联性弱、泛化性差），选择 Graspness 高的地方附近的点云，提取局部特征（ **几何信息** ）
+2. 局部特征：不用全局特征（关联性弱、泛化性差），选择 Graspness 高的地方附近的点云，提取局部特征（**几何信息**）
 3. 条件抓取生成模块：**条件生成处理 $(T, R)$ 多峰分布**，然后采样后直接预测手指形态 $\theta$
 
-仅处理包覆式抓取（Power Grasp），没处理指尖抓取（Precision Grasp）；主要使用力封闭抓取；透明（Transparent）或高反光（Highly Specular/Shiny）物体有折射（Refraction）/ 镜面反射（Specular Reflection），导致点云质量差。
+问题：仅处理包覆式抓取（Power Grasp），没处理指尖抓取（Precision Grasp）；主要使用力封闭抓取；透明（Transparent）或高反光（Highly Specular/Shiny）物体有折射（Refraction）/ 镜面反射（Specular Reflection），导致点云质量差。
 
-**ASGrasp**：深度修复，合成数据 + 监督学习。域随机化、多模态立体视觉、立体匹配（Stereo Matching） 。
+**ASGrasp**：深度修复，合成数据 + 监督学习。**域随机化**、多模态立体视觉、立体匹配（Stereo Matching） 。
 
-**Affordance**：指一个物体所能支持或提供的交互方式或操作可能性，哪个区域、何种方式进行交互。
+**Affordance 可供性**：指一个物体所能支持或提供的交互方式或操作可能性，哪个区域、何种方式进行交互。
 
 **Where2Act**：大量随机尝试 + 标注。学习从视觉输入预测交互点 $a_p$、交互方向 $R_{z|p}$ 和成功置信度 $s_{R|p}$。**VAT-Mart**：预测一整条操作轨迹。
 
@@ -149,4 +141,4 @@ GraspNet 的核心在于 **学习局部几何特征（Local Geometric Features�
 **启发式（Heuristic）规则**：预抓取 Pre-grasp，到附近安全位置再闭合，避免碰撞
 
 1.  **操作复杂度有限**：难以处理复杂任务，受启发式规则设计限制。
-2.  **开环执行（Open-loop）**：规划一次，执行到底，闭眼做事。高频重规划可近似闭环。
+2.  **开环执行（Open-loop）**：规划一次，执行到底，闭眼做事。高频重复规划可近似闭环。

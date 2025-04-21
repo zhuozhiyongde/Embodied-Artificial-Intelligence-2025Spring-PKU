@@ -422,7 +422,7 @@ $$
 
 轴角表示法的问题：
 
--   **不唯一性**：$(\hat{\omega}, \theta)$ 和 $(-\hat{\omega}, -\theta)$ 代表同一个旋转
+-   **不唯一性**：$(\hat{\omega}, \theta)$ 和 $(-\hat{\omega}, 2\pi -\theta)$ 代表同一个旋转
 -   当旋转是单位矩阵 $R=I$ 时（即没有旋转），$\theta=0$，此时旋转轴 $\hat{\omega}$ 可以是任意方向。
 -   当旋转角度 $\theta = \pi$ 时，绕轴 $\hat{\omega}$ 和绕轴 $-\hat{\omega}$ 旋转 $\pi$ 得到的结果是相同的。这种情况对应 $\text{tr}(R) = -1$。
 
