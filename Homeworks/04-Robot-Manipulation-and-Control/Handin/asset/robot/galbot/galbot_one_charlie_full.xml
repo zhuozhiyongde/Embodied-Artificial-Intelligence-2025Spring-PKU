@@ -1,0 +1,1978 @@
+<mujoco model="galbot_one_charlie">
+
+  <compiler angle="radian" autolimits="true" strippath="false" boundmass="1e-12"
+    boundinertia="1e-12" discardvisual="false" fusestatic="false" eulerseq="zyx"
+    inertiagrouprange="0 0" />
+  <size nconmax="5000" njmax="5000" />
+  <option timestep="0.001" gravity="0 0 -9.81" density="0" impratio="20" viscosity="0.00002"
+    integrator="implicitfast" cone="elliptic" jacobian="auto" solver="Newton" iterations="100"
+    tolerance="1e-8" />
+
+  <default>
+    <default class="robot">
+      <default class="robot_joint">
+        <joint stiffness="0.05" damping="0.1" armature="0.001" frictionloss="0.01" />
+      </default>
+      <default class="visual">
+        <geom material="visualgeom" contype="0" conaffinity="0" group="2" />
+      </default>
+      <default class="collision">
+        <geom condim="6" friction="0.8 0.02 0.01" group="3" />
+      </default>
+    </default>
+  </default>
+
+
+  <asset>
+    <material name="default_material" rgba="0.7 0.7 0.7 1" />
+    <mesh name="omni_chassis_base_link.stl" file="meshes/chassis/omni_chassis_base_link.stl" />
+    <mesh name="leg_link1.stl" file="meshes/leg/leg_link1.stl" />
+    <mesh name="leg_link1.obj" file="meshes/leg/leg_link1.obj" />
+    <mesh name="leg_link2.stl" file="meshes/leg/leg_link2.stl" />
+    <mesh name="leg_link2.obj" file="meshes/leg/leg_link2.obj" />
+    <mesh name="leg_link3.stl" file="meshes/leg/leg_link3.stl" />
+    <mesh name="leg_link3.obj" file="meshes/leg/leg_link3.obj" />
+    <mesh name="leg_link4.stl" file="meshes/leg/leg_link4.stl" />
+    <mesh name="leg_link4.obj" file="meshes/leg/leg_link4.obj" />
+    <mesh name="torso_base_link.stl" file="meshes/torso/torso_base_link.stl" />
+    <mesh name="head_link2.stl" file="meshes/head/head_link2.stl" />
+    <mesh name="head_link2.obj" file="meshes/head/head_link2.obj" />
+    <mesh name="right_arm_link1.stl" file="meshes/arm/right_arm_link1.stl" />
+    <mesh name="right_arm_link1.obj" file="meshes/arm/right_arm_link1.obj" />
+    <mesh name="right_arm_link2.stl" file="meshes/arm/right_arm_link2.stl" />
+    <mesh name="right_arm_link2.obj" file="meshes/arm/right_arm_link2.obj" />
+    <mesh name="right_arm_link3.stl" file="meshes/arm/right_arm_link3.stl" />
+    <mesh name="right_arm_link3.obj" file="meshes/arm/right_arm_link3.obj" />
+    <mesh name="right_arm_link4.stl" file="meshes/arm/right_arm_link4.stl" />
+    <mesh name="right_arm_link4.obj" file="meshes/arm/right_arm_link4.obj" />
+    <mesh name="right_arm_link5.stl" file="meshes/arm/right_arm_link5.stl" />
+    <mesh name="right_arm_link5.obj" file="meshes/arm/right_arm_link5.obj" />
+    <mesh name="right_arm_link6.stl" file="meshes/arm/right_arm_link6.stl" />
+    <mesh name="right_arm_link6.obj" file="meshes/arm/right_arm_link6.obj" />
+    <mesh name="right_arm_link7.stl" file="meshes/arm/right_arm_link7.stl" />
+    <mesh name="right_arm_link7.obj" file="meshes/arm/right_arm_link7.obj" />
+    <mesh name="galbot_to_robotiq_adapter_convex.stl"
+      file="meshes/gripper/robotiq_gripper/collision/2f_85/galbot_to_robotiq_adapter_convex.stl" />
+    <mesh name="galbot_to_robotiq_adapter.obj"
+      file="meshes/gripper/robotiq_gripper/visual/2f_85/galbot_to_robotiq_adapter.obj" />
+    <mesh name="robotiq_base.stl"
+      file="meshes/gripper/robotiq_gripper/collision/2f_85/robotiq_base.stl" />
+    <mesh name="left_knuckle.stl"
+      file="meshes/gripper/robotiq_gripper/collision/2f_85/left_knuckle.stl" />
+    <mesh name="left_finger.stl"
+      file="meshes/gripper/robotiq_gripper/collision/2f_85/left_finger.stl" />
+    <mesh name="left_finger_tip_collision_0.obj"
+      file="meshes/gripper/robotiq_gripper/collision/2f_85/left_finger_tip_convex_decomposition/left_finger_tip_collision_0.obj" />
+    <mesh name="left_finger_tip_collision_1.obj"
+      file="meshes/gripper/robotiq_gripper/collision/2f_85/left_finger_tip_convex_decomposition/left_finger_tip_collision_1.obj" />
+    <mesh name="left_finger_tip_collision_2.obj"
+      file="meshes/gripper/robotiq_gripper/collision/2f_85/left_finger_tip_convex_decomposition/left_finger_tip_collision_2.obj" />
+    <mesh name="left_finger_tip_collision_3.obj"
+      file="meshes/gripper/robotiq_gripper/collision/2f_85/left_finger_tip_convex_decomposition/left_finger_tip_collision_3.obj" />
+    <mesh name="left_finger_tip_collision_4.obj"
+      file="meshes/gripper/robotiq_gripper/collision/2f_85/left_finger_tip_convex_decomposition/left_finger_tip_collision_4.obj" />
+    <mesh name="left_finger_tip_collision_5.obj"
+      file="meshes/gripper/robotiq_gripper/collision/2f_85/left_finger_tip_convex_decomposition/left_finger_tip_collision_5.obj" />
+    <mesh name="left_finger_tip_collision_6.obj"
+      file="meshes/gripper/robotiq_gripper/collision/2f_85/left_finger_tip_convex_decomposition/left_finger_tip_collision_6.obj" />
+    <mesh name="left_finger_tip_collision_7.obj"
+      file="meshes/gripper/robotiq_gripper/collision/2f_85/left_finger_tip_convex_decomposition/left_finger_tip_collision_7.obj" />
+    <mesh name="left_finger_tip_collision_8.obj"
+      file="meshes/gripper/robotiq_gripper/collision/2f_85/left_finger_tip_convex_decomposition/left_finger_tip_collision_8.obj" />
+    <mesh name="left_finger_tip_collision_9.obj"
+      file="meshes/gripper/robotiq_gripper/collision/2f_85/left_finger_tip_convex_decomposition/left_finger_tip_collision_9.obj" />
+    <mesh name="left_finger_tip.obj"
+      file="meshes/gripper/robotiq_gripper/visual/2f_85/left_finger_tip.obj" />
+    <mesh name="right_knuckle.stl"
+      file="meshes/gripper/robotiq_gripper/collision/2f_85/right_knuckle.stl" />
+    <mesh name="right_finger.stl"
+      file="meshes/gripper/robotiq_gripper/collision/2f_85/right_finger.stl" />
+    <mesh name="right_finger_tip_collision_0.obj"
+      file="meshes/gripper/robotiq_gripper/collision/2f_85/right_finger_tip_convex_decomposition/right_finger_tip_collision_0.obj" />
+    <mesh name="right_finger_tip_collision_1.obj"
+      file="meshes/gripper/robotiq_gripper/collision/2f_85/right_finger_tip_convex_decomposition/right_finger_tip_collision_1.obj" />
+    <mesh name="right_finger_tip_collision_2.obj"
+      file="meshes/gripper/robotiq_gripper/collision/2f_85/right_finger_tip_convex_decomposition/right_finger_tip_collision_2.obj" />
+    <mesh name="right_finger_tip_collision_3.obj"
+      file="meshes/gripper/robotiq_gripper/collision/2f_85/right_finger_tip_convex_decomposition/right_finger_tip_collision_3.obj" />
+    <mesh name="right_finger_tip_collision_4.obj"
+      file="meshes/gripper/robotiq_gripper/collision/2f_85/right_finger_tip_convex_decomposition/right_finger_tip_collision_4.obj" />
+    <mesh name="right_finger_tip_collision_5.obj"
+      file="meshes/gripper/robotiq_gripper/collision/2f_85/right_finger_tip_convex_decomposition/right_finger_tip_collision_5.obj" />
+    <mesh name="right_finger_tip_collision_6.obj"
+      file="meshes/gripper/robotiq_gripper/collision/2f_85/right_finger_tip_convex_decomposition/right_finger_tip_collision_6.obj" />
+    <mesh name="right_finger_tip_collision_7.obj"
+      file="meshes/gripper/robotiq_gripper/collision/2f_85/right_finger_tip_convex_decomposition/right_finger_tip_collision_7.obj" />
+    <mesh name="right_finger_tip_collision_8.obj"
+      file="meshes/gripper/robotiq_gripper/collision/2f_85/right_finger_tip_convex_decomposition/right_finger_tip_collision_8.obj" />
+    <mesh name="right_finger_tip_collision_9.obj"
+      file="meshes/gripper/robotiq_gripper/collision/2f_85/right_finger_tip_convex_decomposition/right_finger_tip_collision_9.obj" />
+    <mesh name="right_finger_tip_collision_10.obj"
+      file="meshes/gripper/robotiq_gripper/collision/2f_85/right_finger_tip_convex_decomposition/right_finger_tip_collision_10.obj" />
+    <mesh name="right_finger_tip.obj"
+      file="meshes/gripper/robotiq_gripper/visual/2f_85/right_finger_tip.obj" />
+    <mesh name="left_inner_knuckle.stl"
+      file="meshes/gripper/robotiq_gripper/collision/2f_85/left_inner_knuckle.stl" />
+    <mesh name="right_inner_knuckle.stl"
+      file="meshes/gripper/robotiq_gripper/collision/2f_85/right_inner_knuckle.stl" />
+    <mesh name="d405_camera_link_collision_0.obj"
+      file="meshes/gripper/robotiq_gripper/collision/2f_85/d405_camera_link_convex_decomposition/d405_camera_link_collision_0.obj" />
+    <mesh name="d405_camera_link_collision_1.obj"
+      file="meshes/gripper/robotiq_gripper/collision/2f_85/d405_camera_link_convex_decomposition/d405_camera_link_collision_1.obj" />
+    <mesh name="d405_camera_link_collision_2.obj"
+      file="meshes/gripper/robotiq_gripper/collision/2f_85/d405_camera_link_convex_decomposition/d405_camera_link_collision_2.obj" />
+    <mesh name="d405_camera_link_collision_3.obj"
+      file="meshes/gripper/robotiq_gripper/collision/2f_85/d405_camera_link_convex_decomposition/d405_camera_link_collision_3.obj" />
+    <mesh name="d405_camera_link_collision_4.obj"
+      file="meshes/gripper/robotiq_gripper/collision/2f_85/d405_camera_link_convex_decomposition/d405_camera_link_collision_4.obj" />
+    <mesh name="d405_camera_link_collision_5.obj"
+      file="meshes/gripper/robotiq_gripper/collision/2f_85/d405_camera_link_convex_decomposition/d405_camera_link_collision_5.obj" />
+    <mesh name="d405_camera_link_collision_6.obj"
+      file="meshes/gripper/robotiq_gripper/collision/2f_85/d405_camera_link_convex_decomposition/d405_camera_link_collision_6.obj" />
+    <mesh name="d405_camera_link_collision_7.obj"
+      file="meshes/gripper/robotiq_gripper/collision/2f_85/d405_camera_link_convex_decomposition/d405_camera_link_collision_7.obj" />
+    <mesh name="d405_camera_link_collision_8.obj"
+      file="meshes/gripper/robotiq_gripper/collision/2f_85/d405_camera_link_convex_decomposition/d405_camera_link_collision_8.obj" />
+    <mesh name="d405_camera_link_collision_9.obj"
+      file="meshes/gripper/robotiq_gripper/collision/2f_85/d405_camera_link_convex_decomposition/d405_camera_link_collision_9.obj" />
+    <mesh name="d405_camera_link_collision_10.obj"
+      file="meshes/gripper/robotiq_gripper/collision/2f_85/d405_camera_link_convex_decomposition/d405_camera_link_collision_10.obj" />
+    <mesh name="d405_camera_link_collision_11.obj"
+      file="meshes/gripper/robotiq_gripper/collision/2f_85/d405_camera_link_convex_decomposition/d405_camera_link_collision_11.obj" />
+    <mesh name="d405_camera_link_collision_12.obj"
+      file="meshes/gripper/robotiq_gripper/collision/2f_85/d405_camera_link_convex_decomposition/d405_camera_link_collision_12.obj" />
+    <mesh name="d405_camera_link_collision_13.obj"
+      file="meshes/gripper/robotiq_gripper/collision/2f_85/d405_camera_link_convex_decomposition/d405_camera_link_collision_13.obj" />
+    <mesh name="d405_camera_link_collision_14.obj"
+      file="meshes/gripper/robotiq_gripper/collision/2f_85/d405_camera_link_convex_decomposition/d405_camera_link_collision_14.obj" />
+    <mesh name="d405_camera_link_collision_15.obj"
+      file="meshes/gripper/robotiq_gripper/collision/2f_85/d405_camera_link_convex_decomposition/d405_camera_link_collision_15.obj" />
+    <mesh name="d405_camera_link_collision_16.obj"
+      file="meshes/gripper/robotiq_gripper/collision/2f_85/d405_camera_link_convex_decomposition/d405_camera_link_collision_16.obj" />
+    <mesh name="d405_camera_link_collision_17.obj"
+      file="meshes/gripper/robotiq_gripper/collision/2f_85/d405_camera_link_convex_decomposition/d405_camera_link_collision_17.obj" />
+    <mesh name="d405_camera_link_collision_18.obj"
+      file="meshes/gripper/robotiq_gripper/collision/2f_85/d405_camera_link_convex_decomposition/d405_camera_link_collision_18.obj" />
+    <mesh name="d405_camera_link_collision_19.obj"
+      file="meshes/gripper/robotiq_gripper/collision/2f_85/d405_camera_link_convex_decomposition/d405_camera_link_collision_19.obj" />
+    <mesh name="d405_camera_link_collision_20.obj"
+      file="meshes/gripper/robotiq_gripper/collision/2f_85/d405_camera_link_convex_decomposition/d405_camera_link_collision_20.obj" />
+    <mesh name="d405_camera_link_collision_21.obj"
+      file="meshes/gripper/robotiq_gripper/collision/2f_85/d405_camera_link_convex_decomposition/d405_camera_link_collision_21.obj" />
+    <mesh name="d405_camera_link_collision_22.obj"
+      file="meshes/gripper/robotiq_gripper/collision/2f_85/d405_camera_link_convex_decomposition/d405_camera_link_collision_22.obj" />
+    <mesh name="d405_camera_link_collision_23.obj"
+      file="meshes/gripper/robotiq_gripper/collision/2f_85/d405_camera_link_convex_decomposition/d405_camera_link_collision_23.obj" />
+    <mesh name="d405_camera_link_collision_24.obj"
+      file="meshes/gripper/robotiq_gripper/collision/2f_85/d405_camera_link_convex_decomposition/d405_camera_link_collision_24.obj" />
+    <mesh name="d405_camera_link_collision_25.obj"
+      file="meshes/gripper/robotiq_gripper/collision/2f_85/d405_camera_link_convex_decomposition/d405_camera_link_collision_25.obj" />
+    <mesh name="d405_camera_link_collision_26.obj"
+      file="meshes/gripper/robotiq_gripper/collision/2f_85/d405_camera_link_convex_decomposition/d405_camera_link_collision_26.obj" />
+    <mesh name="d405_camera_link_collision_27.obj"
+      file="meshes/gripper/robotiq_gripper/collision/2f_85/d405_camera_link_convex_decomposition/d405_camera_link_collision_27.obj" />
+    <mesh name="d405_camera_link_collision_28.obj"
+      file="meshes/gripper/robotiq_gripper/collision/2f_85/d405_camera_link_convex_decomposition/d405_camera_link_collision_28.obj" />
+    <mesh name="d405_camera_link_collision_29.obj"
+      file="meshes/gripper/robotiq_gripper/collision/2f_85/d405_camera_link_convex_decomposition/d405_camera_link_collision_29.obj" />
+    <mesh name="d405_camera_link_collision_30.obj"
+      file="meshes/gripper/robotiq_gripper/collision/2f_85/d405_camera_link_convex_decomposition/d405_camera_link_collision_30.obj" />
+    <mesh name="d405_camera_link_collision_31.obj"
+      file="meshes/gripper/robotiq_gripper/collision/2f_85/d405_camera_link_convex_decomposition/d405_camera_link_collision_31.obj" />
+    <mesh name="d405_camera_link_collision_32.obj"
+      file="meshes/gripper/robotiq_gripper/collision/2f_85/d405_camera_link_convex_decomposition/d405_camera_link_collision_32.obj" />
+    <mesh name="d405_camera_link.obj"
+      file="meshes/gripper/robotiq_gripper/visual/2f_85/d405_camera_link.obj" />
+    <mesh name="left_arm_link1.stl" file="meshes/arm/left_arm_link1.stl" />
+    <mesh name="left_arm_link1.obj" file="meshes/arm/left_arm_link1.obj" />
+    <mesh name="left_arm_link2.stl" file="meshes/arm/left_arm_link2.stl" />
+    <mesh name="left_arm_link2.obj" file="meshes/arm/left_arm_link2.obj" />
+    <mesh name="left_arm_link3.stl" file="meshes/arm/left_arm_link3.stl" />
+    <mesh name="left_arm_link3.obj" file="meshes/arm/left_arm_link3.obj" />
+    <mesh name="left_arm_link4.stl" file="meshes/arm/left_arm_link4.stl" />
+    <mesh name="left_arm_link4.obj" file="meshes/arm/left_arm_link4.obj" />
+    <mesh name="left_arm_link5.stl" file="meshes/arm/left_arm_link5.stl" />
+    <mesh name="left_arm_link5.obj" file="meshes/arm/left_arm_link5.obj" />
+    <mesh name="left_arm_link6.stl" file="meshes/arm/left_arm_link6.stl" />
+    <mesh name="left_arm_link6.obj" file="meshes/arm/left_arm_link6.obj" />
+    <mesh name="left_arm_link7.stl" file="meshes/arm/left_arm_link7.stl" />
+    <mesh name="left_arm_link7.obj" file="meshes/arm/left_arm_link7.obj" />
+  </asset>
+
+  <worldbody>
+    <body name="base_link" pos="0.00000000 0.00000000 0.00000000" quat="1 0 0 0" childclass="robot">
+      <body name="omni_chassis_base_link" pos="0 0 0" quat="1.0 0.0 0.0 0.0">
+        <inertial pos="0.00310 0.00022 0.09001" quat="1.0 0.0 0.0 0.0" mass="25.85"
+          diaginertia="1.12288 1.15522 1.58321" />
+        <geom name="omni_chassis_base_link_collision" pos="0 0 0" quat="1.0 0.0 0.0 0.0" type="mesh"
+          mesh="omni_chassis_base_link.stl" class="collision" />
+        <geom name="omni_chassis_base_link_visual" pos="0 0 0" quat="1.0 0.0 0.0 0.0"
+          material="default_material" type="mesh" mesh="omni_chassis_base_link.stl" class="visual" />
+        <body name="omni_chassis_leg_mount_link" pos="0.134 0 0.13" quat="1.0 0.0 0.0 0.0">
+          <inertial pos="0 0 0" quat="1.0 0.0 0.0 0.0" mass="0" diaginertia="0.0 0.0 0.0" />
+          <body name="leg_base_link" pos="0 0 0" quat="1.0 0.0 0.0 0.0">
+            <inertial pos="0.00138 -0.01502 -0.05360" quat="1.0 0.0 0.0 0.0" mass="1.98"
+              diaginertia="0.01545 0.01172 0.00904" />
+            <body name="leg_link1" pos="0 0 0"
+              quat="0.1352857537805641 -0.1352857537805641 -0.6940444977262082 -0.6940444977262081">
+              <joint name="leg_joint1" type="hinge" ref="0.0" class="robot_joint"
+                range="0 0.994837674" axis="0 0 1" />
+              <inertial pos="0.23126 0.00187 -0.01166" quat="1.0 0.0 0.0 0.0" mass="13.38"
+                diaginertia="0.0554 1.1704 1.15967" />
+              <geom name="leg_link1_collision" pos="0 0 0" quat="1.0 0.0 0.0 0.0" type="mesh"
+                mesh="leg_link1.stl" class="collision" />
+              <geom name="leg_link1_visual" pos="0 0 0" quat="1.0 0.0 0.0 0.0"
+                material="default_material" type="mesh" mesh="leg_link1.obj" class="visual" />
+              <body name="leg_link2" pos="0.45 0 0"
+                quat="1.1715151780866327e-17 -0.19132294779234096 -0.9815271415748263 6.01012036102931e-17">
+                <joint name="leg_joint2" type="hinge" ref="0.0" class="robot_joint" range="0 3.05"
+                  axis="0 0 1" />
+                <inertial pos="0.18340 0.00001 0.01143" quat="1.0 0.0 0.0 0.0" mass="4.72"
+                  diaginertia="0.04727 0.29026 0.25782" />
+                <geom name="leg_link2_collision" pos="0 0 0" quat="1.0 0.0 0.0 0.0" type="mesh"
+                  mesh="leg_link2.stl" class="collision" />
+                <geom name="leg_link2_visual" pos="0 0 0" quat="1.0 0.0 0.0 0.0"
+                  material="default_material" type="mesh" mesh="leg_link2.obj" class="visual" />
+                <body name="leg_link3" pos="0.39 0 0"
+                  quat="3.749399456654644e-33 -6.123233995736766e-17 1.0 -6.123233995736766e-17">
+                  <joint name="leg_joint3" type="hinge" ref="0.0" class="robot_joint"
+                    range="0 2.35619449" axis="0 0 1" />
+                  <inertial pos="0.00004 0.03287 -0.00556" quat="1.0 0.0 0.0 0.0" mass="6.04"
+                    diaginertia="0.02981 0.02294 0.03182" />
+                  <geom name="leg_link3_collision" pos="0 0 0" quat="1.0 0.0 0.0 0.0" type="mesh"
+                    mesh="leg_link3.stl" class="collision" />
+                  <geom name="leg_link3_visual" pos="0 0 0" quat="1.0 0.0 0.0 0.0"
+                    material="default_material" type="mesh" mesh="leg_link3.obj" class="visual" />
+                  <body name="leg_link4" pos="0 0 0"
+                    quat="4.329780281177467e-17 4.329780281177466e-17 -0.7071067811865475 -0.7071067811865476">
+                    <joint name="leg_joint4" type="hinge" ref="0.0" class="robot_joint"
+                      range="-1.570796327 1.570796327" axis="0 0 1" />
+                    <inertial pos="0.00006 -0.00003 0.14494" quat="1.0 0.0 0.0 0.0" mass="0.55"
+                      diaginertia="0.01267 0.0127 0.00125" />
+                    <geom name="leg_link4_collision" pos="0 0 0" quat="1.0 0.0 0.0 0.0" type="mesh"
+                      mesh="leg_link4.stl" class="collision" />
+                    <geom name="leg_link4_visual" pos="0 0 0" quat="1.0 0.0 0.0 0.0"
+                      material="default_material" type="mesh" mesh="leg_link4.obj" class="visual" />
+                    <body name="leg_end_effector_mount_link" pos="0 0 0" quat="1.0 0.0 0.0 0.0">
+                      <inertial pos="0 0 0" quat="1.0 0.0 0.0 0.0" mass="0"
+                        diaginertia="0.0 0.0 0.0" />
+                      <body name="torso_base_link" pos="0 0 0" quat="1.0 0.0 0.0 0.0">
+                        <inertial pos="0.00004 0.00011 0.32719" quat="1.0 0.0 0.0 0.0" mass="6.68"
+                          diaginertia="0.87119 0.85457 0.0656" />
+                        <geom name="torso_base_link_collision" pos="0 0 0" quat="1.0 0.0 0.0 0.0"
+                          type="mesh" mesh="torso_base_link.stl" class="collision" />
+                        <geom name="torso_base_link_visual" pos="0 0 0" quat="1.0 0.0 0.0 0.0"
+                          material="default_material" type="mesh" mesh="torso_base_link.stl"
+                          class="visual" />
+                        <body name="torso_head_mount_link" pos="-0.0081669 5E-05 0.58394"
+                          quat="1.0 0.0 0.0 0.0">
+                          <inertial pos="0 0 0" quat="1.0 0.0 0.0 0.0" mass="0"
+                            diaginertia="0.0 0.0 0.0" />
+                          <body name="head_base_link" pos="0 0 0" quat="1.0 0.0 0.0 0.0">
+                            <inertial pos="0 0 0" quat="1.0 0.0 0.0 0.0" mass="0"
+                              diaginertia="0.0 0.0 0.0" />
+                            <body name="head_link1" pos="0 0 0" quat="1.0 0.0 0.0 0.0">
+                              <joint name="head_joint1" type="hinge" ref="0.0" class="robot_joint"
+                                range="-1.570796327 1.570796327" axis="0 0 1" />
+                              <inertial pos="0.00000 0.00004 -0.04238" quat="1.0 0.0 0.0 0.0"
+                                mass="0.41" diaginertia="0.0011 0.00113 0.00014" />
+                              <body name="head_link2" pos="0 0 0"
+                                quat="0.7071067811865476 -0.7071067811865475 0.0 0.0">
+                                <joint name="head_joint2" type="hinge" ref="0.0" class="robot_joint"
+                                  range="-0.366519143 0.366519143" axis="0 0 1" />
+                                <inertial pos="0.03200 -0.03753 0.00162" quat="1.0 0.0 0.0 0.0"
+                                  mass="0.75" diaginertia="0.0038 0.00367 0.00538" />
+                                <geom name="head_link2_collision" pos="0 0 0" quat="1.0 0.0 0.0 0.0"
+                                  type="mesh" mesh="head_link2.stl" class="collision" />
+                                <geom name="head_link2_visual" pos="0 0 0" quat="1.0 0.0 0.0 0.0"
+                                  material="default_material" type="mesh" mesh="head_link2.obj"
+                                  class="visual" />
+                                <body name="head_end_effector_mount_link" pos="0 0 0"
+                                  quat="1.0 0.0 0.0 0.0">
+                                  <inertial pos="0 0 0" quat="1.0 0.0 0.0 0.0" mass="0"
+                                    diaginertia="0.0 0.0 0.0" />
+                                </body>
+                              </body>
+                            </body>
+                          </body>
+                        </body>
+                        <body name="torso_right_arm_mount_link" pos="0 -0.206 0.39599"
+                          quat="4.329780281177467e-17 -4.329780281177466e-17 -0.7071067811865475 0.7071067811865476">
+                          <inertial pos="0 0 0" quat="1.0 0.0 0.0 0.0" mass="0"
+                            diaginertia="0.0 0.0 0.0" />
+                          <body name="right_arm_base_link" pos="0 0 0" quat="1.0 0.0 0.0 0.0">
+                            <inertial pos="-0.00037 -0.00006 -0.11407" quat="1.0 0.0 0.0 0.0"
+                              mass="0.9" diaginertia="0.01248 0.01247 0.00056" />
+                            <body name="right_arm_link1" pos="0 0 0" quat="1.0 0.0 0.0 0.0">
+                              <joint name="right_arm_joint1" type="hinge" ref="0.0"
+                                class="robot_joint" range="-3 3" axis="0 0 1" />
+                              <inertial pos="0.00000 -0.00650 -0.01459" quat="1.0 0.0 0.0 0.0"
+                                mass="1.48" diaginertia="0.00378 0.0046 0.00217" />
+                              <geom name="right_arm_link1_collision" pos="0 0 0"
+                                quat="1.0 0.0 0.0 0.0" type="mesh" mesh="right_arm_link1.stl"
+                                class="collision" />
+                              <geom name="right_arm_link1_visual" pos="0 0 0" quat="1.0 0.0 0.0 0.0"
+                                material="default_material" type="mesh" mesh="right_arm_link1.obj"
+                                class="visual" />
+                              <body name="right_arm_link2" pos="0 0 0"
+                                quat="4.329780281177467e-17 -4.329780281177466e-17 -0.7071067811865475 0.7071067811865476">
+                                <joint name="right_arm_joint2" type="hinge" ref="0.0"
+                                  class="robot_joint" range="-1.5707963267948966 1.7" axis="0 0 1" />
+                                <inertial pos="-0.00080 -0.09873 0.00815" quat="1.0 0.0 0.0 0.0"
+                                  mass="1.33" diaginertia="0.01827 0.00232 0.01769" />
+                                <geom name="right_arm_link2_collision" pos="0 0 0"
+                                  quat="1.0 0.0 0.0 0.0" type="mesh" mesh="right_arm_link2.stl"
+                                  class="collision" />
+                                <geom name="right_arm_link2_visual" pos="0 0 0"
+                                  quat="1.0 0.0 0.0 0.0" material="default_material" type="mesh"
+                                  mesh="right_arm_link2.obj" class="visual" />
+                                <body name="right_arm_link3" pos="0 -0.35 0"
+                                  quat="0.5000000000000001 0.5 -0.5 0.4999999999999999">
+                                  <joint name="right_arm_joint3" type="hinge" ref="0.0"
+                                    class="robot_joint" range="-2.9 2.9" axis="0 0 1" />
+                                  <inertial pos="-0.00019 -0.00330 -0.04824" quat="1.0 0.0 0.0 0.0"
+                                    mass="1.25" diaginertia="0.00955 0.00983 0.00151" />
+                                  <geom name="right_arm_link3_collision" pos="0 0 0"
+                                    quat="1.0 0.0 0.0 0.0" type="mesh" mesh="right_arm_link3.stl"
+                                    class="collision" />
+                                  <geom name="right_arm_link3_visual" pos="0 0 0"
+                                    quat="1.0 0.0 0.0 0.0" material="default_material" type="mesh"
+                                    mesh="right_arm_link3.obj" class="visual" />
+                                  <body name="right_arm_link4" pos="0 0 0"
+                                    quat="4.329780281177467e-17 -4.329780281177466e-17 -0.7071067811865475 0.7071067811865476">
+                                    <joint name="right_arm_joint4" type="hinge" ref="0.0"
+                                      class="robot_joint" range="-2.1 2.1" axis="0 0 1" />
+                                    <inertial pos="0.00000 -0.06457 0.00899" quat="1.0 0.0 0.0 0.0"
+                                      mass="0.8" diaginertia="0.00529 0.0012 0.00488" />
+                                    <geom name="right_arm_link4_collision" pos="0 0 0"
+                                      quat="1.0 0.0 0.0 0.0" type="mesh" mesh="right_arm_link4.stl"
+                                      class="collision" />
+                                    <geom name="right_arm_link4_visual" pos="0 0 0"
+                                      quat="1.0 0.0 0.0 0.0" material="default_material" type="mesh"
+                                      mesh="right_arm_link4.obj" class="visual" />
+                                    <body name="right_arm_link5" pos="0 -0.36 0"
+                                      quat="0.7071067811865476 0.7071067811865475 0.0 0.0">
+                                      <joint name="right_arm_joint5" type="hinge" ref="0.0"
+                                        class="robot_joint" range="-2.9 2.9" axis="0 0 1" />
+                                      <inertial pos="0.00201 -0.00042 -0.14589"
+                                        quat="1.0 0.0 0.0 0.0" mass="1.22"
+                                        diaginertia="0.03428 0.03366 0.00222" />
+                                      <geom name="right_arm_link5_collision" pos="0 0 0"
+                                        quat="1.0 0.0 0.0 0.0" type="mesh"
+                                        mesh="right_arm_link5.stl" class="collision" />
+                                      <geom name="right_arm_link5_visual" pos="0 0 0"
+                                        quat="1.0 0.0 0.0 0.0" material="default_material"
+                                        type="mesh" mesh="right_arm_link5.obj" class="visual" />
+                                      <body name="right_arm_link6" pos="0 0 0"
+                                        quat="-0.49999999999999983 -0.5 -0.49999999999999994 0.5000000000000001">
+                                        <joint name="right_arm_joint6" type="hinge" ref="0.0"
+                                          class="robot_joint" range="-0.785398163 0.785398163"
+                                          axis="0 0 1" />
+                                        <inertial pos="0.00000 0.01031 0.00000"
+                                          quat="1.0 0.0 0.0 0.0" mass="0.43"
+                                          diaginertia="0.00051 0.0007 0.00091" />
+                                        <geom name="right_arm_link6_collision" pos="0 0 0"
+                                          quat="1.0 0.0 0.0 0.0" type="mesh"
+                                          mesh="right_arm_link6.stl" class="collision" />
+                                        <geom name="right_arm_link6_visual" pos="0 0 0"
+                                          quat="1.0 0.0 0.0 0.0" material="default_material"
+                                          type="mesh" mesh="right_arm_link6.obj" class="visual" />
+                                        <body name="right_arm_link7" pos="0 0 0"
+                                          quat="0.7071067811865476 -0.7071067811865475 0.0 0.0">
+                                          <joint name="right_arm_joint7" type="hinge" ref="0.0"
+                                            class="robot_joint" range="-1.4 1.4" axis="0 0 1" />
+                                          <inertial pos="-0.03291 0.00799 -0.00131"
+                                            quat="1.0 0.0 0.0 0.0" mass="0.6"
+                                            diaginertia="0.00124 0.00198 0.00164" />
+                                          <geom name="right_arm_link7_collision" pos="0 0 0"
+                                            quat="1.0 0.0 0.0 0.0" type="mesh"
+                                            mesh="right_arm_link7.stl" class="collision" />
+                                          <geom name="right_arm_link7_visual" pos="0 0 0"
+                                            quat="1.0 0.0 0.0 0.0" material="default_material"
+                                            type="mesh" mesh="right_arm_link7.obj" class="visual" />
+                                          <body name="right_arm_end_effector_mount_link"
+                                            pos="-0.083 0 0"
+                                            quat="4.329780281177467e-17 4.329780281177466e-17 0.7071067811865475 0.7071067811865476">
+                                            <inertial pos="0 0 0" quat="1.0 0.0 0.0 0.0" mass="0"
+                                              diaginertia="0.0 0.0 0.0" />
+                                            <body
+                                              name="right_gripper_galbot_to_robotiq_adapter_link"
+                                              pos="0.008 0 0"
+                                              quat="4.329780281177467e-17 0.7071067811865476 -4.329780281177466e-17 0.7071067811865475">
+                                              <inertial pos="-1.9028E-07 5.9618E-18 -0.0041416"
+                                                quat="1.0 0.0 0.0 0.0" mass="0.023056"
+                                                diaginertia="5.5937e-06 5.3172e-06 1.0645e-05" />
+                                              <geom
+                                                name="right_gripper_galbot_to_robotiq_adapter_link_collision"
+                                                pos="0 0 0" quat="1.0 0.0 0.0 0.0" type="mesh"
+                                                mesh="galbot_to_robotiq_adapter_convex.stl"
+                                                class="collision" />
+                                              <geom
+                                                name="right_gripper_galbot_to_robotiq_adapter_link_visual"
+                                                pos="0 0 0" quat="1.0 0.0 0.0 0.0"
+                                                material="default_material" type="mesh"
+                                                mesh="galbot_to_robotiq_adapter.obj" class="visual" />
+                                              <body name="right_gripper_robotiq_85_base_link"
+                                                pos="0 0 0" quat="1.0 0.0 0.0 0.0">
+                                                <inertial pos="0.0 2.274e-05 0.03232288"
+                                                  quat="1.0 0.0 0.0 0.0" mass="6.6320197e-01"
+                                                  diaginertia="0.00051617816 0.00058802208 0.00039462776" />
+                                                <geom
+                                                  name="right_gripper_robotiq_85_base_link_collision"
+                                                  pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                  mesh="robotiq_base.stl" class="collision" />
+                                                <geom
+                                                  name="right_gripper_robotiq_85_base_link_visual"
+                                                  pos="0 0 0" quat="1 0 0 0"
+                                                  material="default_material" type="mesh"
+                                                  mesh="robotiq_base.stl" class="visual" />
+                                                <body
+                                                  name="right_gripper_robotiq_85_left_knuckle_link"
+                                                  pos="0.03060114 0.0 0.05490452"
+                                                  quat="1.0 0.0 0.0 0.0">
+                                                  <joint
+                                                    name="right_gripper_robotiq_85_left_knuckle_joint"
+                                                    type="hinge" ref="0.0" class="robot_joint"
+                                                    range="-0.8 0" axis="0 1 0" />
+                                                  <inertial pos="0.01213197 0.0002 -0.00058647"
+                                                    quat="1.0 0.0 0.0 0.0" mass="1.384773208e-02"
+                                                    diaginertia="3.5232e-07 2.31944e-06 2.23136e-06" />
+                                                  <geom
+                                                    name="right_gripper_robotiq_85_left_knuckle_link_collision"
+                                                    pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                    mesh="left_knuckle.stl" class="collision" />
+                                                  <geom
+                                                    name="right_gripper_robotiq_85_left_knuckle_link_visual"
+                                                    pos="0 0 0" quat="1 0 0 0"
+                                                    material="default_material" type="mesh"
+                                                    mesh="left_knuckle.stl" class="visual" />
+                                                  <body
+                                                    name="right_gripper_robotiq_85_left_finger_link"
+                                                    pos="0.03152616 0.0 -0.00376347"
+                                                    quat="1.0 0.0 0.0 0.0">
+                                                    <inertial
+                                                      pos="0.00346899 -0.00079447 0.01867121"
+                                                      quat="1.0 0.0 0.0 0.0" mass="4.260376752e-02"
+                                                      diaginertia="1.385792e-05 1.183208e-05 5.19672e-06" />
+                                                    <geom
+                                                      name="right_gripper_robotiq_85_left_finger_link_collision"
+                                                      pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                      mesh="left_finger.stl" class="collision" />
+                                                    <geom
+                                                      name="right_gripper_robotiq_85_left_finger_link_visual"
+                                                      pos="0 0 0" quat="1 0 0 0"
+                                                      material="default_material" type="mesh"
+                                                      mesh="left_finger.stl" class="visual" />
+                                                    <body
+                                                      name="right_gripper_robotiq_85_left_finger_tip_link"
+                                                      pos="0.00563134 0.0 0.04718515"
+                                                      quat="1.0 0.0 0.0 0.0">
+                                                      <joint
+                                                        name="right_gripper_robotiq_85_left_finger_tip_joint"
+                                                        type="hinge" ref="0.0" class="robot_joint"
+                                                        range="0 0.8" axis="0 1 0" armature="0.001"
+                                                        solimplimit="0.95 0.99 0.001"
+                                                        solreflimit="0.005 1" />
+                                                      <inertial pos="-0.01456706 -0.0008 0.01649701"
+                                                        quat="1.0 0.0 0.0 0.0"
+                                                        mass="4.268588744e-02"
+                                                        diaginertia="1.048152e-05 1.197888e-05 4.22784e-06" />
+                                                      <geom
+                                                        name="right_gripper_robotiq_85_left_finger_tip_link_collision_0"
+                                                        pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                        mesh="left_finger_tip_collision_0.obj"
+                                                        class="collision" />
+                                                      <geom
+                                                        name="right_gripper_robotiq_85_left_finger_tip_link_collision_1"
+                                                        pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                        mesh="left_finger_tip_collision_1.obj"
+                                                        class="collision" />
+                                                      <geom
+                                                        name="right_gripper_robotiq_85_left_finger_tip_link_collision_2"
+                                                        pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                        mesh="left_finger_tip_collision_2.obj"
+                                                        class="collision" />
+                                                      <geom
+                                                        name="right_gripper_robotiq_85_left_finger_tip_link_collision_3"
+                                                        pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                        mesh="left_finger_tip_collision_3.obj"
+                                                        class="collision" />
+                                                      <geom
+                                                        name="right_gripper_robotiq_85_left_finger_tip_link_collision_4"
+                                                        pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                        mesh="left_finger_tip_collision_4.obj"
+                                                        class="collision" />
+                                                      <geom
+                                                        name="right_gripper_robotiq_85_left_finger_tip_link_collision_5"
+                                                        pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                        mesh="left_finger_tip_collision_5.obj"
+                                                        class="collision" />
+                                                      <geom
+                                                        name="right_gripper_robotiq_85_left_finger_tip_link_collision_6"
+                                                        pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                        mesh="left_finger_tip_collision_6.obj"
+                                                        class="collision" />
+                                                      <geom
+                                                        name="right_gripper_robotiq_85_left_finger_tip_link_collision_7"
+                                                        pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                        mesh="left_finger_tip_collision_7.obj"
+                                                        class="collision" />
+                                                      <geom
+                                                        name="right_gripper_robotiq_85_left_finger_tip_link_collision_8"
+                                                        pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                        mesh="left_finger_tip_collision_8.obj"
+                                                        class="collision" />
+                                                      <geom
+                                                        name="right_gripper_robotiq_85_left_finger_tip_link_collision_9"
+                                                        pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                        mesh="left_finger_tip_collision_9.obj"
+                                                        class="collision" />
+                                                      <geom
+                                                        name="right_gripper_robotiq_85_left_finger_tip_link_visual"
+                                                        pos="0 0 0" quat="1 0 0 0"
+                                                        material="default_material" type="mesh"
+                                                        mesh="left_finger_tip.obj" class="visual" />
+                                                    </body>
+                                                  </body>
+                                                </body>
+                                                <body
+                                                  name="right_gripper_robotiq_85_right_knuckle_link"
+                                                  pos="-0.03060114 0.0 0.05490452"
+                                                  quat="1.0 0.0 0.0 0.0">
+                                                  <joint
+                                                    name="right_gripper_robotiq_85_right_knuckle_joint"
+                                                    type="hinge" ref="0.0" class="robot_joint"
+                                                    range="0 0.8" axis="0 1 0" armature="0.005"
+                                                    damping="10" solimplimit="0.95 0.99 0.001"
+                                                    solreflimit="0.005 1" />
+                                                  <inertial pos="-0.01213197 0.0002 -0.00058647"
+                                                    quat="1.0 0.0 0.0 0.0" mass="1.384773208e-02"
+                                                    diaginertia="3.5232e-07 2.31944e-06 2.23136e-06" />
+                                                  <geom
+                                                    name="right_gripper_robotiq_85_right_knuckle_link_collision"
+                                                    pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                    mesh="right_knuckle.stl" class="collision" />
+                                                  <geom
+                                                    name="right_gripper_robotiq_85_right_knuckle_link_visual"
+                                                    pos="0 0 0" quat="1 0 0 0"
+                                                    material="default_material" type="mesh"
+                                                    mesh="right_knuckle.stl" class="visual" />
+                                                  <body
+                                                    name="right_gripper_robotiq_85_right_finger_link"
+                                                    pos="-0.03152616 0.0 -0.00376347"
+                                                    quat="1.0 0.0 0.0 0.0">
+                                                    <inertial pos="-0.00346899 -5.53e-06 0.01867121"
+                                                      quat="1.0 0.0 0.0 0.0"
+                                                      mass="4.260376752000000e-02"
+                                                      diaginertia="1.385792e-05 1.183208e-05 5.19672e-06" />
+                                                    <geom
+                                                      name="right_gripper_robotiq_85_right_finger_link_collision"
+                                                      pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                      mesh="right_finger.stl" class="collision" />
+                                                    <geom
+                                                      name="right_gripper_robotiq_85_right_finger_link_visual"
+                                                      pos="0 0 0" quat="1 0 0 0"
+                                                      material="default_material" type="mesh"
+                                                      mesh="right_finger.stl" class="visual" />
+                                                    <body
+                                                      name="right_gripper_robotiq_85_right_finger_tip_link"
+                                                      pos="-0.00563134 0.0 0.04718515"
+                                                      quat="1.0 0.0 0.0 0.0">
+                                                      <joint
+                                                        name="right_gripper_robotiq_85_right_finger_tip_joint"
+                                                        type="hinge" ref="0.0" class="robot_joint"
+                                                        range="-0.8 0" axis="0 1 0" armature="0.001"
+                                                        solimplimit="0.95 0.99 0.001"
+                                                        solreflimit="0.005 1" />
+                                                      <inertial pos="0.01456706 5e-05 0.01649701"
+                                                        quat="1.0 0.0 0.0 0.0"
+                                                        mass="4.268588744e-02"
+                                                        diaginertia="1.048152e-05 1.197888e-05 4.22784e-06" />
+                                                      <geom
+                                                        name="right_gripper_robotiq_85_right_finger_tip_link_collision_0"
+                                                        pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                        mesh="right_finger_tip_collision_0.obj"
+                                                        class="collision" />
+                                                      <geom
+                                                        name="right_gripper_robotiq_85_right_finger_tip_link_collision_1"
+                                                        pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                        mesh="right_finger_tip_collision_1.obj"
+                                                        class="collision" />
+                                                      <geom
+                                                        name="right_gripper_robotiq_85_right_finger_tip_link_collision_2"
+                                                        pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                        mesh="right_finger_tip_collision_2.obj"
+                                                        class="collision" />
+                                                      <geom
+                                                        name="right_gripper_robotiq_85_right_finger_tip_link_collision_3"
+                                                        pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                        mesh="right_finger_tip_collision_3.obj"
+                                                        class="collision" />
+                                                      <geom
+                                                        name="right_gripper_robotiq_85_right_finger_tip_link_collision_4"
+                                                        pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                        mesh="right_finger_tip_collision_4.obj"
+                                                        class="collision" />
+                                                      <geom
+                                                        name="right_gripper_robotiq_85_right_finger_tip_link_collision_5"
+                                                        pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                        mesh="right_finger_tip_collision_5.obj"
+                                                        class="collision" />
+                                                      <geom
+                                                        name="right_gripper_robotiq_85_right_finger_tip_link_collision_6"
+                                                        pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                        mesh="right_finger_tip_collision_6.obj"
+                                                        class="collision" />
+                                                      <geom
+                                                        name="right_gripper_robotiq_85_right_finger_tip_link_collision_7"
+                                                        pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                        mesh="right_finger_tip_collision_7.obj"
+                                                        class="collision" />
+                                                      <geom
+                                                        name="right_gripper_robotiq_85_right_finger_tip_link_collision_8"
+                                                        pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                        mesh="right_finger_tip_collision_8.obj"
+                                                        class="collision" />
+                                                      <geom
+                                                        name="right_gripper_robotiq_85_right_finger_tip_link_collision_9"
+                                                        pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                        mesh="right_finger_tip_collision_9.obj"
+                                                        class="collision" />
+                                                      <geom
+                                                        name="right_gripper_robotiq_85_right_finger_tip_link_collision_10"
+                                                        pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                        mesh="right_finger_tip_collision_10.obj"
+                                                        class="collision" />
+                                                      <geom
+                                                        name="right_gripper_robotiq_85_right_finger_tip_link_visual"
+                                                        pos="0 0 0" quat="1 0 0 0"
+                                                        material="default_material" type="mesh"
+                                                        mesh="right_finger_tip.obj" class="visual" />
+                                                    </body>
+                                                  </body>
+                                                </body>
+                                                <body
+                                                  name="right_gripper_robotiq_85_left_inner_knuckle_link"
+                                                  pos="0.0127 0.0 0.06142" quat="1.0 0.0 0.0 0.0">
+                                                  <joint
+                                                    name="right_gripper_robotiq_85_left_inner_knuckle_joint"
+                                                    type="hinge" ref="0.0" class="robot_joint"
+                                                    range="-0.8 0" axis="0 1 0" />
+                                                  <inertial pos="0.01897699 0.00015001 0.02247101"
+                                                    quat="1.0 0.0 0.0 0.0" mass="2.969376448e-02"
+                                                    diaginertia="9.57136e-06 8.69056e-06 8.19144e-06" />
+                                                  <geom
+                                                    name="right_gripper_robotiq_85_left_inner_knuckle_link_collision"
+                                                    pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                    mesh="left_inner_knuckle.stl" class="collision" />
+                                                  <geom
+                                                    name="right_gripper_robotiq_85_left_inner_knuckle_link_visual"
+                                                    pos="0 0 0" quat="1 0 0 0"
+                                                    material="default_material" type="mesh"
+                                                    mesh="left_inner_knuckle.stl" class="visual" />
+                                                </body>
+                                                <body
+                                                  name="right_gripper_robotiq_85_right_inner_knuckle_link"
+                                                  pos="-0.0127 0.0 0.06142" quat="1.0 0.0 0.0 0.0">
+                                                  <joint
+                                                    name="right_gripper_robotiq_85_right_inner_knuckle_joint"
+                                                    type="hinge" ref="0.0" class="robot_joint"
+                                                    range="0 0.8" axis="0 1 0" />
+                                                  <inertial pos="-0.01926824 5.001e-05 0.02222178"
+                                                    quat="1.0 0.0 0.0 0.0" mass="2.969376448e-02"
+                                                    diaginertia="9.42456e-06 8.69056e-06 8.33824e-06" />
+                                                  <geom
+                                                    name="right_gripper_robotiq_85_right_inner_knuckle_link_collision"
+                                                    pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                    mesh="right_inner_knuckle.stl" class="collision" />
+                                                  <geom
+                                                    name="right_gripper_robotiq_85_right_inner_knuckle_link_visual"
+                                                    pos="0 0 0" quat="1 0 0 0"
+                                                    material="default_material" type="mesh"
+                                                    mesh="right_inner_knuckle.stl" class="visual" />
+                                                </body>
+                                                <body name="right_gripper_tcp_link"
+                                                  pos="0.0 0.0 0.15"
+                                                  quat="0.5000000000000001 -0.5 -0.5 -0.4999999999999999" />
+                                              </body>
+                                            </body>
+                                            <body name="right_gripper_camera_link" pos="0.008 0 0"
+                                              quat="4.329780281177467e-17 0.7071067811865476 -4.329780281177466e-17 0.7071067811865475">
+                                              <geom name="right_gripper_camera_link_collision_0"
+                                                pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                mesh="d405_camera_link_collision_0.obj"
+                                                class="collision" />
+                                              <geom name="right_gripper_camera_link_collision_1"
+                                                pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                mesh="d405_camera_link_collision_1.obj"
+                                                class="collision" />
+                                              <geom name="right_gripper_camera_link_collision_2"
+                                                pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                mesh="d405_camera_link_collision_2.obj"
+                                                class="collision" />
+                                              <geom name="right_gripper_camera_link_collision_3"
+                                                pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                mesh="d405_camera_link_collision_3.obj"
+                                                class="collision" />
+                                              <geom name="right_gripper_camera_link_collision_4"
+                                                pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                mesh="d405_camera_link_collision_4.obj"
+                                                class="collision" />
+                                              <geom name="right_gripper_camera_link_collision_5"
+                                                pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                mesh="d405_camera_link_collision_5.obj"
+                                                class="collision" />
+                                              <geom name="right_gripper_camera_link_collision_6"
+                                                pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                mesh="d405_camera_link_collision_6.obj"
+                                                class="collision" />
+                                              <geom name="right_gripper_camera_link_collision_7"
+                                                pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                mesh="d405_camera_link_collision_7.obj"
+                                                class="collision" />
+                                              <geom name="right_gripper_camera_link_collision_8"
+                                                pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                mesh="d405_camera_link_collision_8.obj"
+                                                class="collision" />
+                                              <geom name="right_gripper_camera_link_collision_9"
+                                                pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                mesh="d405_camera_link_collision_9.obj"
+                                                class="collision" />
+                                              <geom name="right_gripper_camera_link_collision_10"
+                                                pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                mesh="d405_camera_link_collision_10.obj"
+                                                class="collision" />
+                                              <geom name="right_gripper_camera_link_collision_11"
+                                                pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                mesh="d405_camera_link_collision_11.obj"
+                                                class="collision" />
+                                              <geom name="right_gripper_camera_link_collision_12"
+                                                pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                mesh="d405_camera_link_collision_12.obj"
+                                                class="collision" />
+                                              <geom name="right_gripper_camera_link_collision_13"
+                                                pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                mesh="d405_camera_link_collision_13.obj"
+                                                class="collision" />
+                                              <geom name="right_gripper_camera_link_collision_14"
+                                                pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                mesh="d405_camera_link_collision_14.obj"
+                                                class="collision" />
+                                              <geom name="right_gripper_camera_link_collision_15"
+                                                pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                mesh="d405_camera_link_collision_15.obj"
+                                                class="collision" />
+                                              <geom name="right_gripper_camera_link_collision_16"
+                                                pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                mesh="d405_camera_link_collision_16.obj"
+                                                class="collision" />
+                                              <geom name="right_gripper_camera_link_collision_17"
+                                                pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                mesh="d405_camera_link_collision_17.obj"
+                                                class="collision" />
+                                              <geom name="right_gripper_camera_link_collision_18"
+                                                pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                mesh="d405_camera_link_collision_18.obj"
+                                                class="collision" />
+                                              <geom name="right_gripper_camera_link_collision_19"
+                                                pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                mesh="d405_camera_link_collision_19.obj"
+                                                class="collision" />
+                                              <geom name="right_gripper_camera_link_collision_20"
+                                                pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                mesh="d405_camera_link_collision_20.obj"
+                                                class="collision" />
+                                              <geom name="right_gripper_camera_link_collision_21"
+                                                pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                mesh="d405_camera_link_collision_21.obj"
+                                                class="collision" />
+                                              <geom name="right_gripper_camera_link_collision_22"
+                                                pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                mesh="d405_camera_link_collision_22.obj"
+                                                class="collision" />
+                                              <geom name="right_gripper_camera_link_collision_23"
+                                                pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                mesh="d405_camera_link_collision_23.obj"
+                                                class="collision" />
+                                              <geom name="right_gripper_camera_link_collision_24"
+                                                pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                mesh="d405_camera_link_collision_24.obj"
+                                                class="collision" />
+                                              <geom name="right_gripper_camera_link_collision_25"
+                                                pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                mesh="d405_camera_link_collision_25.obj"
+                                                class="collision" />
+                                              <geom name="right_gripper_camera_link_collision_26"
+                                                pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                mesh="d405_camera_link_collision_26.obj"
+                                                class="collision" />
+                                              <geom name="right_gripper_camera_link_collision_27"
+                                                pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                mesh="d405_camera_link_collision_27.obj"
+                                                class="collision" />
+                                              <geom name="right_gripper_camera_link_collision_28"
+                                                pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                mesh="d405_camera_link_collision_28.obj"
+                                                class="collision" />
+                                              <geom name="right_gripper_camera_link_collision_29"
+                                                pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                mesh="d405_camera_link_collision_29.obj"
+                                                class="collision" />
+                                              <geom name="right_gripper_camera_link_collision_30"
+                                                pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                mesh="d405_camera_link_collision_30.obj"
+                                                class="collision" />
+                                              <geom name="right_gripper_camera_link_collision_31"
+                                                pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                mesh="d405_camera_link_collision_31.obj"
+                                                class="collision" />
+                                              <geom name="right_gripper_camera_link_collision_32"
+                                                pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                mesh="d405_camera_link_collision_32.obj"
+                                                class="collision" />
+                                              <geom name="right_gripper_camera_link_visual"
+                                                pos="0 0 0" quat="1 0 0 0"
+                                                material="default_material" type="mesh"
+                                                mesh="d405_camera_link.obj" class="visual" />
+                                            </body>
+                                          </body>
+                                        </body>
+                                      </body>
+                                    </body>
+                                  </body>
+                                </body>
+                              </body>
+                            </body>
+                          </body>
+                        </body>
+                        <body name="torso_left_arm_mount_link" pos="0 0.206 0.39599"
+                          quat="4.329780281177467e-17 4.329780281177466e-17 0.7071067811865475 0.7071067811865476">
+                          <inertial pos="0 0 0" quat="1.0 0.0 0.0 0.0" mass="0"
+                            diaginertia="0.0 0.0 0.0" />
+                          <body name="left_arm_base_link" pos="0 0 0" quat="1.0 0.0 0.0 0.0">
+                            <inertial pos="-0.00037 -0.00006 -0.11407" quat="1.0 0.0 0.0 0.0"
+                              mass="0.9" diaginertia="0.01248 0.01247 0.00056" />
+                            <body name="left_arm_link1" pos="0 0 0" quat="1.0 0.0 0.0 0.0">
+                              <joint name="left_arm_joint1" type="hinge" ref="0.0"
+                                class="robot_joint" range="-3 3" axis="0 0 1" />
+                              <inertial pos="0.00000 0.00650 -0.01459" quat="1.0 0.0 0.0 0.0"
+                                mass="1.48" diaginertia="0.00378 0.0046 0.00217" />
+                              <geom name="left_arm_link1_collision" pos="0 0 0"
+                                quat="1.0 0.0 0.0 0.0" type="mesh" mesh="left_arm_link1.stl"
+                                class="collision" />
+                              <geom name="left_arm_link1_visual" pos="0 0 0" quat="1.0 0.0 0.0 0.0"
+                                material="default_material" type="mesh" mesh="left_arm_link1.obj"
+                                class="visual" />
+                              <body name="left_arm_link2" pos="0 0 0"
+                                quat="4.329780281177467e-17 4.329780281177466e-17 0.7071067811865475 0.7071067811865476">
+                                <joint name="left_arm_joint2" type="hinge" ref="0.0"
+                                  class="robot_joint" range="-1.7 1.5707963267948966" axis="0 0 1" />
+                                <inertial pos="-0.00080 0.09873 0.00815" quat="1.0 0.0 0.0 0.0"
+                                  mass="1.33" diaginertia="0.01827 0.00232 0.01769" />
+                                <geom name="left_arm_link2_collision" pos="0 0 0"
+                                  quat="1.0 0.0 0.0 0.0" type="mesh" mesh="left_arm_link2.stl"
+                                  class="collision" />
+                                <geom name="left_arm_link2_visual" pos="0 0 0"
+                                  quat="1.0 0.0 0.0 0.0" material="default_material" type="mesh"
+                                  mesh="left_arm_link2.obj" class="visual" />
+                                <body name="left_arm_link3" pos="0 0.35 0"
+                                  quat="0.5000000000000001 -0.5 -0.5 -0.4999999999999999">
+                                  <joint name="left_arm_joint3" type="hinge" ref="0.0"
+                                    class="robot_joint" range="-2.9 2.9" axis="0 0 1" />
+                                  <inertial pos="0.00019 0.00330 -0.04824" quat="1.0 0.0 0.0 0.0"
+                                    mass="1.25" diaginertia="0.00955 0.00983 0.00151" />
+                                  <geom name="left_arm_link3_collision" pos="0 0 0"
+                                    quat="1.0 0.0 0.0 0.0" type="mesh" mesh="left_arm_link3.stl"
+                                    class="collision" />
+                                  <geom name="left_arm_link3_visual" pos="0 0 0"
+                                    quat="1.0 0.0 0.0 0.0" material="default_material" type="mesh"
+                                    mesh="left_arm_link3.obj" class="visual" />
+                                  <body name="left_arm_link4" pos="0 0 0"
+                                    quat="4.329780281177467e-17 4.329780281177466e-17 -0.7071067811865475 -0.7071067811865476">
+                                    <joint name="left_arm_joint4" type="hinge" ref="0.0"
+                                      class="robot_joint" range="-2.1 2.1" axis="0 0 1" />
+                                    <inertial pos="0.00000 0.06457 0.00899" quat="1.0 0.0 0.0 0.0"
+                                      mass="0.8" diaginertia="0.00529 0.0012 0.00488" />
+                                    <geom name="left_arm_link4_collision" pos="0 0 0"
+                                      quat="1.0 0.0 0.0 0.0" type="mesh" mesh="left_arm_link4.stl"
+                                      class="collision" />
+                                    <geom name="left_arm_link4_visual" pos="0 0 0"
+                                      quat="1.0 0.0 0.0 0.0" material="default_material" type="mesh"
+                                      mesh="left_arm_link4.obj" class="visual" />
+                                    <body name="left_arm_link5" pos="0 0.36 0"
+                                      quat="4.329780281177467e-17 -4.329780281177466e-17 0.7071067811865476 0.7071067811865475">
+                                      <joint name="left_arm_joint5" type="hinge" ref="0.0"
+                                        class="robot_joint" range="-2.9 2.9" axis="0 0 1" />
+                                      <inertial pos="-0.00201 0.00042 -0.14589"
+                                        quat="1.0 0.0 0.0 0.0" mass="1.22"
+                                        diaginertia="0.03428 0.03366 0.00222" />
+                                      <geom name="left_arm_link5_collision" pos="0 0 0"
+                                        quat="1.0 0.0 0.0 0.0" type="mesh" mesh="left_arm_link5.stl"
+                                        class="collision" />
+                                      <geom name="left_arm_link5_visual" pos="0 0 0"
+                                        quat="1.0 0.0 0.0 0.0" material="default_material"
+                                        type="mesh" mesh="left_arm_link5.obj" class="visual" />
+                                      <body name="left_arm_link6" pos="0 0 0"
+                                        quat="0.5000000000000001 0.5 0.5 -0.4999999999999999">
+                                        <joint name="left_arm_joint6" type="hinge" ref="0.0"
+                                          class="robot_joint" range="-0.785398163 0.785398163"
+                                          axis="0 0 1" />
+                                        <inertial pos="0.00000 -0.01031 0.00000"
+                                          quat="1.0 0.0 0.0 0.0" mass="0.43"
+                                          diaginertia="0.00051 0.0007 0.00091" />
+                                        <geom name="left_arm_link6_collision" pos="0 0 0"
+                                          quat="1.0 0.0 0.0 0.0" type="mesh"
+                                          mesh="left_arm_link6.stl" class="collision" />
+                                        <geom name="left_arm_link6_visual" pos="0 0 0"
+                                          quat="1.0 0.0 0.0 0.0" material="default_material"
+                                          type="mesh" mesh="left_arm_link6.obj" class="visual" />
+                                        <body name="left_arm_link7" pos="0 0 0"
+                                          quat="0.7071067811865476 0.7071067811865475 0.0 0.0">
+                                          <joint name="left_arm_joint7" type="hinge" ref="0.0"
+                                            class="robot_joint" range="-1.4 1.4" axis="0 0 1" />
+                                          <inertial pos="-0.03291 0.00799 -0.00131"
+                                            quat="1.0 0.0 0.0 0.0" mass="0.6"
+                                            diaginertia="0.00124 0.00197 0.00165" />
+                                          <geom name="left_arm_link7_collision" pos="0 0 0"
+                                            quat="1.0 0.0 0.0 0.0" type="mesh"
+                                            mesh="left_arm_link7.stl" class="collision" />
+                                          <geom name="left_arm_link7_visual" pos="0 0 0"
+                                            quat="1.0 0.0 0.0 0.0" material="default_material"
+                                            type="mesh" mesh="left_arm_link7.obj" class="visual" />
+                                          <body name="left_arm_end_effector_mount_link"
+                                            pos="-0.083 0 0"
+                                            quat="4.329780281177467e-17 -4.329780281177466e-17 -0.7071067811865475 0.7071067811865476">
+                                            <inertial pos="0 0 0" quat="1.0 0.0 0.0 0.0" mass="0"
+                                              diaginertia="0.0 0.0 0.0" />
+                                            <body name="left_gripper_galbot_to_robotiq_adapter_link"
+                                              pos="0.008 0 0"
+                                              quat="0.7071067811865476 0.0 0.7071067811865475 0.0">
+                                              <inertial pos="-1.9028E-07 5.9618E-18 -0.0041416"
+                                                quat="1.0 0.0 0.0 0.0" mass="0.023056"
+                                                diaginertia="5.5937e-06 5.3172e-06 1.0645e-05" />
+                                              <geom
+                                                name="left_gripper_galbot_to_robotiq_adapter_link_collision"
+                                                pos="0 0 0" quat="1.0 0.0 0.0 0.0" type="mesh"
+                                                mesh="galbot_to_robotiq_adapter_convex.stl"
+                                                class="collision" />
+                                              <geom
+                                                name="left_gripper_galbot_to_robotiq_adapter_link_visual"
+                                                pos="0 0 0" quat="1.0 0.0 0.0 0.0"
+                                                material="default_material" type="mesh"
+                                                mesh="galbot_to_robotiq_adapter.obj" class="visual" />
+                                              <body name="left_gripper_robotiq_85_base_link"
+                                                pos="0 0 0" quat="1.0 0.0 0.0 0.0">
+                                                <inertial pos="0.0 2.274e-05 0.03232288"
+                                                  quat="1.0 0.0 0.0 0.0" mass="6.6320197e-01"
+                                                  diaginertia="0.00051617816 0.00058802208 0.00039462776" />
+                                                <geom
+                                                  name="left_gripper_robotiq_85_base_link_collision"
+                                                  pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                  mesh="robotiq_base.stl" class="collision" />
+                                                <geom
+                                                  name="left_gripper_robotiq_85_base_link_visual"
+                                                  pos="0 0 0" quat="1 0 0 0"
+                                                  material="default_material" type="mesh"
+                                                  mesh="robotiq_base.stl" class="visual" />
+                                                <body
+                                                  name="left_gripper_robotiq_85_left_knuckle_link"
+                                                  pos="0.03060114 0.0 0.05490452"
+                                                  quat="1.0 0.0 0.0 0.0">
+                                                  <joint
+                                                    name="left_gripper_robotiq_85_left_knuckle_joint"
+                                                    type="hinge" ref="0.0" class="robot_joint"
+                                                    range="-0.8 0" axis="0 1 0" />
+                                                  <inertial pos="0.01213197 0.0002 -0.00058647"
+                                                    quat="1.0 0.0 0.0 0.0" mass="1.384773208e-02"
+                                                    diaginertia="3.5232e-07 2.31944e-06 2.23136e-06" />
+                                                  <geom
+                                                    name="left_gripper_robotiq_85_left_knuckle_link_collision"
+                                                    pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                    mesh="left_knuckle.stl" class="collision" />
+                                                  <geom
+                                                    name="left_gripper_robotiq_85_left_knuckle_link_visual"
+                                                    pos="0 0 0" quat="1 0 0 0"
+                                                    material="default_material" type="mesh"
+                                                    mesh="left_knuckle.stl" class="visual" />
+                                                  <body
+                                                    name="left_gripper_robotiq_85_left_finger_link"
+                                                    pos="0.03152616 0.0 -0.00376347"
+                                                    quat="1.0 0.0 0.0 0.0">
+                                                    <inertial
+                                                      pos="0.00346899 -0.00079447 0.01867121"
+                                                      quat="1.0 0.0 0.0 0.0" mass="4.260376752e-02"
+                                                      diaginertia="1.385792e-05 1.183208e-05 5.19672e-06" />
+                                                    <geom
+                                                      name="left_gripper_robotiq_85_left_finger_link_collision"
+                                                      pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                      mesh="left_finger.stl" class="collision" />
+                                                    <geom
+                                                      name="left_gripper_robotiq_85_left_finger_link_visual"
+                                                      pos="0 0 0" quat="1 0 0 0"
+                                                      material="default_material" type="mesh"
+                                                      mesh="left_finger.stl" class="visual" />
+                                                    <body
+                                                      name="left_gripper_robotiq_85_left_finger_tip_link"
+                                                      pos="0.00563134 0.0 0.04718515"
+                                                      quat="1.0 0.0 0.0 0.0">
+                                                      <joint
+                                                        name="left_gripper_robotiq_85_left_finger_tip_joint"
+                                                        type="hinge" ref="0.0" class="robot_joint"
+                                                        range="0 0.8" axis="0 1 0" armature="0.001"
+                                                        solimplimit="0.95 0.99 0.001"
+                                                        solreflimit="0.005 1" />
+                                                      <inertial pos="-0.01456706 -0.0008 0.01649701"
+                                                        quat="1.0 0.0 0.0 0.0"
+                                                        mass="4.268588744e-02"
+                                                        diaginertia="1.048152e-05 1.197888e-05 4.22784e-06" />
+                                                      <geom
+                                                        name="left_gripper_robotiq_85_left_finger_tip_link_collision_0"
+                                                        pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                        mesh="left_finger_tip_collision_0.obj"
+                                                        class="collision" />
+                                                      <geom
+                                                        name="left_gripper_robotiq_85_left_finger_tip_link_collision_1"
+                                                        pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                        mesh="left_finger_tip_collision_1.obj"
+                                                        class="collision" />
+                                                      <geom
+                                                        name="left_gripper_robotiq_85_left_finger_tip_link_collision_2"
+                                                        pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                        mesh="left_finger_tip_collision_2.obj"
+                                                        class="collision" />
+                                                      <geom
+                                                        name="left_gripper_robotiq_85_left_finger_tip_link_collision_3"
+                                                        pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                        mesh="left_finger_tip_collision_3.obj"
+                                                        class="collision" />
+                                                      <geom
+                                                        name="left_gripper_robotiq_85_left_finger_tip_link_collision_4"
+                                                        pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                        mesh="left_finger_tip_collision_4.obj"
+                                                        class="collision" />
+                                                      <geom
+                                                        name="left_gripper_robotiq_85_left_finger_tip_link_collision_5"
+                                                        pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                        mesh="left_finger_tip_collision_5.obj"
+                                                        class="collision" />
+                                                      <geom
+                                                        name="left_gripper_robotiq_85_left_finger_tip_link_collision_6"
+                                                        pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                        mesh="left_finger_tip_collision_6.obj"
+                                                        class="collision" />
+                                                      <geom
+                                                        name="left_gripper_robotiq_85_left_finger_tip_link_collision_7"
+                                                        pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                        mesh="left_finger_tip_collision_7.obj"
+                                                        class="collision" />
+                                                      <geom
+                                                        name="left_gripper_robotiq_85_left_finger_tip_link_collision_8"
+                                                        pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                        mesh="left_finger_tip_collision_8.obj"
+                                                        class="collision" />
+                                                      <geom
+                                                        name="left_gripper_robotiq_85_left_finger_tip_link_collision_9"
+                                                        pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                        mesh="left_finger_tip_collision_9.obj"
+                                                        class="collision" />
+                                                      <geom
+                                                        name="left_gripper_robotiq_85_left_finger_tip_link_visual"
+                                                        pos="0 0 0" quat="1 0 0 0"
+                                                        material="default_material" type="mesh"
+                                                        mesh="left_finger_tip.obj" class="visual" />
+                                                    </body>
+                                                  </body>
+                                                </body>
+                                                <body
+                                                  name="left_gripper_robotiq_85_right_knuckle_link"
+                                                  pos="-0.03060114 0.0 0.05490452"
+                                                  quat="1.0 0.0 0.0 0.0">
+                                                  <joint
+                                                    name="left_gripper_robotiq_85_right_knuckle_joint"
+                                                    type="hinge" ref="0.0" class="robot_joint"
+                                                    range="0 0.8" axis="0 1 0" armature="0.005"
+                                                    damping="10" solimplimit="0.95 0.99 0.001"
+                                                    solreflimit="0.005 1" />
+                                                  <inertial pos="-0.01213197 0.0002 -0.00058647"
+                                                    quat="1.0 0.0 0.0 0.0" mass="1.384773208e-02"
+                                                    diaginertia="3.5232e-07 2.31944e-06 2.23136e-06" />
+                                                  <geom
+                                                    name="left_gripper_robotiq_85_right_knuckle_link_collision"
+                                                    pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                    mesh="right_knuckle.stl" class="collision" />
+                                                  <geom
+                                                    name="left_gripper_robotiq_85_right_knuckle_link_visual"
+                                                    pos="0 0 0" quat="1 0 0 0"
+                                                    material="default_material" type="mesh"
+                                                    mesh="right_knuckle.stl" class="visual" />
+                                                  <body
+                                                    name="left_gripper_robotiq_85_right_finger_link"
+                                                    pos="-0.03152616 0.0 -0.00376347"
+                                                    quat="1.0 0.0 0.0 0.0">
+                                                    <inertial pos="-0.00346899 -5.53e-06 0.01867121"
+                                                      quat="1.0 0.0 0.0 0.0"
+                                                      mass="4.260376752000000e-02"
+                                                      diaginertia="1.385792e-05 1.183208e-05 5.19672e-06" />
+                                                    <geom
+                                                      name="left_gripper_robotiq_85_right_finger_link_collision"
+                                                      pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                      mesh="right_finger.stl" class="collision" />
+                                                    <geom
+                                                      name="left_gripper_robotiq_85_right_finger_link_visual"
+                                                      pos="0 0 0" quat="1 0 0 0"
+                                                      material="default_material" type="mesh"
+                                                      mesh="right_finger.stl" class="visual" />
+                                                    <body
+                                                      name="left_gripper_robotiq_85_right_finger_tip_link"
+                                                      pos="-0.00563134 0.0 0.04718515"
+                                                      quat="1.0 0.0 0.0 0.0">
+                                                      <joint
+                                                        name="left_gripper_robotiq_85_right_finger_tip_joint"
+                                                        type="hinge" ref="0.0" class="robot_joint"
+                                                        range="-0.8 0" axis="0 1 0" armature="0.001"
+                                                        solimplimit="0.95 0.99 0.001"
+                                                        solreflimit="0.005 1" />
+                                                      <inertial pos="0.01456706 5e-05 0.01649701"
+                                                        quat="1.0 0.0 0.0 0.0"
+                                                        mass="4.268588744e-02"
+                                                        diaginertia="1.048152e-05 1.197888e-05 4.22784e-06" />
+                                                      <geom
+                                                        name="left_gripper_robotiq_85_right_finger_tip_link_collision_0"
+                                                        pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                        mesh="right_finger_tip_collision_0.obj"
+                                                        class="collision" />
+                                                      <geom
+                                                        name="left_gripper_robotiq_85_right_finger_tip_link_collision_1"
+                                                        pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                        mesh="right_finger_tip_collision_1.obj"
+                                                        class="collision" />
+                                                      <geom
+                                                        name="left_gripper_robotiq_85_right_finger_tip_link_collision_2"
+                                                        pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                        mesh="right_finger_tip_collision_2.obj"
+                                                        class="collision" />
+                                                      <geom
+                                                        name="left_gripper_robotiq_85_right_finger_tip_link_collision_3"
+                                                        pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                        mesh="right_finger_tip_collision_3.obj"
+                                                        class="collision" />
+                                                      <geom
+                                                        name="left_gripper_robotiq_85_right_finger_tip_link_collision_4"
+                                                        pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                        mesh="right_finger_tip_collision_4.obj"
+                                                        class="collision" />
+                                                      <geom
+                                                        name="left_gripper_robotiq_85_right_finger_tip_link_collision_5"
+                                                        pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                        mesh="right_finger_tip_collision_5.obj"
+                                                        class="collision" />
+                                                      <geom
+                                                        name="left_gripper_robotiq_85_right_finger_tip_link_collision_6"
+                                                        pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                        mesh="right_finger_tip_collision_6.obj"
+                                                        class="collision" />
+                                                      <geom
+                                                        name="left_gripper_robotiq_85_right_finger_tip_link_collision_7"
+                                                        pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                        mesh="right_finger_tip_collision_7.obj"
+                                                        class="collision" />
+                                                      <geom
+                                                        name="left_gripper_robotiq_85_right_finger_tip_link_collision_8"
+                                                        pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                        mesh="right_finger_tip_collision_8.obj"
+                                                        class="collision" />
+                                                      <geom
+                                                        name="left_gripper_robotiq_85_right_finger_tip_link_collision_9"
+                                                        pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                        mesh="right_finger_tip_collision_9.obj"
+                                                        class="collision" />
+                                                      <geom
+                                                        name="left_gripper_robotiq_85_right_finger_tip_link_collision_10"
+                                                        pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                        mesh="right_finger_tip_collision_10.obj"
+                                                        class="collision" />
+                                                      <geom
+                                                        name="left_gripper_robotiq_85_right_finger_tip_link_visual"
+                                                        pos="0 0 0" quat="1 0 0 0"
+                                                        material="default_material" type="mesh"
+                                                        mesh="right_finger_tip.obj" class="visual" />
+                                                    </body>
+                                                  </body>
+                                                </body>
+                                                <body
+                                                  name="left_gripper_robotiq_85_left_inner_knuckle_link"
+                                                  pos="0.0127 0.0 0.06142" quat="1.0 0.0 0.0 0.0">
+                                                  <joint
+                                                    name="left_gripper_robotiq_85_left_inner_knuckle_joint"
+                                                    type="hinge" ref="0.0" class="robot_joint"
+                                                    range="-0.8 0" axis="0 1 0" />
+                                                  <inertial pos="0.01897699 0.00015001 0.02247101"
+                                                    quat="1.0 0.0 0.0 0.0" mass="2.969376448e-02"
+                                                    diaginertia="9.57136e-06 8.69056e-06 8.19144e-06" />
+                                                  <geom
+                                                    name="left_gripper_robotiq_85_left_inner_knuckle_link_collision"
+                                                    pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                    mesh="left_inner_knuckle.stl" class="collision" />
+                                                  <geom
+                                                    name="left_gripper_robotiq_85_left_inner_knuckle_link_visual"
+                                                    pos="0 0 0" quat="1 0 0 0"
+                                                    material="default_material" type="mesh"
+                                                    mesh="left_inner_knuckle.stl" class="visual" />
+                                                </body>
+                                                <body
+                                                  name="left_gripper_robotiq_85_right_inner_knuckle_link"
+                                                  pos="-0.0127 0.0 0.06142" quat="1.0 0.0 0.0 0.0">
+                                                  <joint
+                                                    name="left_gripper_robotiq_85_right_inner_knuckle_joint"
+                                                    type="hinge" ref="0.0" class="robot_joint"
+                                                    range="0 0.8" axis="0 1 0" />
+                                                  <inertial pos="-0.01926824 5.001e-05 0.02222178"
+                                                    quat="1.0 0.0 0.0 0.0" mass="2.969376448e-02"
+                                                    diaginertia="9.42456e-06 8.69056e-06 8.33824e-06" />
+                                                  <geom
+                                                    name="left_gripper_robotiq_85_right_inner_knuckle_link_collision"
+                                                    pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                    mesh="right_inner_knuckle.stl" class="collision" />
+                                                  <geom
+                                                    name="left_gripper_robotiq_85_right_inner_knuckle_link_visual"
+                                                    pos="0 0 0" quat="1 0 0 0"
+                                                    material="default_material" type="mesh"
+                                                    mesh="right_inner_knuckle.stl" class="visual" />
+                                                </body>
+                                                <body name="left_gripper_tcp_link"
+                                                  pos="0.0 0.0 0.15"
+                                                  quat="0.5000000000000001 -0.5 -0.5 -0.4999999999999999" />
+                                              </body>
+                                            </body>
+                                            <body name="left_gripper_camera_link" pos="0.008 0 0"
+                                              quat="0.7071067811865476 0.0 0.7071067811865475 0.0">
+                                              <geom name="left_gripper_camera_link_collision_0"
+                                                pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                mesh="d405_camera_link_collision_0.obj"
+                                                class="collision" />
+                                              <geom name="left_gripper_camera_link_collision_1"
+                                                pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                mesh="d405_camera_link_collision_1.obj"
+                                                class="collision" />
+                                              <geom name="left_gripper_camera_link_collision_2"
+                                                pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                mesh="d405_camera_link_collision_2.obj"
+                                                class="collision" />
+                                              <geom name="left_gripper_camera_link_collision_3"
+                                                pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                mesh="d405_camera_link_collision_3.obj"
+                                                class="collision" />
+                                              <geom name="left_gripper_camera_link_collision_4"
+                                                pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                mesh="d405_camera_link_collision_4.obj"
+                                                class="collision" />
+                                              <geom name="left_gripper_camera_link_collision_5"
+                                                pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                mesh="d405_camera_link_collision_5.obj"
+                                                class="collision" />
+                                              <geom name="left_gripper_camera_link_collision_6"
+                                                pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                mesh="d405_camera_link_collision_6.obj"
+                                                class="collision" />
+                                              <geom name="left_gripper_camera_link_collision_7"
+                                                pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                mesh="d405_camera_link_collision_7.obj"
+                                                class="collision" />
+                                              <geom name="left_gripper_camera_link_collision_8"
+                                                pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                mesh="d405_camera_link_collision_8.obj"
+                                                class="collision" />
+                                              <geom name="left_gripper_camera_link_collision_9"
+                                                pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                mesh="d405_camera_link_collision_9.obj"
+                                                class="collision" />
+                                              <geom name="left_gripper_camera_link_collision_10"
+                                                pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                mesh="d405_camera_link_collision_10.obj"
+                                                class="collision" />
+                                              <geom name="left_gripper_camera_link_collision_11"
+                                                pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                mesh="d405_camera_link_collision_11.obj"
+                                                class="collision" />
+                                              <geom name="left_gripper_camera_link_collision_12"
+                                                pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                mesh="d405_camera_link_collision_12.obj"
+                                                class="collision" />
+                                              <geom name="left_gripper_camera_link_collision_13"
+                                                pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                mesh="d405_camera_link_collision_13.obj"
+                                                class="collision" />
+                                              <geom name="left_gripper_camera_link_collision_14"
+                                                pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                mesh="d405_camera_link_collision_14.obj"
+                                                class="collision" />
+                                              <geom name="left_gripper_camera_link_collision_15"
+                                                pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                mesh="d405_camera_link_collision_15.obj"
+                                                class="collision" />
+                                              <geom name="left_gripper_camera_link_collision_16"
+                                                pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                mesh="d405_camera_link_collision_16.obj"
+                                                class="collision" />
+                                              <geom name="left_gripper_camera_link_collision_17"
+                                                pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                mesh="d405_camera_link_collision_17.obj"
+                                                class="collision" />
+                                              <geom name="left_gripper_camera_link_collision_18"
+                                                pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                mesh="d405_camera_link_collision_18.obj"
+                                                class="collision" />
+                                              <geom name="left_gripper_camera_link_collision_19"
+                                                pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                mesh="d405_camera_link_collision_19.obj"
+                                                class="collision" />
+                                              <geom name="left_gripper_camera_link_collision_20"
+                                                pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                mesh="d405_camera_link_collision_20.obj"
+                                                class="collision" />
+                                              <geom name="left_gripper_camera_link_collision_21"
+                                                pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                mesh="d405_camera_link_collision_21.obj"
+                                                class="collision" />
+                                              <geom name="left_gripper_camera_link_collision_22"
+                                                pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                mesh="d405_camera_link_collision_22.obj"
+                                                class="collision" />
+                                              <geom name="left_gripper_camera_link_collision_23"
+                                                pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                mesh="d405_camera_link_collision_23.obj"
+                                                class="collision" />
+                                              <geom name="left_gripper_camera_link_collision_24"
+                                                pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                mesh="d405_camera_link_collision_24.obj"
+                                                class="collision" />
+                                              <geom name="left_gripper_camera_link_collision_25"
+                                                pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                mesh="d405_camera_link_collision_25.obj"
+                                                class="collision" />
+                                              <geom name="left_gripper_camera_link_collision_26"
+                                                pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                mesh="d405_camera_link_collision_26.obj"
+                                                class="collision" />
+                                              <geom name="left_gripper_camera_link_collision_27"
+                                                pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                mesh="d405_camera_link_collision_27.obj"
+                                                class="collision" />
+                                              <geom name="left_gripper_camera_link_collision_28"
+                                                pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                mesh="d405_camera_link_collision_28.obj"
+                                                class="collision" />
+                                              <geom name="left_gripper_camera_link_collision_29"
+                                                pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                mesh="d405_camera_link_collision_29.obj"
+                                                class="collision" />
+                                              <geom name="left_gripper_camera_link_collision_30"
+                                                pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                mesh="d405_camera_link_collision_30.obj"
+                                                class="collision" />
+                                              <geom name="left_gripper_camera_link_collision_31"
+                                                pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                mesh="d405_camera_link_collision_31.obj"
+                                                class="collision" />
+                                              <geom name="left_gripper_camera_link_collision_32"
+                                                pos="0 0 0" quat="1 0 0 0" type="mesh"
+                                                mesh="d405_camera_link_collision_32.obj"
+                                                class="collision" />
+                                              <geom name="left_gripper_camera_link_visual"
+                                                pos="0 0 0" quat="1 0 0 0"
+                                                material="default_material" type="mesh"
+                                                mesh="d405_camera_link.obj" class="visual" />
+                                            </body>
+                                          </body>
+                                        </body>
+                                      </body>
+                                    </body>
+                                  </body>
+                                </body>
+                              </body>
+                            </body>
+                          </body>
+                        </body>
+                      </body>
+                    </body>
+                  </body>
+                </body>
+              </body>
+            </body>
+          </body>
+        </body>
+      </body>
+
+    </body>
+  </worldbody>
+
+
+  <actuator>
+
+    <position class="robot" name="leg_joint1" joint="leg_joint1" ctrlrange="0 0.994838" kp="10000"
+      kv="2000" forcerange="-845 845" />
+    <position class="robot" name="leg_joint2" joint="leg_joint2" ctrlrange="0 3.05" kp="10000"
+      kv="2000" forcerange="-845 845" />
+    <position class="robot" name="leg_joint3" joint="leg_joint3" ctrlrange="0 2.35619" kp="10000"
+      kv="2000" forcerange="-420 420" />
+    <position class="robot" name="leg_joint4" joint="leg_joint4" ctrlrange="-1.5708 1.5708"
+      kp="10000" kv="2000" forcerange="-150 150" />
+    <position class="robot" name="head_joint1" joint="head_joint1" ctrlrange="-1.5708 1.5708"
+      kp="500" kv="100" forcerange="-4 4" />
+    <position class="robot" name="head_joint2" joint="head_joint2" ctrlrange="-0.366519 0.366519"
+      kp="500" kv="100" forcerange="-4 4" />
+    <position class="robot" name="right_arm_joint1" joint="right_arm_joint1" ctrlrange="-3 3"
+      kp="3000" kv="500" forcerange="-60 60" />
+    <position class="robot" name="right_arm_joint2" joint="right_arm_joint2" ctrlrange="-1.5708 1.7"
+      kp="3000" kv="500" forcerange="-60 60" />
+    <position class="robot" name="right_arm_joint3" joint="right_arm_joint3" ctrlrange="-2.9 2.9"
+      kp="1500" kv="300" forcerange="-30 30" />
+    <position class="robot" name="right_arm_joint4" joint="right_arm_joint4" ctrlrange="-2.1 2.1"
+      kp="1500" kv="300" forcerange="-30 30" />
+    <position class="robot" name="right_arm_joint5" joint="right_arm_joint5" ctrlrange="-2.9 2.9"
+      kp="1500" kv="300" forcerange="-10 10" />
+    <position class="robot" name="right_arm_joint6" joint="right_arm_joint6"
+      ctrlrange="-0.785398 0.785398" kp="1500" kv="300" forcerange="-10 10" />
+    <position class="robot" name="right_arm_joint7" joint="right_arm_joint7" ctrlrange="-1.4 1.4"
+      kp="1500" kv="300" forcerange="-10 10" />
+    <position class="robot" name="left_arm_joint1" joint="left_arm_joint1" ctrlrange="-3 3"
+      kp="3000" kv="500" forcerange="-60 60" />
+    <position class="robot" name="left_arm_joint2" joint="left_arm_joint2" ctrlrange="-1.7 1.5708"
+      kp="3000" kv="500" forcerange="-60 60" />
+    <position class="robot" name="left_arm_joint3" joint="left_arm_joint3" ctrlrange="-2.9 2.9"
+      kp="1500" kv="300" forcerange="-30 30" />
+    <position class="robot" name="left_arm_joint4" joint="left_arm_joint4" ctrlrange="-2.1 2.1"
+      kp="1500" kv="300" forcerange="-30 30" />
+    <position class="robot" name="left_arm_joint5" joint="left_arm_joint5" ctrlrange="-2.9 2.9"
+      kp="1500" kv="300" forcerange="-10 10" />
+    <position class="robot" name="left_arm_joint6" joint="left_arm_joint6"
+      ctrlrange="-0.785398 0.785398" kp="1500" kv="300" forcerange="-10 10" />
+    <position class="robot" name="left_arm_joint7" joint="left_arm_joint7" ctrlrange="-1.4 1.4"
+      kp="1500" kv="300" forcerange="-10 10" />
+
+
+    <!-- <position name="right_gripper_robotiq_85_left_knuckle_joint"
+      joint="right_gripper_robotiq_85_left_knuckle_joint"
+      class="robot" ctrlrange="-0.8 0.0" kp="1500" kv="4"
+      forcerange="-50 50" />
+    <position name="right_gripper_robotiq_85_left_finger_tip_joint"
+      joint="right_gripper_robotiq_85_left_finger_tip_joint"
+      class="robot" ctrlrange="0.0 0.8" kp="1500" kv="4"
+      forcerange="-50 50" /> -->
+    <position name="right_gripper_robotiq_85_right_knuckle_joint"
+      joint="right_gripper_robotiq_85_right_knuckle_joint"
+      class="robot" ctrlrange="0.0 0.8" kp="100" kv="20"
+      forcerange="-5 5" />
+    <!-- <position name="right_gripper_robotiq_85_right_finger_tip_joint"
+      joint="right_gripper_robotiq_85_right_finger_tip_joint"
+      class="robot" ctrlrange="-0.8 0.0" kp="1500" kv="4"
+      forcerange="-50 50" />
+    <position name="right_gripper_robotiq_85_left_inner_knuckle_joint"
+      joint="right_gripper_robotiq_85_left_inner_knuckle_joint"
+      class="robot" ctrlrange="-0.8 0.0" kp="1500" kv="4"
+      forcerange="-50 50" />
+    <position name="right_gripper_robotiq_85_right_inner_knuckle_joint"
+      joint="right_gripper_robotiq_85_right_inner_knuckle_joint"
+      class="robot" ctrlrange="0.0 0.8" kp="1500" kv="4"
+      forcerange="-50 50" /> -->
+    <!-- <position name="left_gripper_robotiq_85_left_knuckle_joint"
+      joint="left_gripper_robotiq_85_left_knuckle_joint"
+      class="robot" ctrlrange="-0.8 0.0" kp="1500" kv="4"
+      forcerange="-50 50" />
+    <position name="left_gripper_robotiq_85_left_finger_tip_joint"
+      joint="left_gripper_robotiq_85_left_finger_tip_joint"
+      class="robot" ctrlrange="0.0 0.8" kp="1500" kv="4"
+      forcerange="-50 50" /> -->
+    <position name="left_gripper_robotiq_85_right_knuckle_joint"
+      joint="left_gripper_robotiq_85_right_knuckle_joint"
+      class="robot" ctrlrange="0.0 0.8" kp="100" kv="20"
+      forcerange="-5 5" />
+    <!-- <position name="left_gripper_robotiq_85_right_finger_tip_joint"
+      joint="left_gripper_robotiq_85_right_finger_tip_joint"
+      class="robot" ctrlrange="-0.8 0.0" kp="1500" kv="4"
+      forcerange="-50 50" />
+    <position name="left_gripper_robotiq_85_left_inner_knuckle_joint"
+      joint="left_gripper_robotiq_85_left_inner_knuckle_joint"
+      class="robot" ctrlrange="-0.8 0.0" kp="1500" kv="4"
+      forcerange="-50 50" />
+    <position name="left_gripper_robotiq_85_right_inner_knuckle_joint"
+      joint="left_gripper_robotiq_85_right_inner_knuckle_joint"
+      class="robot" ctrlrange="0.0 0.8" kp="1500" kv="4"
+      forcerange="-50 50" /> -->
+  </actuator>
+
+
+  <equality>
+    <joint joint1="left_gripper_robotiq_85_right_knuckle_joint"
+      joint2="left_gripper_robotiq_85_left_knuckle_joint" polycoef="0 -1 0 0 0"
+      solimp="0.95 0.99 0.001"
+      solref="0.005 1" />
+    <joint joint1="left_gripper_robotiq_85_right_knuckle_joint"
+      joint2="left_gripper_robotiq_85_left_inner_knuckle_joint" polycoef="0 -1 0 0 0"
+      solimp="0.95 0.99 0.001"
+      solref="0.005 1" />
+    <joint joint1="left_gripper_robotiq_85_right_knuckle_joint"
+      joint2="left_gripper_robotiq_85_right_inner_knuckle_joint" polycoef="0 1 0 0 0"
+      solimp="0.95 0.99 0.001"
+      solref="0.005 1" />
+
+
+    <joint joint1="left_gripper_robotiq_85_right_knuckle_joint"
+      joint2="left_gripper_robotiq_85_left_finger_tip_joint" polycoef="0 1 0 0 0"
+      solimp="0.95 0.99 0.001"
+      solref="0.005 1" />
+    <joint joint1="left_gripper_robotiq_85_right_knuckle_joint"
+      joint2="left_gripper_robotiq_85_right_finger_tip_joint" polycoef="0 -1 0 0 0"
+      solimp="0.95 0.99 0.001"
+      solref="0.005 1" />
+
+    <joint joint1="right_gripper_robotiq_85_right_knuckle_joint"
+      joint2="right_gripper_robotiq_85_left_knuckle_joint" polycoef="0 -1 0 0 0"
+      solimp="0.95 0.99 0.001"
+      solref="0.005 1" />
+    <joint joint1="right_gripper_robotiq_85_right_knuckle_joint"
+      joint2="right_gripper_robotiq_85_left_inner_knuckle_joint" polycoef="0 -1 0 0 0"
+      solimp="0.95 0.99 0.001"
+      solref="0.005 1" />
+    <joint joint1="right_gripper_robotiq_85_right_knuckle_joint"
+      joint2="right_gripper_robotiq_85_right_inner_knuckle_joint" polycoef="0 1 0 0 0"
+      solimp="0.95 0.99 0.001"
+      solref="0.005 1" />
+    <joint joint1="right_gripper_robotiq_85_right_knuckle_joint"
+      joint2="right_gripper_robotiq_85_left_finger_tip_joint" polycoef="0 1 0 0 0"
+      solimp="0.95 0.99 0.001"
+      solref="0.005 1" />
+    <joint joint1="right_gripper_robotiq_85_right_knuckle_joint"
+      joint2="right_gripper_robotiq_85_right_finger_tip_joint" polycoef="0 -1 0 0 0"
+      solimp="0.95 0.99 0.001"
+      solref="0.005 1" />
+
+  </equality>
+
+
+  <contact>
+    <exclude body1="head_link1" body2="torso_base_link" />
+    <exclude body1="head_link2"
+      body2="head_link1" />
+    <exclude body1="head_link2" body2="torso_base_link" />
+    <exclude
+      body1="head_link2" body2="left_arm_link1" />
+    <exclude body1="head_link2" body2="leg_link1" />
+    <exclude
+      body1="head_link2" body2="leg_link2" />
+    <exclude body1="head_link2" body2="leg_link3" />
+    <exclude
+      body1="head_link2" body2="leg_link4" />
+    <exclude body1="head_link2"
+      body2="omni_chassis_base_link" />
+    <exclude body1="head_link2" body2="right_arm_link1" />
+    <exclude
+      body1="head_link2" body2="torso_base_link" />
+    <exclude body1="left_arm_link1"
+      body2="left_arm_link2" />
+    <exclude body1="left_arm_link1" body2="left_arm_link3" />
+    <exclude
+      body1="left_arm_link1" body2="left_arm_link4" />
+    <exclude body1="left_arm_link1"
+      body2="left_arm_link5" />
+    <exclude body1="left_arm_link1" body2="left_arm_link6" />
+    <exclude
+      body1="left_arm_link1" body2="left_arm_link7" />
+    <exclude body1="left_arm_link1"
+      body2="leg_link1" />
+    <exclude body1="left_arm_link1" body2="leg_link2" />
+    <exclude
+      body1="left_arm_link1" body2="leg_link3" />
+    <exclude body1="left_arm_link1" body2="leg_link4" />
+    <exclude
+      body1="left_arm_link1" body2="omni_chassis_base_link" />
+    <exclude body1="left_arm_link1"
+      body2="right_arm_link1" />
+    <exclude body1="left_arm_link1" body2="right_arm_link2" />
+    <exclude
+      body1="left_arm_link1" body2="right_arm_link3" />
+    <exclude body1="left_arm_link1"
+      body2="right_arm_link4" />
+    <exclude body1="left_arm_link1" body2="right_arm_link5" />
+    <exclude
+      body1="left_arm_link1" body2="right_arm_link6" />
+    <exclude body1="left_arm_link1"
+      body2="right_arm_link7" />
+    <exclude body1="left_arm_link1" body2="torso_base_link" />
+    <exclude
+      body1="left_arm_link2" body2="left_arm_link3" />
+    <exclude body1="left_arm_link2"
+      body2="left_arm_link4" />
+    <exclude body1="left_arm_link2" body2="left_arm_link5" />
+    <exclude
+      body1="left_arm_link2" body2="left_arm_link6" />
+    <exclude body1="left_arm_link2"
+      body2="left_arm_link7" />
+    <exclude body1="left_arm_link2" body2="leg_link2" />
+    <exclude
+      body1="left_arm_link2" body2="leg_link3" />
+    <exclude body1="left_arm_link2" body2="leg_link4" />
+    <exclude
+      body1="left_arm_link2" body2="right_arm_link1" />
+    <exclude body1="left_arm_link2"
+      body2="right_arm_link2" />
+    <exclude body1="left_arm_link2" body2="right_arm_link3" />
+    <exclude
+      body1="left_arm_link3" body2="left_arm_link4" />
+    <exclude body1="left_arm_link3"
+      body2="left_arm_link6" />
+    <exclude body1="left_arm_link3" body2="left_arm_link7" />
+    <exclude
+      body1="left_arm_link3" body2="right_arm_link1" />
+    <exclude body1="left_arm_link3"
+      body2="right_arm_link2" />
+    <exclude body1="left_arm_link3" body2="right_arm_link3" />
+    <exclude
+      body1="left_arm_link4" body2="left_arm_link5" />
+    <exclude body1="left_arm_link4"
+      body2="left_arm_link6" />
+    <exclude body1="left_arm_link4" body2="left_arm_link7" />
+    <exclude
+      body1="left_arm_link4" body2="right_arm_link1" />
+    <exclude body1="left_arm_link5"
+      body2="left_arm_link6" />
+    <exclude body1="left_arm_link5" body2="left_arm_link7" />
+    <exclude
+      body1="left_arm_link5" body2="right_arm_link1" />
+    <exclude body1="left_arm_link6"
+      body2="left_arm_link7" />
+    <exclude body1="left_arm_link6" body2="leg_link4" />
+    <exclude
+      body1="left_arm_link6" body2="right_arm_link1" />
+    <exclude body1="left_arm_link6"
+      body2="right_arm_link6" />
+    <exclude body1="leg_link1" body2="leg_link2" />
+    <exclude
+      body1="leg_link1" body2="leg_link3" />
+    <exclude body1="leg_link1"
+      body2="omni_chassis_base_link" />
+    <exclude body1="leg_link1" body2="right_arm_link1" />
+    <exclude
+      body1="leg_link2" body2="leg_link3" />
+    <exclude body1="leg_link2" body2="leg_link4" />
+    <exclude
+      body1="leg_link2" body2="right_arm_link1" />
+    <exclude body1="leg_link2" body2="right_arm_link2" />
+    <exclude
+      body1="leg_link2" body2="torso_base_link" />
+    <exclude body1="leg_link2"
+      body2="omni_chassis_base_link" />
+    <exclude body1="leg_link3" body2="leg_link4" />
+    <exclude
+      body1="leg_link3" body2="right_arm_link1" />
+    <exclude body1="leg_link3" body2="right_arm_link2" />
+    <exclude
+      body1="leg_link3" body2="torso_base_link" />
+    <exclude body1="leg_link3"
+      body2="omni_chassis_base_link" />
+    <exclude body1="leg_link4" body2="right_arm_link1" />
+    <exclude
+      body1="leg_link4" body2="right_arm_link2" />
+    <exclude body1="leg_link4" body2="right_arm_link3" />
+    <exclude
+      body1="leg_link4" body2="torso_base_link" />
+    <exclude body1="omni_chassis_base_link"
+      body2="right_arm_link1" />
+    <exclude body1="right_arm_link1" body2="right_arm_link2" />
+    <exclude
+      body1="right_arm_link1" body2="right_arm_link3" />
+    <exclude body1="right_arm_link1"
+      body2="right_arm_link4" />
+    <exclude body1="right_arm_link1" body2="right_arm_link5" />
+    <exclude
+      body1="right_arm_link1" body2="right_arm_link6" />
+    <exclude body1="right_arm_link1"
+      body2="right_arm_link7" />
+    <exclude body1="right_arm_link1" body2="torso_base_link" />
+    <exclude
+      body1="right_arm_link2" body2="right_arm_link3" />
+    <exclude body1="right_arm_link2"
+      body2="right_arm_link4" />
+    <exclude body1="right_arm_link2" body2="right_arm_link5" />
+    <exclude
+      body1="right_arm_link2" body2="right_arm_link6" />
+    <exclude body1="right_arm_link2"
+      body2="right_arm_link7" />
+    <exclude body1="right_arm_link3" body2="right_arm_link4" />
+    <exclude
+      body1="right_arm_link3" body2="right_arm_link5" />
+    <exclude body1="right_arm_link3"
+      body2="right_arm_link6" />
+    <exclude body1="right_arm_link3" body2="right_arm_link7" />
+    <exclude
+      body1="right_arm_link4" body2="right_arm_link5" />
+    <exclude body1="right_arm_link4"
+      body2="right_arm_link6" />
+    <exclude body1="right_arm_link4" body2="right_arm_link7" />
+    <exclude
+      body1="right_arm_link5" body2="right_arm_link6" />
+    <exclude body1="right_arm_link5"
+      body2="right_arm_link7" />
+    <exclude body1="right_arm_link6" body2="right_arm_link7" />
+    <exclude
+      body1="left_arm_link5" body2="omni_chassis_base_link" />
+    <exclude body1="left_arm_link5"
+      body2="leg_link1" />
+    <exclude body1="left_arm_link5" body2="leg_link2" />
+    <exclude
+      body1="left_arm_link5" body2="leg_link3" />
+    <exclude body1="left_arm_link5" body2="leg_link4" />
+    <exclude
+      body1="left_arm_link5" body2="torso_base_link" />
+    <exclude body1="head_link2"
+      body2="left_arm_link5" />
+    <exclude body1="left_arm_link5" body2="right_arm_link2" />
+    <exclude
+      body1="left_arm_link5" body2="right_arm_link3" />
+    <exclude body1="left_arm_link5"
+      body2="right_arm_link4" />
+    <exclude body1="left_arm_link5" body2="right_arm_link5" />
+    <exclude
+      body1="left_arm_link5" body2="right_arm_link6" />
+    <exclude body1="left_arm_link5"
+      body2="right_arm_link7" />
+    <exclude body1="omni_chassis_base_link" body2="right_arm_link5" />
+    <exclude body1="left_arm_link2" body2="right_arm_link5" />
+    <exclude
+      body1="left_arm_link4" body2="right_arm_link5" />
+    <exclude body1="left_arm_link6"
+      body2="right_arm_link5" />
+    <exclude body1="left_arm_link7" body2="right_arm_link5" />
+    <exclude
+      body1="leg_link2" body2="omni_chassis_base_link" />
+    <exclude body1="left_arm_link6"
+      body2="omni_chassis_base_link" />
+    <exclude body1="left_arm_link6" body2="leg_link1" />
+    <exclude
+      body1="left_arm_link6" body2="leg_link2" />
+    <exclude body1="left_arm_link6" body2="leg_link3" />
+    <exclude
+      body1="left_arm_link6" body2="torso_base_link" />
+    <exclude body1="head_link2"
+      body2="left_arm_link6" />
+    <exclude body1="left_arm_link6" body2="right_arm_link2" />
+    <exclude
+      body1="left_arm_link6" body2="right_arm_link3" />
+    <exclude body1="left_arm_link6"
+      body2="right_arm_link4" />
+    <exclude body1="left_arm_link6" body2="right_arm_link7" />
+    <exclude
+      body1="omni_chassis_base_link" body2="right_arm_link6" />
+    <exclude body1="leg_link1"
+      body2="right_arm_link6" />
+    <exclude body1="leg_link2" body2="right_arm_link6" />
+    <exclude
+      body1="leg_link3" body2="right_arm_link6" />
+    <exclude body1="leg_link4" body2="right_arm_link6" />
+    <exclude
+      body1="right_arm_link6" body2="torso_base_link" />
+    <exclude body1="head_link2"
+      body2="right_arm_link6" />
+    <exclude body1="left_arm_link2" body2="right_arm_link6" />
+    <exclude
+      body1="left_arm_link4" body2="right_arm_link6" />
+    <exclude body1="left_arm_link7"
+      body2="right_arm_link6" />
+    <exclude body1="leg_link4" body2="omni_chassis_base_link" />
+    <exclude
+      body1="leg_link1" body2="leg_link4" />
+    <exclude body1="left_arm_link4" body2="leg_link4" />
+    <exclude
+      body1="leg_link4" body2="right_arm_link4" />
+    <exclude body1="leg_link4" body2="right_arm_link7" />
+    <exclude
+      body1="leg_link4" body2="leg_link1" />
+    <exclude body1="leg_link4" body2="leg_link2" />
+    <exclude
+      body1="leg_link4" body2="leg_link3" />
+
+
+    <exclude body1="leg_link1" body2="torso_base_link" />
+    <exclude
+      body1="left_arm_link2" body2="leg_link1" />
+    <exclude body1="left_arm_link7" body2="leg_link4" />
+    <exclude
+      body1="left_arm_link7" body2="right_arm_link1" />
+    <exclude body1="left_arm_link2"
+      body2="torso_base_link" />
+    <exclude body1="left_arm_link3" body2="leg_link4" />
+    <exclude
+      body1="left_arm_link3" body2="left_arm_link5" />
+    <exclude body1="left_arm_link3"
+      body2="right_arm_link5" />
+    <exclude body1="left_arm_link3" body2="right_arm_link6" />
+    <exclude
+      body1="right_arm_link2" body2="torso_base_link" />
+
+
+    <!-- Left gripper contact ignores -->
+    <exclude body1="left_gripper_robotiq_85_base_link"
+      body2="left_gripper_robotiq_85_left_knuckle_link" />
+    <exclude body1="left_gripper_robotiq_85_base_link"
+      body2="left_gripper_robotiq_85_right_knuckle_link" />
+    <exclude body1="left_gripper_robotiq_85_base_link"
+      body2="left_gripper_robotiq_85_left_inner_knuckle_link" />
+    <exclude body1="left_gripper_robotiq_85_base_link"
+      body2="left_gripper_robotiq_85_right_inner_knuckle_link" />
+    <exclude body1="left_gripper_robotiq_85_base_link"
+      body2="left_gripper_robotiq_85_left_finger_link" />
+    <exclude body1="left_gripper_robotiq_85_base_link"
+      body2="left_gripper_robotiq_85_right_finger_link" />
+    <exclude body1="left_gripper_robotiq_85_base_link"
+      body2="left_gripper_robotiq_85_left_finger_tip_link" />
+    <exclude body1="left_gripper_robotiq_85_base_link"
+      body2="left_gripper_robotiq_85_right_finger_tip_link" />
+
+    <exclude body1="left_gripper_robotiq_85_left_knuckle_link"
+      body2="left_gripper_robotiq_85_right_knuckle_link" />
+    <exclude body1="left_gripper_robotiq_85_left_knuckle_link"
+      body2="left_gripper_robotiq_85_left_inner_knuckle_link" />
+    <exclude body1="left_gripper_robotiq_85_left_knuckle_link"
+      body2="left_gripper_robotiq_85_right_inner_knuckle_link" />
+    <exclude body1="left_gripper_robotiq_85_left_knuckle_link"
+      body2="left_gripper_robotiq_85_left_finger_link" />
+    <exclude body1="left_gripper_robotiq_85_left_knuckle_link"
+      body2="left_gripper_robotiq_85_right_finger_link" />
+    <exclude body1="left_gripper_robotiq_85_left_knuckle_link"
+      body2="left_gripper_robotiq_85_left_finger_tip_link" />
+    <exclude body1="left_gripper_robotiq_85_left_knuckle_link"
+      body2="left_gripper_robotiq_85_right_finger_tip_link" />
+
+    <exclude body1="left_gripper_robotiq_85_right_knuckle_link"
+      body2="left_gripper_robotiq_85_left_inner_knuckle_link" />
+    <exclude body1="left_gripper_robotiq_85_right_knuckle_link"
+      body2="left_gripper_robotiq_85_right_inner_knuckle_link" />
+    <exclude body1="left_gripper_robotiq_85_right_knuckle_link"
+      body2="left_gripper_robotiq_85_left_finger_link" />
+    <exclude body1="left_gripper_robotiq_85_right_knuckle_link"
+      body2="left_gripper_robotiq_85_right_finger_link" />
+    <exclude body1="left_gripper_robotiq_85_right_knuckle_link"
+      body2="left_gripper_robotiq_85_left_finger_tip_link" />
+    <exclude body1="left_gripper_robotiq_85_right_knuckle_link"
+      body2="left_gripper_robotiq_85_right_finger_tip_link" />
+
+    <exclude body1="left_gripper_robotiq_85_left_inner_knuckle_link"
+      body2="left_gripper_robotiq_85_right_inner_knuckle_link" />
+    <exclude body1="left_gripper_robotiq_85_left_inner_knuckle_link"
+      body2="left_gripper_robotiq_85_left_finger_link" />
+    <exclude body1="left_gripper_robotiq_85_left_inner_knuckle_link"
+      body2="left_gripper_robotiq_85_right_finger_link" />
+    <exclude body1="left_gripper_robotiq_85_left_inner_knuckle_link"
+      body2="left_gripper_robotiq_85_left_finger_tip_link" />
+    <exclude body1="left_gripper_robotiq_85_left_inner_knuckle_link"
+      body2="left_gripper_robotiq_85_right_finger_tip_link" />
+
+    <exclude body1="left_gripper_robotiq_85_right_inner_knuckle_link"
+      body2="left_gripper_robotiq_85_left_finger_link" />
+    <exclude body1="left_gripper_robotiq_85_right_inner_knuckle_link"
+      body2="left_gripper_robotiq_85_right_finger_link" />
+    <exclude body1="left_gripper_robotiq_85_right_inner_knuckle_link"
+      body2="left_gripper_robotiq_85_left_finger_tip_link" />
+    <exclude body1="left_gripper_robotiq_85_right_inner_knuckle_link"
+      body2="left_gripper_robotiq_85_right_finger_tip_link" />
+
+    <exclude body1="left_gripper_robotiq_85_left_finger_link"
+      body2="left_gripper_robotiq_85_right_finger_link" />
+    <exclude body1="left_gripper_robotiq_85_left_finger_link"
+      body2="left_gripper_robotiq_85_left_finger_tip_link" />
+    <exclude body1="left_gripper_robotiq_85_left_finger_link"
+      body2="left_gripper_robotiq_85_right_finger_tip_link" />
+
+    <exclude body1="left_gripper_robotiq_85_right_finger_link"
+      body2="left_gripper_robotiq_85_left_finger_tip_link" />
+    <exclude body1="left_gripper_robotiq_85_right_finger_link"
+      body2="left_gripper_robotiq_85_right_finger_tip_link" />
+
+    <exclude body1="left_gripper_robotiq_85_left_finger_tip_link"
+      body2="left_gripper_robotiq_85_right_finger_tip_link" />
+
+    <!-- Right gripper contact ignores -->
+    <exclude body1="right_gripper_robotiq_85_base_link"
+      body2="right_gripper_robotiq_85_left_knuckle_link" />
+    <exclude body1="right_gripper_robotiq_85_base_link"
+      body2="right_gripper_robotiq_85_right_knuckle_link" />
+    <exclude body1="right_gripper_robotiq_85_base_link"
+      body2="right_gripper_robotiq_85_left_inner_knuckle_link" />
+    <exclude body1="right_gripper_robotiq_85_base_link"
+      body2="right_gripper_robotiq_85_right_inner_knuckle_link" />
+    <exclude body1="right_gripper_robotiq_85_base_link"
+      body2="right_gripper_robotiq_85_left_finger_link" />
+    <exclude body1="right_gripper_robotiq_85_base_link"
+      body2="right_gripper_robotiq_85_right_finger_link" />
+    <exclude body1="right_gripper_robotiq_85_base_link"
+      body2="right_gripper_robotiq_85_left_finger_tip_link" />
+    <exclude body1="right_gripper_robotiq_85_base_link"
+      body2="right_gripper_robotiq_85_right_finger_tip_link" />
+
+    <exclude body1="right_gripper_robotiq_85_left_knuckle_link"
+      body2="right_gripper_robotiq_85_right_knuckle_link" />
+    <exclude body1="right_gripper_robotiq_85_left_knuckle_link"
+      body2="right_gripper_robotiq_85_left_inner_knuckle_link" />
+    <exclude body1="right_gripper_robotiq_85_left_knuckle_link"
+      body2="right_gripper_robotiq_85_right_inner_knuckle_link" />
+    <exclude body1="right_gripper_robotiq_85_left_knuckle_link"
+      body2="right_gripper_robotiq_85_left_finger_link" />
+    <exclude body1="right_gripper_robotiq_85_left_knuckle_link"
+      body2="right_gripper_robotiq_85_right_finger_link" />
+    <exclude body1="right_gripper_robotiq_85_left_knuckle_link"
+      body2="right_gripper_robotiq_85_left_finger_tip_link" />
+    <exclude body1="right_gripper_robotiq_85_left_knuckle_link"
+      body2="right_gripper_robotiq_85_right_finger_tip_link" />
+
+    <exclude body1="right_gripper_robotiq_85_right_knuckle_link"
+      body2="right_gripper_robotiq_85_left_inner_knuckle_link" />
+    <exclude body1="right_gripper_robotiq_85_right_knuckle_link"
+      body2="right_gripper_robotiq_85_right_inner_knuckle_link" />
+    <exclude body1="right_gripper_robotiq_85_right_knuckle_link"
+      body2="right_gripper_robotiq_85_left_finger_link" />
+    <exclude body1="right_gripper_robotiq_85_right_knuckle_link"
+      body2="right_gripper_robotiq_85_right_finger_link" />
+    <exclude body1="right_gripper_robotiq_85_right_knuckle_link"
+      body2="right_gripper_robotiq_85_left_finger_tip_link" />
+    <exclude body1="right_gripper_robotiq_85_right_knuckle_link"
+      body2="right_gripper_robotiq_85_right_finger_tip_link" />
+
+    <exclude body1="right_gripper_robotiq_85_left_inner_knuckle_link"
+      body2="right_gripper_robotiq_85_right_inner_knuckle_link" />
+    <exclude body1="right_gripper_robotiq_85_left_inner_knuckle_link"
+      body2="right_gripper_robotiq_85_left_finger_link" />
+    <exclude body1="right_gripper_robotiq_85_left_inner_knuckle_link"
+      body2="right_gripper_robotiq_85_right_finger_link" />
+    <exclude body1="right_gripper_robotiq_85_left_inner_knuckle_link"
+      body2="right_gripper_robotiq_85_left_finger_tip_link" />
+    <exclude body1="right_gripper_robotiq_85_left_inner_knuckle_link"
+      body2="right_gripper_robotiq_85_right_finger_tip_link" />
+
+    <exclude body1="right_gripper_robotiq_85_right_inner_knuckle_link"
+      body2="right_gripper_robotiq_85_left_finger_link" />
+    <exclude body1="right_gripper_robotiq_85_right_inner_knuckle_link"
+      body2="right_gripper_robotiq_85_right_finger_link" />
+    <exclude body1="right_gripper_robotiq_85_right_inner_knuckle_link"
+      body2="right_gripper_robotiq_85_left_finger_tip_link" />
+    <exclude body1="right_gripper_robotiq_85_right_inner_knuckle_link"
+      body2="right_gripper_robotiq_85_right_finger_tip_link" />
+
+    <exclude body1="right_gripper_robotiq_85_left_finger_link"
+      body2="right_gripper_robotiq_85_right_finger_link" />
+    <exclude body1="right_gripper_robotiq_85_left_finger_link"
+      body2="right_gripper_robotiq_85_left_finger_tip_link" />
+    <exclude body1="right_gripper_robotiq_85_left_finger_link"
+      body2="right_gripper_robotiq_85_right_finger_tip_link" />
+
+    <exclude body1="right_gripper_robotiq_85_right_finger_link"
+      body2="right_gripper_robotiq_85_left_finger_tip_link" />
+    <exclude body1="right_gripper_robotiq_85_right_finger_link"
+      body2="right_gripper_robotiq_85_right_finger_tip_link" />
+
+    <exclude body1="right_gripper_robotiq_85_left_finger_tip_link"
+      body2="right_gripper_robotiq_85_right_finger_tip_link" />
+
+
+  </contact>
+
+</mujoco>
