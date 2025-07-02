@@ -1,0 +1,17 @@
+batch_size: 32
+checkpoint: null
+device: cuda
+exp_name: est_coord_final
+learning_rate: 0.001
+learning_rate_min: 1.0e-08
+log_interval: 100
+max_iter: 20000
+model_type: est_coord
+num_workers: 8
+obj_name: power_drill
+point_num: 1024
+robot: galbot
+save_interval: 2500
+seed: 0
+val_interval: 500
+val_num: 10
