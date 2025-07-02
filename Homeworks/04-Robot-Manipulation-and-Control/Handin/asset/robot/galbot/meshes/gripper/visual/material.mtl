@@ -1,7 +1,3 @@
-# https://github.com/mikedh/trimesh
-
-newmtl material_0
-Ka 0.40000000 0.40000000 0.40000000
-Kd 0.07843137 0.07843137 0.07843137
-Ks 0.50196078 0.50196078 0.50196078
-Ns 1.00000000
+version https://git-lfs.github.com/spec/v1
+oid sha256:ec0c00032a1e24fcefccfbf29acd7683bed155a0675d02a0519d50dcc9f31f9c
+size 176

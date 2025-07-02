@@ -1,12 +1,3 @@
-# Blender 4.4.0 MTL File: 'apriltag.blend'
-# www.blender.org
-
-newmtl Material.003
-Ns 250.000000
-Ka 1.000000 1.000000 1.000000
-Ks 0.500000 0.500000 0.500000
-Ke 0.000000 0.000000 0.000000
-Ni 1.500000
-d 1.000000
-illum 2
-map_Kd basecolor_2.png
+version https://git-lfs.github.com/spec/v1
+oid sha256:98e3ea6fb198bd7efc2784c7be06ee625d4be985e95f76d975589dcf06ad38af
+size 240

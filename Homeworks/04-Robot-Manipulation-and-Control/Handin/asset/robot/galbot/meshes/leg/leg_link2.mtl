@@ -1,17 +1,3 @@
-# Blender 4.2.1 LTS MTL File: 'leg_02.blend'
-# www.blender.org
-
-newmtl Material.001
-Kd 0.800000 0.800000 0.800000
-Ks 0.500000 0.500000 0.500000
-Ke 0.000000 0.000000 0.000000
-Ni 1.500000
-d 1.000000
-illum 3
-Pr 0.600000
-Pm 0.750000
-Ps 0.000000
-Pc 0.000000
-Pcr 0.030000
-aniso 0.000000
-anisor 0.000000
+version https://git-lfs.github.com/spec/v1
+oid sha256:4277804a2b1ac929572c20229f10ed3e873fb25c182b5e139877083daab8e1bf
+size 297

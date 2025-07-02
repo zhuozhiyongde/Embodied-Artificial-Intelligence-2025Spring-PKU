@@ -1,12 +1,3 @@
-# Blender 4.4.0 MTL File: 'None'
-# www.blender.org
-
-newmtl material_0
-Ns 0.999999
-Ka 1.000000 1.000000 1.000000
-Ks 0.400000 0.400000 0.400000
-Ke 0.000000 0.000000 0.000000
-Ni 1.500000
-d 1.000000
-illum 2
-map_Kd /mnt/storage_2TB/gx_storage/asset/robot/galbot_charlie_14_description/meshes/body/visual/material_0.png
+version https://git-lfs.github.com/spec/v1
+oid sha256:210bc11965dc2d2acef16bb1d152f79ba7c79d40833f41bc001dd6ac64b76de7
+size 314
