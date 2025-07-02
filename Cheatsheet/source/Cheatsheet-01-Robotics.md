@@ -26,7 +26,7 @@ R_{z}(\gamma):=\begin{bmatrix}\cos\gamma&-\sin\gamma&0\\\sin\gamma&\cos\gamma&0\
 
 **单位四元数** $\|q\| = 1$，可表示三维空间中的旋转，$q^{-1} = q^*$。
 
-**旋转表示**：绕某个单位向量 $\hat{\omega}$ 旋转 $\theta$ 角度，对应的四元数：$q = \left[\cos\frac{\theta}{2}, \sin\frac{\theta}{2} \hat{\omega}\right]$、 **“重覆盖**：$q$ 和 $-q$ 代表同一个旋转。
+**旋转表示**：绕某个单位向量 $\hat{\omega}$ 旋转 $\theta$ 角度，对应的四元数：$q = \left[\cos\frac{\theta}{2}, \sin\frac{\theta}{2} \hat{\omega}\right]$、 **双重覆盖**：$q$ 和 $-q$ 代表同一个旋转。
 
 **从四元数恢复轴角表示**：$\theta = 2 \arccos(w), \quad \hat{\omega} =\begin{cases}\frac{\bold{v}}{\sin(\theta/2)}, & \theta \neq 0 \\0, & \theta = 0\end{cases}$
 
